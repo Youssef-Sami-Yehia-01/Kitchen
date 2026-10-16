@@ -14,7 +14,7 @@ From this folder run `python -m http.server 8080`, then open http://localhost:80
 
 ## Controls
 
-Walk inside: click to explore; WASD/arrow keys move, mouse looks, Shift moves faster, E opens the item under the crosshair, Escape releases the mouse. Isometric: drag to orbit and scroll to zoom. On phones: tap to explore, hold the on-screen arrows to move, swipe the room to look around, tap Open to interact, and tap Pause to stop. Movement and looking work together. In isometric mode, drag to rotate, pinch to zoom, and tap a door or drawer to open. Doors & drawers lists all 40 opening parts. Scene controls sunlight and automatic wall hiding.
+Walk inside: click to explore; WASD/arrow keys move, mouse looks, Shift moves faster, E opens the item under the crosshair, Escape releases the mouse. Isometric: drag to orbit and scroll to zoom. On phones: tap to explore, hold the on-screen arrows to move, swipe the room to look around, tap Open to interact, and tap Pause to stop. Movement and looking work together. In isometric mode, drag to rotate, pinch to zoom, and tap a door or drawer to open. Doors & drawers lists all 37 opening parts. Scene controls sunlight and automatic wall hiding.
 
 Room: 4.00 x 2.50 m; ceiling 2.75 m. Model geometry and appliance dimensions are retained. The room is mirrored with the column on the right when entering. Real-time lighting approximates the supplied reference; the AI image is an artistic visualization.
 
@@ -22,8 +22,12 @@ Vercel settings reference: https://vercel.com/docs/builds/configure-a-build
 
 ## Validation
 
-Verified in Chromium desktop and emulated touch devices: simultaneous walking and swipe looking, tap interactions, pause/resume, drag orbit, pinch zoom, portrait/landscape layouts, collision checks, opening/closing all 40 parts, auto-hidden walls, and sunlight settings. Testing used phone emulation; physical iOS/Android hardware was not available.
+Verified in Chromium desktop and emulated touch devices: simultaneous walking and swipe looking, tap interactions, pause/resume, drag orbit, pinch zoom, portrait/landscape layouts, collision checks, opening/closing all 37 parts, auto-hidden walls, and sunlight settings. Testing used phone emulation; physical iOS/Android hardware was not available.
 
-## Front cabinetry and microwave
+## Cabinetry and microwave
 
-The microwave sits on the left counter beside the entrance. Its 54 x 42 x 32 cm size is assumed. Matching front upper cabinets include a concealed 90 cm extractor insert above the stove, with opening doors and a hidden duct. The window remains clear and the PDF column, room dimensions, and confirmed appliance sizes are unchanged. The microwave door and four front cabinet doors bring the total to 40 interactive parts.
+The microwave sits on the left counter beside the entrance. Its 54 x 42 x 32 cm size is assumed. Matching front upper cabinets conceal the 90 cm extractor above the stove.
+
+Cabinet corners keep their square 90 degree layout. Side and front upper cabinets share a 1.70 m underside and 2.48 m top. Straight blind return panels and clearance fillers replace the buried corner door leaves. The existing counter keeps its square L-shaped join and sink opening. Neighboring corner doors/drawers close before opening another component whose sweep would overlap.
+
+The room, PDF column, window and confirmed appliance dimensions are unchanged. There are 37 usable interactive parts, including the microwave, extractor cabinet, corner cabinet doors and existing appliance drawers/racks.
