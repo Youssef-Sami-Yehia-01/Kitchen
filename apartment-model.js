@@ -2,7 +2,7 @@
 
 // All plan coordinates come from the R05 scene specification. Metres, Y up.
 window.buildApartment = function (B, scene, register) {
-  const plan = window.APARTMENT, walls = [], ceilings = [], furniture = [], labels = [];
+  const plan = window.APARTMENT, walls = [], ceilings = [], furniture = [], labels = [], mirrors=[];
   const mat = (name, hex, roughness = .65, metallic = 0) => {
     const m = new B.PBRMaterial(name, scene);
     m.albedoColor = B.Color3.FromHexString(hex).toLinearSpace(); m.roughness = roughness;
@@ -79,6 +79,16 @@ window.buildApartment = function (B, scene, register) {
   function sphere(name,w,h,d,x,y,z,material=M.cream,parent=null){const m=B.MeshBuilder.CreateSphere(name,{diameter:1,segments:12},scene);m.scaling.set(w,h,d);m.position.set(x,y,z);m.material=material;m.parent=parent;m.receiveShadows=true;return m;}
   function rod(name,a,b,r=.009,material=M.silver,parent=null){const path=[new B.Vector3(...a),new B.Vector3(...b)];const m=B.MeshBuilder.CreateTube(name,{path,radius:r,tessellation:8,cap:B.Mesh.CAP_ALL},scene);m.material=material;m.parent=parent;return m;}
   function node(name,x=0,y=0,z=0,angle=0,parent=null){const n=new B.TransformNode(name,scene);n.position.set(x,y,z);n.rotation.y=angle;n.parent=parent;return n;}
+  function mirror(name,w,h,x,y,z,parent,room){
+    box(name+' mounting frame',w+.035,h+.035,.025,x,y,z,M.metal,parent);
+    const surface=B.MeshBuilder.CreatePlane(name,{width:w,height:h},scene);
+    surface.position.set(x,y,z+.014);surface.parent=parent;surface.metadata={mirrorSurface:true,room};
+    const material=new B.StandardMaterial(name+' silvered glass',scene);
+    material.diffuseColor=B.Color3.Black();material.specularColor=new B.Color3(.18,.18,.18);material.backFaceCulling=false;
+    const reflection=new B.MirrorTexture(name+' reflection',512,scene,true);reflection.level=.95;reflection.refreshRate=0;reflection.renderList=[];
+    reflection.clearColor=new B.Color4(.50,.53,.54,1);material.reflectionTexture=reflection;surface.material=material;
+    mirrors.push({surface,texture:reflection,room});return surface;
+  }
   const fromRect=(name,r,low,high,material)=>box(name,(r[2]-r[0])/1000,(high-low)/1000,(r[3]-r[1])/1000,(r[0]+r[2])/2000,(high+low)/2000,-(r[1]+r[3])/2000,material);
   function wallPiece(m,r){walls.push({mesh:m,center:new B.Vector3((r[0]+r[2])/2000,1.2,-(r[1]+r[3])/2000)});return m;}
   for(const s of plan.walls)wallPiece(fromRect('R05 joined wall',s.bounds,s.low,s.high,M.wall),s.bounds);
@@ -154,15 +164,15 @@ window.buildApartment = function (B, scene, register) {
   const roots=new Map();
   function localRoot(f,angle=0){const p=node(f.id+' · '+f.desc,(f.x+f.w/2)/1000,0,-(f.y+f.d/2)/1000,angle);p.metadata={furnitureId:f.id,room:f.room};roots.set(f.id,p);furniture.push(p);return p;}
   function feet(w,d,p,y=.10){for(const x of [-w/2+.07,w/2-.07])for(const z of [-d/2+.07,d/2-.07])cylinder('Tapered furniture leg',.021,y*2,x,y,z,M.walnut,p,.016);}
-  function cushion(w,d,p,x,z,material=M.cream){const c=soft('Loose scatter cushion',w,.13,d,x,.80,z,material,p,.06);c.rotation.z=.18;return c;}
+  function cushion(w,d,p,x,z,material=M.cream){const c=soft('Loose scatter cushion',w,d,.12,x,.63,z,material,p,.05);c.rotation.z=.14;c.rotation.x=.12;return c;}
   function sofa(p,w,d,material=M.grey){
-    feet(w,d,p,.09);soft('Upholstered sofa base',w,.28,d,0,.32,0,material,p);
-    soft('Upholstered sofa back',w,.65,.17,0,.64,-d/2+.085,material,p,.065);
-    for(const x of [-w/2+.085,w/2-.085])soft('Sofa arm',.17,.48,d,x,.57,0,material,p,.06);
+    feet(w,d,p,.09);soft('Upholstered sofa base',w,.25,d,0,.25,0,material,p);
+    soft('Upholstered sofa back',w,.65,.17,0,.58,-d/2+.085,material,p,.065);
+    for(const x of [-w/2+.085,w/2-.085])soft('Sofa arm',.17,.48,d,x,.47,0,material,p,.06);
     const count=Math.max(1,Math.round(w/.8)),cw=(w-.38)/count;
     for(let i=0;i<count;i++){
-      soft('Individual seat cushion',cw-.012,.16,d-.24,-w/2+.19+cw*(i+.5),.52,.07,material,p,.05);
-      soft('Individual back cushion',cw-.022,.40,.16,-w/2+.19+cw*(i+.5),.79,-d/2+.22,material,p,.06);
+      soft('Individual seat cushion',cw-.012,.14,d-.24,-w/2+.19+cw*(i+.5),.39,.07,material,p,.05);
+      soft('Individual back cushion',cw-.022,.40,.16,-w/2+.19+cw*(i+.5),.67,-d/2+.22,material,p,.06);
     }
     cushion(.34,.34,p,-w/2+.40,-d/2+.30,M.cream);
   }
@@ -196,34 +206,41 @@ window.buildApartment = function (B, scene, register) {
     }
   }
   function tap(p,x,y,z){rod('Chrome basin spout',[x,y,z],[x,y+.20,z],.014,M.silver,p);rod('Chrome basin outlet',[x,y+.20,z],[x,y+.20,z+.15],.014,M.silver,p);}
-  function basin(f,p){const west=['B08','B05'].includes(f.id);const w=(west?f.d:f.w)/1000,d=(west?f.w:f.d)/1000;
+  function basin(f,p){const west=f.id==='B08';const w=(west?f.d:f.w)/1000,d=(west?f.w:f.d)/1000;
     const q=node('Vanity orientation',0,0,0,west?Math.PI/2:Math.PI,p);
-    cabinet(f,q,w,d,.77,0,0);
-    box('Vanity stone rim',w,.035,d,0,.825,0,M.stone,q);
+    cabinet(f,q,w,d,.72,0,0);
+    box('Vanity stone rim',w,.030,d,0,.755,0,M.stone,q);
     const bw=w*.71,bd=d*.68;
-    box('Porcelain bowl base',bw,.028,bd,0,.82,0,M.ceramic,q);
-    for(const x of [-bw/2,bw/2])soft('Porcelain basin edge',.032,.075,bd,x,.86,0,M.ceramic,q,.012);
-    for(const z of [-bd/2,bd/2])soft('Porcelain basin edge',bw,.075,.032,0,.86,z,M.ceramic,q,.012);
-    cylinder('Basin waste',.023,.004,0,.838,0,M.silver,q);tap(q,0,.86,-d/2+.06);
-    box('Vanity mirror',w*.86,.74,.013,0,1.52,-d/2-.005,M.silver,q);
+    box('Porcelain bowl base',bw,.018,bd,0,.775,0,M.ceramic,q);
+    for(const x of [-bw/2,bw/2])soft('Porcelain basin edge',.032,.074,bd,x,.813,0,M.ceramic,q,.012);
+    for(const z of [-bd/2,bd/2])soft('Porcelain basin edge',bw,.074,.032,0,.813,z,M.ceramic,q,.012);
+    cylinder('Basin waste',.023,.004,0,.786,0,M.silver,q);tap(q,0,.78,-d/2+.06);
+    const room=plan.rooms[f.room].bounds,wallGap=(west?f.x-room[0]:f.y-room[1])/1000;
+    mirror(f.id+' wall-mounted mirror',w*.86,.74,0,1.50,-d/2-wallGap+.008,q,f.room);
   }
   function toilet(f,p){const west=f.id==='B07',south=f.id==='B04';const q=node('WC orientation',0,0,0,west?Math.PI/2:south?0:Math.PI,p);
     box('Concealed cistern',.36,.77,.15,0,.385,-.265,M.ceramic,q);
-    sphere('WC pedestal',.27,.38,.40,0,.20,.03,M.ceramic,q);
-    sphere('Toilet bowl',.37,.22,.53,0,.39,.075,M.ceramic,q);
-    const torus=B.MeshBuilder.CreateTorus('Toilet seat ring',{diameter:.325,thickness:.035,tessellation:32},scene);torus.scaling.z=1.38;torus.position.set(0,.505,.075);torus.material=M.ceramic;torus.parent=q;
-    sphere('Toilet bowl recess',.25,.012,.37,0,.493,.07,M.grout,q);
+    sphere('WC pedestal',.27,.34,.40,0,.17,.03,M.ceramic,q);
+    sphere('Toilet bowl',.37,.19,.53,0,.315,.075,M.ceramic,q);
+    const torus=B.MeshBuilder.CreateTorus('Toilet seat ring',{diameter:.325,thickness:.035,tessellation:32},scene);torus.scaling.z=1.38;torus.position.set(0,.4125,.075);torus.material=M.ceramic;torus.parent=q;
+    sphere('Toilet bowl recess',.25,.012,.37,0,.402,.07,M.grout,q);
     box('Dual flush button',.11,.045,.012,0,.69,-.183,M.silver,q);
   }
-  function shower(f,p){const w=f.w/1000,d=f.d/1000;
+  function shower(f,p){const w=f.w/1000,d=f.d/1000,wallGap=(f.y-plan.rooms[f.room].bounds[1])/1000,back=-d/2-wallGap;
     box('Shower stone tray',w,.07,d,0,.035,0,M.stone,p);
     box('Shower linear drain',w*.72,.006,.026,0,.074,-d/2+.10,M.silver,p);
-    box('Frameless shower screen',w-.025,2.0,.008,0,1.08,d/2-.02,M.glass,p);
+    const doorWidth=Math.min(.70,w-.25),fixedWidth=w-doorWidth;
+    box('Fixed shower glass',fixedWidth-.018,2.0,.008,doorWidth/2,1.08,d/2-.02,M.glass,p);
+    const door=node(f.id+' shower door',-w/2,0,d/2-.02,0,p);
+    box('Hinged shower glass',doorWidth-.012,1.99,.008,doorWidth/2,1.08,0,M.glass,door);
+    for(const z of [-.022,.022])rod('Shower door pull',[doorWidth-.055,.95,z],[doorWidth-.055,1.16,z],.007,M.silver,door);
+    register(door,{id:f.id+'_screen',label:(f.room==='UTIL'?'Bathroom 2':'Bathroom 1')+' shower door',kind:'hinge',axis:[0,1,0],amount:-Math.PI/2,category:'room',room:f.room});
     rod('Shower glass top rail',[-w/2,2.08,d/2],[w/2,2.08,d/2],.009,M.silver,p);
-    rod('Shower rail',[w/2-.14,1,-d/2+.03],[w/2-.14,2.11,-d/2+.03],.012,M.silver,p);
-    rod('Rain shower arm',[w/2-.14,2.11,-d/2+.03],[w/2-.14,2.11,-d/2+.33],.012,M.silver,p);
-    cylinder('Rain shower head',.105,.018,w/2-.14,2.09,-d/2+.33,M.silver,p);
-    box('Shower mixer',.16,.07,.04,w/2-.14,1.05,-d/2+.04,M.silver,p);
+    rod('Shower rail',[w/2-.14,1,back+.03],[w/2-.14,2.11,back+.03],.012,M.silver,p);
+    rod('Rain shower arm',[w/2-.14,2.11,back+.03],[w/2-.14,2.11,back+.33],.012,M.silver,p);
+    for(const y of [1.05,1.95])rod('Shower wall bracket',[w/2-.14,y,back+.004],[w/2-.14,y,back+.03],.018,M.silver,p);
+    cylinder('Rain shower head',.105,.018,w/2-.14,2.09,back+.33,M.silver,p);
+    box('Shower mixer',.16,.07,.04,w/2-.14,1.05,back+.025,M.silver,p);
   }
   function bookcase(f,p){const w=f.d/1000,d=f.w/1000,h=f.id==='R13'?.81:1.6,base=f.overhead?1.34:0;
     const q=node('Bookcase orientation',0,base,0,Math.PI/2,p);
@@ -247,14 +264,14 @@ window.buildApartment = function (B, scene, register) {
     }
     else if(f.kind==='chair'){
       p.rotation.y=f.x<1000?Math.PI/2:f.x>2000?-Math.PI/2:f.y<2000?Math.PI:0;
-      feet(w-.08,d-.06,p,.22);soft('Dining chair seat',w,.10,d,0,.48,0,M.cream,p,.04);
-      soft('Dining chair padded back',w,.40,.09,0,.72,-d/2+.045,M.cream,p,.04);
+      feet(w-.08,d-.06,p,.19);soft('Dining chair seat',w,.10,d,0,.405,0,M.cream,p,.04);
+      soft('Dining chair padded back',w,.50,.09,0,.69,-d/2+.045,M.cream,p,.04);
     }
     else if(f.kind==='table'){
-      const h=f.id==='R01'?.755:.40;
+      const h=f.id==='R01'?.7275:.4075;
       soft('Table top',w,.045,d,0,h,0,f.id==='R01'?M.walnut:M.oak,p,.025);
       if(f.id==='R01'){for(const z of [-d*.30,d*.30])box('Dining sculpted pedestal',w*.47,h-.04,.14,0,h/2,z,M.walnut,p);}
-      else {box('Coffee table drawer base',w*.92,.30,d*.93,0,.19,0,M.walnut,p);const drawer=node(f.id+' drawer',0,0,d*.47,0,p);box('Coffee drawer front',w*.84,.22,.02,0,.23,0,M.white,drawer);register(drawer,{id:f.id+'_drawer',label:f.desc+' drawer',kind:'slide',axis:[0,0,1],amount:.28,category:'drawer',room:f.room});}
+      else {box('Coffee table drawer base',w*.92,.36,d*.93,0,.205,0,M.walnut,p);for(const x of [-w*.37,w*.37])for(const z of [-d*.37,d*.37])cylinder('Coffee table recessed foot',.025,.025,x,.0125,z,M.walnut,p);const drawer=node(f.id+' drawer',0,0,d*.47,0,p);box('Coffee drawer front',w*.84,.22,.02,0,.23,0,M.white,drawer);register(drawer,{id:f.id+'_drawer',label:f.desc+' drawer',kind:'slide',axis:[0,0,1],amount:.28,category:'drawer',room:f.room});}
     }
     else if(f.kind==='bed'){
       const headRight=f.id!=='M01';p.rotation.y=headRight?-Math.PI/2:Math.PI/2;
@@ -281,11 +298,12 @@ window.buildApartment = function (B, scene, register) {
     else if(f.kind==='bookcase')bookcase(f,p);
     else if(f.kind==='dresser'){
       const q=node('Dresser orientation',0,0,0,-Math.PI/2,p);cabinet(f,q,d,w,.78);
-      box('Dressing mirror',d*.68,.9,.025,0,1.39,-w/2,M.silver,q);
+      const wallGap=(plan.rooms[f.room].bounds[2]-f.x-f.w)/1000;
+      mirror('Dressing wall mirror',.90,.90,0,1.39,-w/2-wallGap+.008,q,f.room);
     }
     else if(f.kind==='wc')toilet(f,p);
     else if(f.kind==='basin')basin(f,p);
-    else if(f.kind==='shower')shower(f,p);
+    else if(f.kind==='shower'){p.rotation.y=Math.PI;shower(f,p);}
     else if(f.kind==='washer'){
       p.rotation.y=Math.PI/2;box('Laundry washer body',d,.85,w,0,.425,0,M.white,p);
       const ring=B.MeshBuilder.CreateTorus('Washer chrome door ring',{diameter:.38,thickness:.045,tessellation:32},scene);ring.rotation.x=Math.PI/2;ring.position.set(0,.40,w/2+.012);ring.material=M.silver;ring.parent=p;
@@ -304,31 +322,24 @@ window.buildApartment = function (B, scene, register) {
   for(const [r,color] of [ [[145,1590,2870,4420],M.rug],[[100,7350,3180,10020],M.rug],[[4200,9290,7150,11430],M.rug],[[8850,3010,11020,5290],M.rug] ]){
     const rug=fromRect('Bound woven rug',r,7,13,color);rug.isPickable=false;
   }
-  function plant(x,z,h=.8){const p=node('Decorative potted plant',x,0,z);cylinder('Stoneware planter',h*.16,h*.34,0,h*.17,0,M.taupe,p,h*.19);cylinder('Soil',h*.17,.01,0,h*.345,0,M.soil,p);
-    for(let i=0;i<9;i++){const a=i*2.399,top=h*(.60+(i%3)*.14),dx=Math.cos(a)*h*.25,dz=Math.sin(a)*h*.25;rod('Plant stem',[0,h*.31,0],[dx,top,dz],.004,M.walnut,p);const leaf=sphere('Leaf',h*.16,.025,h*.35,dx,top,dz,M.leaf,p);leaf.rotation.set(.2,a,.25);}
-  }
-  plant(.48,-10.93,1.15);plant(3.35,-11.02,.85);plant(12.13,-7.7,.75);
   // A small number of decorative objects keep the real furniture footprints clear.
-  for(const [x,z,y] of [[.60,-.25,.87],[1.86,-.25,.87],[1.95,-8.45,.44],[5.85,-9.83,.44]]){
+  for(const [x,z,y] of [[1.86,-.25,.855],[1.95,-8.45,.43],[5.85,-9.83,.43]]){
     cylinder('Stoneware decorative vase',.075,.19,x,y+.095,z,M.cream,null,.055);
     rod('Dried ornamental stem',[x,y+.15,z],[x+.04,y+.39,z+.02],.003,M.walnut);
     sphere('Dried seed head',.07,.10,.03,x+.04,y+.37,z+.02,M.taupe);
   }
-  for(const [x,z,y] of [[1.92,-8.88,.45],[6.13,-9.83,.45]]){
+  for(const [x,z,y] of [[1.92,-8.88,.443],[6.13,-9.83,.443]]){
     box('Coffee table art book',.22,.026,.30,x,y,z,M.cream);
     const top=box('Art book cover',.22,.004,.30,x,y+.015,z,M.walnut);top.rotation.y=.09;
   }
-  const art=new B.DynamicTexture('Original abstract wall art',{width:768,height:512},scene,false);
-  const a=art.getContext();a.fillStyle='#ddd4c3';a.fillRect(0,0,768,512);
-  for(const [x,y,rx,ry,c] of [[250,285,155,210,'#aaa18e'],[465,235,130,180,'#8d8879'],[570,350,130,100,'#c6b9a0']]){a.fillStyle=c;a.beginPath();a.ellipse(x,y,rx,ry,-.24,0,Math.PI*2);a.fill();}
-  art.update();const artMat=mat('Gallery print','#ffffff',.98);artMat.albedoTexture=art;
-  box('Buffet artwork walnut frame',1.70,.99,.035,1.25,1.64,-.025,M.walnut);
-  box('Buffet abstract artwork',1.64,.93,.006,1.25,1.64,-.046,artMat);
+  const buffetMirror=node('R03 wall mirror mount',1.25,0,0,Math.PI);
+  mirror('Mirror above R03',1.60,.90,0,1.55,.008,buffetMirror,'REC');
   // Dining pendant is a restrained pair of brass rings above the measured table.
   for(const z of [-2.35,-3.35]){
     rod('Pendant suspension',[1.6,2.75,z],[1.6,2.16,z],.003,M.black);
     const ring=B.MeshBuilder.CreateTorus('Dining pendant brass ring',{diameter:.52,thickness:.018,tessellation:48},scene);ring.position.set(1.6,2.14,z);ring.material=M.metal;ceilings.push(ring);
   }
+  const details=window.addApartmentDetails(B,scene,{M,node,box,soft,cylinder,sphere,rod,furniture,roots,plan});
   // Batch the tile geometry: floor joints remain modelled, with two draw calls.
   for(const material of [M.oak,M.floor]){
     const tiles=scene.meshes.filter(m=>m.name.endsWith(' floor')&&m.material===material);
@@ -339,5 +350,5 @@ window.buildApartment = function (B, scene, register) {
     const b=wall.mesh.getBoundingInfo().boundingBox;
     if(wall.mesh.position.y-b.extendSize.y<=.001){const s=box('Oak skirting',b.extendSize.x*2+.006,.065,b.extendSize.z*2+.006,wall.mesh.position.x,.0325,wall.mesh.position.z,M.oak);wall.skirting=s;}
   }
-  return {walls,ceilings,furniture,roots,materials:M,labels,box,soft};
+  return {walls,ceilings,furniture,roots,materials:M,labels,box,soft,details,mirrors};
 };

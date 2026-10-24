@@ -264,15 +264,15 @@
     },
     {
       "id": "R06",
-      "kind": "armchair",
-      "x": 1523.970842879527,
-      "y": 5422.823282956876,
-      "w": 950,
-      "d": 950,
+      "kind": "table",
+      "x": 1693.970842879527,
+      "y": 5397.823282956876,
+      "w": 610,
+      "d": 1000,
       "room": "REC",
-      "size": "950 x 950",
-      "status": "E",
-      "desc": "Lazyboy / armchair",
+      "size": "1000 x 610",
+      "status": "R",
+      "desc": "Reception coffee table (owner correction)",
       "overhead": false
     },
     {
@@ -681,21 +681,21 @@
     {
       "id": "K11",
       "kind": "microwave",
-      "x": 4070.0,
-      "y": 5070.0,
-      "w": 420,
-      "d": 540,
+      "x": 4093.0,
+      "y": 5095.5,
+      "w": 374,
+      "d": 489,
       "room": "KIT",
-      "size": "540 x 420",
+      "size": "489 x 374; H275",
       "status": "A",
-      "desc": "Microwave on counter",
+      "desc": "Microwave on counter, standard compact proposal",
       "overhead": true
     },
     {
       "id": "B01",
       "kind": "shower",
-      "x": 7750.0,
-      "y": 50.0,
+      "x": 7700,
+      "y": 0,
       "w": 900,
       "d": 900,
       "room": "BATH",
@@ -708,7 +708,7 @@
       "id": "B02",
       "kind": "wc",
       "x": 8900.0,
-      "y": 80.0,
+      "y": 0,
       "w": 380,
       "d": 700,
       "room": "BATH",
@@ -721,7 +721,7 @@
       "id": "B03",
       "kind": "basin",
       "x": 9450.0,
-      "y": 80.0,
+      "y": 0,
       "w": 600,
       "d": 450,
       "room": "BATH",
@@ -746,14 +746,14 @@
     {
       "id": "B05",
       "kind": "basin",
-      "x": 4930.0,
-      "y": 100.0,
-      "w": 450,
-      "d": 500,
+      "x": 4880,
+      "y": 0,
+      "w": 500,
+      "d": 450,
       "room": "WC",
       "size": "500 x 450",
       "status": "A",
-      "desc": "Guest basin",
+      "desc": "Guest basin, mounted to north wall",
       "overhead": false
     },
     {
@@ -925,6 +925,45 @@
       7210.0
     ]
   ],
+  "reviewChanges": [
+    "R06 is a coffee table using the recorded 1000 x 610 mm centre-table size; its centre stays unchanged.",
+    "R03 has a wall mirror above the buffet, not artwork.",
+    "Assumed bathroom fixtures are aligned to their backing walls.",
+    "Only balcony corners receive floor planting; indoor planting sits on existing furniture."
+  ],
+  "reviewDimensions": {
+    "dining_table_height_mm": 750,
+    "dining_seat_height_mm": 455,
+    "sofa_seat_height_mm": 460,
+    "coffee_table_height_mm": 430,
+    "washbasin_rim_height_mm": 850,
+    "wc_seat_height_mm": 430,
+    "fridge_height_assumed_mm": 1850,
+    "freezer_height_assumed_mm": 1714,
+    "microwave_assumed_mm": {
+      "width": 489,
+      "depth": 374,
+      "height": 275
+    },
+    "owner_appliance_widths_depths_mm": {
+      "fridge": [
+        780,
+        660
+      ],
+      "dishwasher": [
+        600,
+        580
+      ],
+      "stove": [
+        900,
+        530
+      ],
+      "upright_freezer": [
+        620,
+        700
+      ]
+    }
+  },
   "walls": [
     {
       "bounds": [

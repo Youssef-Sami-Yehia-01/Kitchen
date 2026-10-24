@@ -14,7 +14,7 @@ Run `python -m http.server 8088` from this directory and open `http://localhost:
 - **Walk inside:** click Explore; WASD/arrows move, mouse looks, Shift moves faster, E opens the part under the crosshair, Escape pauses. Walls, columns, furniture and moving doors have collision footprints.
 - **Phone:** tap Explore, hold movement arrows, swipe to look, tap Open to interact, Pause to return to navigation. Pinch/drag in isometric view. Narrow screens also expose these controls.
 - **Isometric:** drag to orbit, scroll/pinch to zoom, right-drag to pan. Automatic cutaway hides walls between the camera and target, and removes ceilings. Disable it in Scene to retain walls.
-- **Doors & drawers:** 90 controls cover kitchen appliances/cabinets, room doors, balcony sliders, wardrobes, storage, vanities and washing machine. Sliding wardrobe panels and kitchen corner doors close conflicting neighbours.
+- **Doors & drawers:** 93 controls cover kitchen appliances/cabinets, room doors, balcony sliders, wardrobes, storage, vanities and washing machine. Sliding wardrobe panels and kitchen corner doors close conflicting neighbours.
 - **Scene:** sunlight strength, cutaway, close all compartments, dimension-data download and source assumptions.
 
 ## R05 layout
@@ -31,6 +31,8 @@ Ceiling height **2.75 m** is confirmed. Unrecorded heights are proposals: window
 - `assets/apartment-scene.json`: dimension specification including joined walls and openings.
 - `apartment-data.js`: bundled scene specification; no runtime JSON fetch.
 - `apartment-model.js`: apartment geometry, materials and furniture.
+- `apartment-details.js`: curved vegetation, detailed planters, curtains, textiles and accessories.
+- `DIMENSIONS.md`: owner measurements, review corrections and Egyptian-market size references.
 - `apartment.js`: connected viewer, kitchen import, interactions and controls.
 - `viewer.js`: unchanged original standalone kitchen runtime.
 - `tools/prepare_apartment.py`: regenerate dimension data; authoring requires Python and Shapely.
@@ -44,4 +46,12 @@ Choose Framework Preset **Other**, root directory **.**, no Build Command and Ou
 
 ## Verification
 
-Checked in local Chromium: all 12 room entry points clear; all 90 interaction buttons exercised without console errors or non-finite transforms; close-all; desktop movement/look/pause; compact 390 x 844 layout without horizontal overflow. Phone controls were checked in browser emulation; physical iOS/Android hardware was not used. Rounded furniture, tiled/plank floors, warm lighting and contact shadows render without bloom or depth-of-field blur.
+Checked in local Chromium: all 12 room entry points clear; all 93 interaction buttons exercised without console errors or non-finite transforms; close-all; desktop movement/look/pause; compact 390 x 844 layout without horizontal overflow. Phone controls were checked in browser emulation; physical iOS/Android hardware was not used. Rounded furniture, tiled/plank floors, warm lighting and contact shadows render without bloom or depth-of-field blur.
+
+## Latest review
+
+R06 is a coffee table, and R03 has a reflective wall mirror. Guest and bathroom fixtures face their backing walls; showers have wall-mounted fittings and hinged front glass doors. Five reflective mirrors are checked against the actual walls after coordinate transforms. Assumed furniture/fixture heights use the market references in [DIMENSIONS.md](DIMENSIONS.md); owner-recorded appliance widths and depths remain unchanged.
+
+The apartment has 18 planters, including four floor pots confined to balcony corners. Indoor planting sits on existing furniture. Corner pots and the trough clear door swings, columns and furniture; right-balcony pots leave over 900 mm of clear floor width. Run `python tools/check_apartment_details.py` to verify these clearances. Plan geometry and supplied furniture measurements were compared with the original R05 source.
+
+The walk camera retains its facing direction when exploration starts. Shower trays are walkable through the open glass doors, with the 70 mm tray elevation reflected in eye height. Complete appliance envelopes were checked after resizing, including handles and levelling feet.
