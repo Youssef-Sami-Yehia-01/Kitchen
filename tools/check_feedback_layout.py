@@ -30,7 +30,7 @@ assert items['B08']['y'] + items['B08']['d'] == plan['rooms']['UTIL']['bounds'][
 
 # All new/moved floor furniture clears columns and the other furniture in its room.
 changed = {'R14','K08','M01','M02a','M02b','M04a','M04b','M04c','C05','B08',
-           'C01','C07','C02','C08','C09','C10','C11','C14','C15'}
+           'C01','C07','C02','C10','C11','C14','C15'}
 for key in changed:
     f = items[key]
     shape = footprint(f)
@@ -49,6 +49,8 @@ for key in changed:
                 door['y'] + door['w'] * math.sin(a0 + (a1-a0)*i/60)) for i in range(61)]
         assert_clear(shape, Polygon([(door['x'],door['y']),*arc]), key + ' blocks door swing')
 
+assert 'C08' not in items and 'C09' not in items, 'Remove the left study desk and chair.'
+assert items['C10']['kind']=='desk' and items['C11']['kind']=='chair', 'Retain the right study area.'
 assert items['C01']['orientation'] == items['C07']['orientation'] == 'vertical'
 assert items['C07']['x'] - (items['C01']['x'] + items['C01']['w']) == 1040
 assert plan['height'] == 2750

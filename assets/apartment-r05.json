@@ -884,34 +884,6 @@
       "overhead": false
     },
     {
-      "id": "C08",
-      "kind": "desk",
-      "x": 7620,
-      "y": 8110,
-      "w": 550,
-      "d": 800,
-      "room": "CHILD",
-      "size": "800 x 550",
-      "status": "A",
-      "desc": "Left study desk",
-      "frontSide": "east",
-      "overhead": false
-    },
-    {
-      "id": "C09",
-      "kind": "chair",
-      "x": 8190,
-      "y": 8235,
-      "w": 550,
-      "d": 550,
-      "room": "CHILD",
-      "size": "550 x 550",
-      "status": "A",
-      "desc": "Left study chair",
-      "frontSide": "west",
-      "overhead": false
-    },
-    {
       "id": "C10",
       "kind": "desk",
       "x": 10850,
@@ -949,7 +921,7 @@
       "room": "CHILD",
       "size": "800 x 260; H750",
       "status": "A",
-      "desc": "Left study wall shelves",
+      "desc": "Left wall bookshelves",
       "frontSide": "east",
       "overhead": true,
       "base": 1500,

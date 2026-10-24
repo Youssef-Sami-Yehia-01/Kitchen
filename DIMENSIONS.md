@@ -67,7 +67,7 @@ Dining remains 2300 × 1100 mm, with chairs shown pulled out. A 180 mm-deep shoe
 
 The master bed faces from the right column face; the dresser and three wardrobe bays face from the left wall. Foot-to-wardrobe clearance is 1170 mm. The balcony cross-wall is removed. The large-bathroom vanity has a 10 mm end reveal at the lower-left wall. The family bookcase starts 600 mm above the floor and ends at 2200 mm.
 
-Children’s beds retain the existing window opening and avoid the structural column. Frame-to-frame aisle is 1040 mm. The left desk is 800 × 550 mm because a longer desk would clash with the entrance swing or column; the right desk is 1350 × 550 mm. Wall shelves stay below the confirmed 2750 mm ceiling. The reference’s 2600 mm height is not used.
+Children’s beds retain the existing window opening and avoid the structural column. Frame-to-frame aisle is 1040 mm. The left desk and chair are removed at the owner’s request; the right study desk remains 1350 × 550 mm. Wall shelves stay below the confirmed 2750 mm ceiling. The reference’s 2600 mm height is not used.
 
 The microwave sits in a fitted visual surround at 1220 mm above floor, retaining its 489 × 374 × 275 mm envelope. Select a built-in-rated appliance and its required vented enclosure before construction; the previous compact appliance geometry is a review placeholder.
 
