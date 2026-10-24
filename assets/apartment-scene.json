@@ -111,10 +111,19 @@
     "BAY": {
       "name": "BALCONY",
       "bounds": [
-        11520.0,
-        7210.0,
-        12720.0,
-        11560.0
+        11520,
+        10060,
+        12720,
+        11560
+      ]
+    },
+    "RECESS": {
+      "name": "MAIN BEDROOM RECESS",
+      "bounds": [
+        11520,
+        7210,
+        12720,
+        9940
       ]
     }
   },
@@ -530,7 +539,14 @@
       "status": "E",
       "desc": "Main wardrobe bay 1 (2150 total / two bays)",
       "overhead": false,
-      "frontSide": "east"
+      "frontSide": "east",
+      "height": 2220,
+      "dimensionBasis": {
+        "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
+        "recordedCm": "65 x 222 x 215",
+        "interpretation": "Overall width 2150, depth 650, height 2220 mm; two equal 1075 mm model bays. Width/height ordering interpreted from handwritten sequence; not separately confirmed.",
+        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
+      }
     },
     {
       "id": "M04b",
@@ -544,7 +560,14 @@
       "status": "E",
       "desc": "Main wardrobe bay 2 (2150 total / two bays)",
       "overhead": false,
-      "frontSide": "east"
+      "frontSide": "east",
+      "height": 2220,
+      "dimensionBasis": {
+        "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
+        "recordedCm": "65 x 222 x 215",
+        "interpretation": "Overall width 2150, depth 650, height 2220 mm; two equal 1075 mm model bays. Width/height ordering interpreted from handwritten sequence; not separately confirmed.",
+        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
+      }
     },
     {
       "id": "M04c",
@@ -558,7 +581,14 @@
       "status": "E",
       "desc": "Khadija wardrobe, third bay on main wall",
       "overhead": false,
-      "frontSide": "east"
+      "frontSide": "east",
+      "height": 2150,
+      "dimensionBasis": {
+        "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
+        "recordedCm": "90 x 215 x 65",
+        "interpretation": "Width 900, depth 650, height 2150 mm",
+        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
+      }
     },
     {
       "id": "K01",
@@ -1096,6 +1126,27 @@
       ]
     }
   },
+  "masterBalcony": {
+    "bedroomPassage": [
+      11520,
+      7090,
+      12720,
+      7210
+    ],
+    "divider": [
+      11520,
+      9940,
+      12720,
+      10060
+    ],
+    "doorBounds": [
+      11640,
+      9940,
+      12540,
+      10060
+    ],
+    "basis": "Owner confirmed glazed entrance at former divider. Divider Y=9940..10060 comes from edited CAD layer 0 lines at Y=1620/1500 in the 11560 mm drawing height. Door width 900 retained; jamb avoids structural column."
+  },
   "walls": [
     {
       "bounds": [
@@ -1279,16 +1330,6 @@
     },
     {
       "bounds": [
-        12720.0,
-        4810.0,
-        12840.0,
-        7090.0
-      ],
-      "low": 0,
-      "high": 1100
-    },
-    {
-      "bounds": [
         -120.0,
         7090.0,
         700.0,
@@ -1311,17 +1352,7 @@
       "bounds": [
         8450.0,
         7090.0,
-        11670.0,
-        7210.0
-      ],
-      "low": 0,
-      "high": 1100
-    },
-    {
-      "bounds": [
-        12570.0,
-        7090.0,
-        12840.0,
+        11520.0,
         7210.0
       ],
       "low": 0,
@@ -1350,7 +1381,7 @@
     {
       "bounds": [
         12720.0,
-        7210.0,
+        4810.0,
         12840.0,
         9120.0
       ],
@@ -1363,6 +1394,26 @@
         7210.0,
         3980.0,
         9420.0
+      ],
+      "low": 0,
+      "high": 1100
+    },
+    {
+      "bounds": [
+        11400.0,
+        7210.0,
+        11520.0,
+        9940.0
+      ],
+      "low": 0,
+      "high": 1100
+    },
+    {
+      "bounds": [
+        11400.0,
+        9940.0,
+        11640.0,
+        10060.0
       ],
       "low": 0,
       "high": 1100
@@ -1440,7 +1491,7 @@
     {
       "bounds": [
         11400.0,
-        7210.0,
+        10060.0,
         11520.0,
         11560.0
       ],
@@ -1679,16 +1730,6 @@
     },
     {
       "bounds": [
-        12720.0,
-        4810.0,
-        12840.0,
-        7090.0
-      ],
-      "low": 1100,
-      "high": 2150
-    },
-    {
-      "bounds": [
         -120.0,
         7090.0,
         700.0,
@@ -1711,17 +1752,7 @@
       "bounds": [
         8450.0,
         7090.0,
-        11670.0,
-        7210.0
-      ],
-      "low": 1100,
-      "high": 2150
-    },
-    {
-      "bounds": [
-        12570.0,
-        7090.0,
-        12840.0,
+        11520.0,
         7210.0
       ],
       "low": 1100,
@@ -1750,7 +1781,7 @@
     {
       "bounds": [
         12720.0,
-        7210.0,
+        4810.0,
         12840.0,
         9120.0
       ],
@@ -1763,6 +1794,26 @@
         7210.0,
         3980.0,
         9420.0
+      ],
+      "low": 1100,
+      "high": 2150
+    },
+    {
+      "bounds": [
+        11400.0,
+        7210.0,
+        11520.0,
+        9940.0
+      ],
+      "low": 1100,
+      "high": 2150
+    },
+    {
+      "bounds": [
+        11400.0,
+        9940.0,
+        11640.0,
+        10060.0
       ],
       "low": 1100,
       "high": 2150
@@ -1840,7 +1891,7 @@
     {
       "bounds": [
         11400.0,
-        7210.0,
+        10060.0,
         11520.0,
         11560.0
       ],
@@ -2089,16 +2140,6 @@
     },
     {
       "bounds": [
-        12720.0,
-        4810.0,
-        12840.0,
-        7090.0
-      ],
-      "low": 2150,
-      "high": 2300
-    },
-    {
-      "bounds": [
         -120.0,
         7090.0,
         700.0,
@@ -2111,17 +2152,7 @@
       "bounds": [
         3160.0,
         7090.0,
-        11670.0,
-        7210.0
-      ],
-      "low": 2150,
-      "high": 2300
-    },
-    {
-      "bounds": [
-        12570.0,
-        7090.0,
-        12840.0,
+        11520.0,
         7210.0
       ],
       "low": 2150,
@@ -2150,7 +2181,7 @@
     {
       "bounds": [
         12720.0,
-        7210.0,
+        4810.0,
         12840.0,
         9120.0
       ],
@@ -2163,6 +2194,26 @@
         7210.0,
         3980.0,
         9420.0
+      ],
+      "low": 2150,
+      "high": 2300
+    },
+    {
+      "bounds": [
+        11400.0,
+        7210.0,
+        11520.0,
+        9940.0
+      ],
+      "low": 2150,
+      "high": 2300
+    },
+    {
+      "bounds": [
+        11400.0,
+        9940.0,
+        11640.0,
+        10060.0
       ],
       "low": 2150,
       "high": 2300
@@ -2240,7 +2291,7 @@
     {
       "bounds": [
         11400.0,
-        7210.0,
+        10060.0,
         11520.0,
         11560.0
       ],
@@ -2459,16 +2510,6 @@
     },
     {
       "bounds": [
-        12720.0,
-        4810.0,
-        12840.0,
-        7090.0
-      ],
-      "low": 2300,
-      "high": 2750
-    },
-    {
-      "bounds": [
         -120.0,
         7090.0,
         700.0,
@@ -2481,7 +2522,7 @@
       "bounds": [
         3160.0,
         7090.0,
-        12840.0,
+        11520.0,
         7210.0
       ],
       "low": 2300,
@@ -2510,7 +2551,7 @@
     {
       "bounds": [
         12720.0,
-        7210.0,
+        4810.0,
         12840.0,
         9120.0
       ],
@@ -2523,6 +2564,26 @@
         7210.0,
         3980.0,
         9420.0
+      ],
+      "low": 2300,
+      "high": 2750
+    },
+    {
+      "bounds": [
+        11400.0,
+        7210.0,
+        11520.0,
+        9940.0
+      ],
+      "low": 2300,
+      "high": 2750
+    },
+    {
+      "bounds": [
+        11400.0,
+        9940.0,
+        12540.0,
+        10060.0
       ],
       "low": 2300,
       "high": 2750
@@ -2580,7 +2641,7 @@
     {
       "bounds": [
         11400.0,
-        7210.0,
+        10060.0,
         11520.0,
         11560.0
       ],
@@ -2726,10 +2787,10 @@
     {
       "id": "S02",
       "bounds": [
-        11670,
-        7090,
-        12570,
-        7210
+        11640,
+        9940,
+        12540,
+        10060
       ],
       "slider": true
     },
@@ -2806,6 +2867,12 @@
       5690,
       5730,
       5810
+    ],
+    [
+      11520,
+      7090,
+      12720,
+      7210
     ]
   ],
   "obstacles": [
@@ -2942,12 +3009,6 @@
       7090.0
     ],
     [
-      12720.0,
-      4810.0,
-      12840.0,
-      7090.0
-    ],
-    [
       -120.0,
       7090.0,
       700.0,
@@ -2962,13 +3023,7 @@
     [
       8450.0,
       7090.0,
-      11670.0,
-      7210.0
-    ],
-    [
-      12570.0,
-      7090.0,
-      12840.0,
+      11520.0,
       7210.0
     ],
     [
@@ -2985,7 +3040,7 @@
     ],
     [
       12720.0,
-      7210.0,
+      4810.0,
       12840.0,
       9120.0
     ],
@@ -2994,6 +3049,18 @@
       7210.0,
       3980.0,
       9420.0
+    ],
+    [
+      11400.0,
+      7210.0,
+      11520.0,
+      9940.0
+    ],
+    [
+      11400.0,
+      9940.0,
+      11640.0,
+      10060.0
     ],
     [
       -270.0,
@@ -3063,7 +3130,7 @@
     ],
     [
       11400.0,
-      7210.0,
+      10060.0,
       11520.0,
       11560.0
     ],
@@ -3087,6 +3154,6 @@
     "Ceiling 2.75 m confirmed by owner.",
     "Window sill 1.10 m; window head 2.30 m; door head 2.15 m assumed.",
     "Unrecorded furniture heights and decorative finishes are visual proposals.",
-    "Right balcony is continuous, entered only from the master bedroom."
+    "Master bedroom opens through a 1200 mm passage into the recess; 900 mm glazed balcony entrance sits at the former CAD divider, as confirmed by owner."
   ]
 }

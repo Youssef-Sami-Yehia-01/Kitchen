@@ -171,7 +171,7 @@ window.buildApartment = function (B, scene, register) {
 
   // Full floor plate includes the door thresholds and open hall passages.
   fromRect('Apartment foundation',[-120,-120,12840,11680],-140,-30,M.grout);
-  const bedroomIds=['MASTER','STUDY','CHILD','DRESS'];
+  const bedroomIds=['MASTER','RECESS','STUDY','CHILD','DRESS'];
   for(const [id,room] of Object.entries(plan.rooms)){
     const r=room.bounds,w=(r[2]-r[0])/1000,d=(r[3]-r[1])/1000,cx=(r[0]+r[2])/2000,cz=-(r[1]+r[3])/2000;
     if(id==='SHAFT'){fromRect('Open light well floor',r,-110,-90,M.grout);continue;}
@@ -195,11 +195,11 @@ window.buildApartment = function (B, scene, register) {
   }
   for(const r of [...plan.passages,...plan.doors.map(d=>d.cut),...plan.windows.filter(w=>w.slider).map(w=>w.bounds)])fromRect('Flush threshold',r,-6,1,M.stone);
   // Low balcony guardrails: these spaces remain visibly open to daylight.
-  for(const r of [[0,11560,3860,11680],[12720,7210,12840,11560]]){
+  for(const r of [[0,11560,3860,11680],[12720,10060,12840,11560]]){
     wallPiece(fromRect('Balcony parapet',r,0,1050,M.wall),r);
   }
   // Exterior wall sections at balconies are parapets, not full-height enclosure.
-  for(const w of walls){const p=w.center;if(w.mesh.name!=='R05 structural column'&&((p.z<-11.55&&p.x<3.87)||(p.x>12.71&&p.z<-7.21))){
+  for(const w of walls){const p=w.center;if(w.mesh.name!=='R05 structural column'&&((p.z<-11.55&&p.x<3.87)||(p.x>12.71&&p.z<-10.06))){
     w.mesh.computeWorldMatrix(true);const b=w.mesh.getBoundingInfo().boundingBox;
     if(b.minimumWorld.y>=1.05){w.mesh.setEnabled(false);w.forcedHidden=true;}
     else if(b.maximumWorld.y>1.05){const low=b.minimumWorld.y;w.mesh.scaling.y=(1.05-low)/(b.maximumWorld.y-low);w.mesh.position.y=(low+1.05)/2;}
@@ -268,7 +268,7 @@ window.buildApartment = function (B, scene, register) {
     return q;
   }
   function wardrobe(f,p,w,d,angle){
-    const q=node(f.id+' wardrobe case',0,0,0,angle,p),h=f.id==='M04c'?2.15:2.22;
+    const q=node(f.id+' wardrobe case',0,0,0,angle,p),h=f.height?f.height/1000:2.22;
     box('Wardrobe back',w,h,.018,0,h/2,-d/2+.009,M.oak,q);
     for(const x of [-w/2+.009,w/2-.009])box('Wardrobe side',.018,h,d,x,h/2,0,M.oak,q);
     for(const y of [.08,.52,1.78,h-.018])box('Wardrobe shelf',w-.036,.024,d,0,y,0,M.oak,q);

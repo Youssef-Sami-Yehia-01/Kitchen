@@ -94,8 +94,8 @@ window.addApartmentDetails = function (B, scene, kit) {
   plant('Family TV console greenery',5.12,-7.46,.32,'grass',.635,.05);
   plant('Balcony olive tree',.47,-10.98,1.70,'tree');
   plant('Balcony broadleaf plant',3.35,-10.98,1.15);
-  plant('Bedroom balcony greenery',12.56,-8.70,.70,'grass');
-  plant('Bedroom balcony far planter',12.56,-11.06,.70,'grass');
+  plant('Bedroom balcony greenery',12.56,-10.68,.70,'grass');
+  plant('Bedroom balcony far planter',12.56,-11.27,.70,'grass');
   plant('Buffet greenery',1.48,-.25,.39,'broadleaf',.855,.067);
   plant('Dining centrepiece',1.60,-2.88,.25,'grass',.750,.052);
   plant('Main bedside greenery',12.24,-2.98,.28,'broadleaf',.505,.055);
@@ -122,11 +122,13 @@ window.addApartmentDetails = function (B, scene, kit) {
     const z=-(r[1]+r[3])/2000+.085;
     const p=node(id+' linen drapery',(r[0]+r[2])/2000,0,z);
     drapes.push({node:p,center:new B.Vector3((r[0]+r[2])/2000,1.2,z)});
-    rod('Curtain bronze rail',[-width/2-.09,2.48,0],[width/2+.09,2.48,0],.008,M.metal,p);
-    for(const x of [-width/2-.07,width/2+.07])rod('Curtain wall bracket',[x,2.48,0],[x,2.48,-.025],.012,M.metal,p);
-    const panelWidth=win.slider?.14:.20,hem=.025,top=2.44;
+    const railEnd=id==='S02'?width/2-.03:width/2+.09;
+    rod('Curtain bronze rail',[-railEnd,2.48,0],[railEnd,2.48,0],.008,M.metal,p);
+    const bracketEnd=id==='S02'?width/2-.06:width/2+.07;
+    for(const x of [-bracketEnd,bracketEnd])rod('Curtain wall bracket',[x,2.48,0],[x,2.48,-.025],.012,M.metal,p);
+    const panelWidth=id==='S02'?.10:win.slider?.14:.20,hem=.025,top=2.44;
     for(const side of [-1,1]){
-      const center=side*(width/2-.015),positions=[],uv=[],indices=[],normals=[];
+      const center=side*(width/2-(id==='S02'?.085:.015)),positions=[],uv=[],indices=[],normals=[];
       for(let row=0;row<=12;row++)for(let col=0;col<=24;col++){
         const u=col/24,v=row/12,x=center+(u-.5)*panelWidth,fold=Math.sin(u*Math.PI*10)*.023;
         positions.push(x,top-(top-hem)*v,fold+Math.sin(v*Math.PI)*.008);uv.push(u*2,v*6);

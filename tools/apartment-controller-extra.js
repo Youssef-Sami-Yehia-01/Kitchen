@@ -1,6 +1,6 @@
 // R05 apartment navigation and reusable room/furniture interactions.
-const roomNames={ALL:'Entire apartment',REC:'Reception & dining',KIT:'Kitchen',UTIL:'Bathroom 2 & laundry',MASTER:'Main bedroom',DRESS:'Dressing room',STUDY:'Family & study',CHILD:'Children’s bedroom',BATH:'Bathroom 1',WC:'Guest WC',BAL:'Reception balcony',BAY:'Bedroom balcony',HALL:'Hallway'};
-const visits={REC:[3.15,1.50,-2.80],KIT:[5.22,5.20,0],UTIL:[8.12,5.17,-1.38],MASTER:[11.23,6.52,-.55],DRESS:[11.50,1.14,0],STUDY:[6.80,8.35,Math.PI],CHILD:[9.55,8.25,Math.PI],BATH:[9.88,1.18,-1.3],WC:[4.28,1.28,.66],BAL:[1.90,11.02,0],BAY:[12.0,8.36,0],HALL:[7.0,6.48,Math.PI/2]};
+const roomNames={ALL:'Entire apartment',REC:'Reception & dining',KIT:'Kitchen',UTIL:'Bathroom 2 & laundry',MASTER:'Main bedroom',DRESS:'Dressing room',STUDY:'Family & study',CHILD:'Children’s bedroom',BATH:'Bathroom 1',WC:'Guest WC',BAL:'Reception balcony',BAY:'Bedroom balcony',RECESS:'Main bedroom recess',HALL:'Hallway'};
+const visits={REC:[3.15,1.50,-2.80],KIT:[5.22,5.20,0],UTIL:[8.12,5.17,-1.38],MASTER:[11.23,6.52,-.55],DRESS:[11.50,1.14,0],STUDY:[6.80,8.35,Math.PI],CHILD:[9.55,8.25,Math.PI],BATH:[9.88,1.18,-1.3],WC:[4.28,1.28,.66],BAL:[1.90,11.02,0],BAY:[12.0,10.82,0],RECESS:[11.86,8.36,Math.PI],HALL:[7.0,6.48,Math.PI/2]};
 const roomSections=new Map();
 function registerApartmentPart(node,spec){
  const s={spec,node,value:0,target:0,position:node.position.clone(),rotation:node.rotationQuaternion?.clone()||B.Quaternion.FromEulerVector(node.rotation),meshes:node.getChildMeshes(false)};
@@ -116,7 +116,7 @@ function finishApartment(){
  }}
  for(const meshes of buckets.values()){if(meshes.length<2)continue;const material=meshes[0].material;const joined=B.Mesh.MergeMeshes(meshes,true,true,undefined,false,false);joined.name='Apartment static furniture · '+material.name;joined.material=material;joined.receiveShadows=true;}
  // Local ceiling fill uses room-limited light lists; daylight provides the shadows.
- for(const id of ['REC','MASTER','STUDY','CHILD','BATH','UTIL','WC','DRESS','HALL']){
+ for(const id of ['REC','MASTER','STUDY','CHILD','BATH','UTIL','WC','DRESS','RECESS','HALL']){
    const r=APT.rooms[id].bounds,cx=(r[0]+r[2])/2000,cz=-(r[1]+r[3])/2000;
    const light=new B.PointLight(roomNames[id]+' ceiling fill',new B.Vector3(cx,2.55,cz),scene);
    light.diffuse=new B.Color3(1,.91,.78);light.intensity=id==='REC'?6:3;light.range=id==='REC'?7:4;
@@ -192,12 +192,12 @@ function updateRoomUI(){
 }
 function createFloorMap(){
  const svg=document.getElementById('floorMap'),ns='http://www.w3.org/2000/svg';
- const short={REC:'RECEPTION',KIT:'KITCHEN',UTIL:'BATH 2',MASTER:'MAIN',DRESS:'DRESS',STUDY:'FAMILY',CHILD:'CHILDREN',BATH:'BATH 1',WC:'WC',BAL:'BALCONY',BAY:'BALC.',HALL:'HALL'};
+ const short={REC:'RECEPTION',KIT:'KITCHEN',UTIL:'BATH 2',MASTER:'MAIN',DRESS:'DRESS',STUDY:'FAMILY',CHILD:'CHILDREN',BATH:'BATH 1',WC:'WC',BAL:'BALCONY',BAY:'BALC.',RECESS:'RECESS',HALL:'HALL'};
  for(const [id,r] of Object.entries(APT.rooms)){
    const [x,y,x1,y1]=r.bounds,rect=document.createElementNS(ns,'rect');
    Object.entries({x,y,width:x1-x,height:y1-y,class:'map-room',tabindex:0,role:'button','aria-label':'Explore '+(roomNames[id]||r.name)}).forEach(([k,v])=>rect.setAttribute(k,v));
    rect.dataset.room=id;if(id==='SHAFT'){rect.style.fill='#353535';rect.removeAttribute('tabindex');rect.removeAttribute('role');}else{rect.onclick=()=>visitRoom(id);rect.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();visitRoom(id);}};}svg.appendChild(rect);
-   if(short[id]){const text=document.createElementNS(ns,'text');text.setAttribute('x',(x+x1)/2);text.setAttribute('y',(y+y1)/2+110);text.textContent=short[id];if(id==='BAY'){text.setAttribute('transform',`rotate(90 ${(x+x1)/2} ${(y+y1)/2})`);}svg.appendChild(text);}
+   if(short[id]){const text=document.createElementNS(ns,'text');text.setAttribute('x',(x+x1)/2);text.setAttribute('y',(y+y1)/2+110);text.textContent=short[id];if(['BAY','RECESS'].includes(id)){text.setAttribute('transform',`rotate(90 ${(x+x1)/2} ${(y+y1)/2})`);}svg.appendChild(text);}
  }
  for(const r of APT.columns){const e=document.createElementNS(ns,'rect');e.setAttribute('x',r[0]);e.setAttribute('y',r[1]);e.setAttribute('width',r[2]-r[0]);e.setAttribute('height',r[3]-r[1]);e.setAttribute('fill','#d0bfa1');svg.appendChild(e);}
  const marker=document.createElementNS(ns,'path');marker.id='mapMarker';marker.setAttribute('class','marker');marker.setAttribute('d','M0 -210 L155 160 L0 90 L-155 160 Z');svg.appendChild(marker);

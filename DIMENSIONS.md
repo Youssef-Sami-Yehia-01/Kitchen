@@ -65,7 +65,7 @@ The owner's measurements and the PDF room/column/opening dimensions take priorit
 
 Dining remains 2300 × 1100 mm, with chairs shown pulled out. A 180 mm-deep shoe cabinet on the adjacent wall leaves 930 mm at the chair backs when closed. This is a measured model clearance, not a guaranteed clearance while bins are open or people are seated.
 
-The master bed faces from the right column face; the dresser and three wardrobe bays face from the left wall. Foot-to-wardrobe clearance is 1170 mm. The balcony cross-wall is removed. The large-bathroom vanity has a 10 mm end reveal at the lower-left wall. The family bookcase starts 600 mm above the floor and ends at 2200 mm.
+The master bed faces from the right column face; the dresser and three wardrobe bays face from the left wall. Foot-to-wardrobe clearance is 1170 mm. The bedroom-facing balcony boundary is a 1200 mm open passage into a 2730 mm-deep internal recess. The 900 mm glazed entrance is at the former divider, Y=9940..10060 mm; beyond it is the 1500 mm-deep balcony. This supersedes the earlier continuous-balcony interpretation. The large-bathroom vanity has a 10 mm end reveal at the lower-left wall. The family bookcase starts 600 mm above the floor and ends at 2200 mm.
 
 Children’s beds retain the existing window opening and avoid the structural column. Frame-to-frame aisle is 1040 mm. The left desk and chair are removed at the owner’s request; the right study desk remains 1350 × 550 mm. Wall shelves stay below the confirmed 2750 mm ceiling. The reference’s 2600 mm height is not used.
 
@@ -79,3 +79,19 @@ The inner family/TV lounge sofa F01 is blue and one continuous L-shaped piece, r
 Latest bathroom revision: B08 cabinetry and marble top increase from 900 × 500 to 1500 × 550 mm, leaving an 80 mm gap along the wall between the vanity and washer. The basin geometry remains 639 × 340 mm internally with the same 32 mm rims, and the mirror stays 774 × 740 mm. Both are centred on the new cabinet axis. The vanity retains the 10 mm end reveal at the lower-left corner.
 
 Beside the shoe cabinet, R15 is a wall-mounted 700 × 1650 mm mirror, bottom 320 mm above floor. A compact grass-like plant is supported on the shoe cabinet at 1292 mm; floor clearance beside the chairs remains 930 mm.
+
+
+## Master wardrobes: source and interpretation
+
+The source is the owner-uploaded notebook photograph `codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg`, not an Egyptian-market standard or a PDF room dimension. The original handwritten values are in centimetres:
+
+| Notebook line | Interpretation used in model | Explicit modelling choice |
+|---|---|---|
+| `dolab -> 65 x 222 x 215` | Main wardrobe: 2150 wide x 650 deep x 2220 high mm | Shown as M04a and M04b, each 1075 wide; the notebook does not give that split |
+| `dolab dija -> 90 x 215 x 65` | Khadija wardrobe M04c: 900 wide x 650 deep x 2150 high mm | Door leaves and internal fittings proposed |
+
+The main wardrobe's width/height ordering was inferred from the handwritten sequence and proportions; it was not separately confirmed. The two equal bays plus Khadija's wardrobe form a 3050 mm-long run, with a 20 mm separator before the third bay. These are three model bays, not three separately measured full-size wardrobes. The dressing table is separate: the notebook records 135 x 49 cm.
+
+## Master balcony: confirmed entrance correction
+
+Owner confirmed the glazed entrance belongs at the former divider farther inside the recess, with a doorless opening facing the bedroom. The edited CAD source has two layer-0 lines from X=11520 to 12540 at CAD Y=1500 and 1620, equivalent to sheet Y=10060 and 9940. This is the divider location used in the viewer. The 900 mm opening is retained as a proposed width and shifted 30 mm left of the earlier opening's X position so the right jamb meets, rather than overlaps, the structural column. No child-room access is added. The exterior parapet and floor planters now start beyond this entrance; the recess has an indoor ceiling and no floor planter. The earlier issued CAD files are preserved.

@@ -62,9 +62,20 @@ assert items['C10']['kind']=='desk' and items['C11']['kind']=='chair', 'Retain t
 assert items['C01']['orientation'] == items['C07']['orientation'] == 'vertical'
 assert items['C07']['x'] - (items['C01']['x'] + items['C01']['w']) == 1040
 assert plan['height'] == 2750
-# A walking strip along the side balcony must remain continuous past the old split.
+# Master opening is doorless; the glazed entrance is at the owner-confirmed CAD divider.
 route = LineString([(12000, 7500), (12000, 11350)]).buffer(140)
 architecture = unary_union([box(*r) for r in plan['obstacles']])
-assert_clear(route, architecture, 'Side balcony still divided')
+assert_clear(route, architecture, 'Master recess / balcony structural route blocked')
+assert plan['masterBalcony']['bedroomPassage'] in plan['passages']
+slider=next(w for w in plan['windows'] if w['id']=='S02')
+assert slider['bounds']==[11640,9940,12540,10060] and slider['slider']
+assert not any(w['bounds'][1]==7090 for w in plan['windows'])
+assert plan['rooms']['RECESS']['bounds']==[11520,7210,12720,9940]
+assert plan['rooms']['BAY']['bounds']==[11520,10060,12720,11560]
+assert_clear(box(11520,7090,12720,7210), architecture, 'Bedroom passage not open')
+assert architecture.covers(box(11520,9940,11640,10060)), 'Missing recessed door pier'
+assert items['M04a']['d']+items['M04b']['d']==2150
+assert all(items[k]['w']==650 for k in ['M04a','M04b','M04c'])
+assert [items[k]['height'] for k in ['M04a','M04b','M04c']]==[2220,2220,2150]
 print('PASS: shoe aisle 930 mm; master aisle >=1100 mm; child bed aisle 1040 mm;')
-print('new furniture clears room boundaries, structural columns, furniture and door swings; balcony continuous.')
+print('new furniture clears room boundaries, structural columns, furniture and door swings; master recess open, balcony entrance at CAD divider; notebook wardrobe envelopes retained.')

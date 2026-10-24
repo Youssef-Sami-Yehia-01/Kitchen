@@ -111,10 +111,19 @@
     "BAY": {
       "name": "BALCONY",
       "bounds": [
-        11520.0,
-        7210.0,
-        12720.0,
-        11560.0
+        11520,
+        10060,
+        12720,
+        11560
+      ]
+    },
+    "RECESS": {
+      "name": "MAIN BEDROOM RECESS",
+      "bounds": [
+        11520,
+        7210,
+        12720,
+        9940
       ]
     }
   },
@@ -530,7 +539,14 @@
       "status": "E",
       "desc": "Main wardrobe bay 1 (2150 total / two bays)",
       "overhead": false,
-      "frontSide": "east"
+      "frontSide": "east",
+      "height": 2220,
+      "dimensionBasis": {
+        "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
+        "recordedCm": "65 x 222 x 215",
+        "interpretation": "Overall width 2150, depth 650, height 2220 mm; two equal 1075 mm model bays. Width/height ordering interpreted from handwritten sequence; not separately confirmed.",
+        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
+      }
     },
     {
       "id": "M04b",
@@ -544,7 +560,14 @@
       "status": "E",
       "desc": "Main wardrobe bay 2 (2150 total / two bays)",
       "overhead": false,
-      "frontSide": "east"
+      "frontSide": "east",
+      "height": 2220,
+      "dimensionBasis": {
+        "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
+        "recordedCm": "65 x 222 x 215",
+        "interpretation": "Overall width 2150, depth 650, height 2220 mm; two equal 1075 mm model bays. Width/height ordering interpreted from handwritten sequence; not separately confirmed.",
+        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
+      }
     },
     {
       "id": "M04c",
@@ -558,7 +581,14 @@
       "status": "E",
       "desc": "Khadija wardrobe, third bay on main wall",
       "overhead": false,
-      "frontSide": "east"
+      "frontSide": "east",
+      "height": 2150,
+      "dimensionBasis": {
+        "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
+        "recordedCm": "90 x 215 x 65",
+        "interpretation": "Width 900, depth 650, height 2150 mm",
+        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
+      }
     },
     {
       "id": "K01",
@@ -1095,5 +1125,26 @@
         700
       ]
     }
+  },
+  "masterBalcony": {
+    "bedroomPassage": [
+      11520,
+      7090,
+      12720,
+      7210
+    ],
+    "divider": [
+      11520,
+      9940,
+      12720,
+      10060
+    ],
+    "doorBounds": [
+      11640,
+      9940,
+      12540,
+      10060
+    ],
+    "basis": "Owner confirmed glazed entrance at former divider. Divider Y=9940..10060 comes from edited CAD layer 0 lines at Y=1620/1500 in the 11560 mm drawing height. Door width 900 retained; jamb avoids structural column."
   }
 }
