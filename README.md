@@ -38,7 +38,7 @@ Ceiling height **2.75 m** is confirmed. Unrecorded heights are proposals: window
 - `tools/prepare_apartment.py`: regenerate dimension data; authoring requires Python and Shapely.
 - `tools/build_apartment_viewer.py` and `tools/apartment-controller-extra.js`: regenerate apartment runtime/page from the original kitchen controls.
 
-After source dimension/control edits, run both Python tools in that order. Edit `apartment-model.js` directly for geometry/material changes. Python is for authoring only, not deployment.
+After source dimension/control edits, run both Python tools in that order. Edit `apartment-model.js` directly for geometry/material changes, then rerun `python tools/build_apartment_viewer.py` to refresh the script content hashes in the page. Python is for authoring only, not deployment.
 
 ## Vercel
 
@@ -55,3 +55,5 @@ R06 is a coffee table, and R03 has a reflective wall mirror. Guest and bathroom 
 The apartment has 18 planters, including four floor pots confined to balcony corners. Indoor planting sits on existing furniture. Corner pots and the trough clear door swings, columns and furniture; right-balcony pots leave over 900 mm of clear floor width. Run `python tools/check_apartment_details.py` to verify these clearances. Plan geometry and supplied furniture measurements were compared with the original R05 source.
 
 The walk camera retains its facing direction when exploration starts. Shower trays are walkable through the open glass doors, with the 70 mm tray elevation reflected in eye height. Complete appliance envelopes were checked after resizing, including handles and levelling feet.
+
+Rounded furniture uses independent vertex/index buffers when batching by material. Run `node tools/check_apartment_geometry.cjs` to verify that one material batch cannot corrupt another cached shape or create stretched triangles between separate objects. Apartment scripts have content hashes in their URLs so revised geometry replaces cached copies.

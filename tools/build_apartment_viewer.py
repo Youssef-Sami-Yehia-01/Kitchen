@@ -1,6 +1,6 @@
 """Retain the tested kitchen controls while extending their scene to R05."""
 from pathlib import Path
-import re,json
+import re,json,hashlib
 ROOT=Path(__file__).resolve().parents[1]
 s=(ROOT/'viewer.js').read_text(encoding='utf-8')
 s=s.replace("'use strict';", "'use strict';\nconst APT=window.APARTMENT; let apartment=null,selectedRoom='ALL';")
@@ -126,5 +126,9 @@ select{font:inherit;color:var(--ink);background:#343434;border:1px solid #ffffff
 '''
 html=html.replace('</style>',extra_css+'\n</style>')
 html=html.replace('<script defer src="viewer.js"></script>', '<script defer src="apartment-data.js"></script><script defer src="apartment-details.js"></script><script defer src="apartment-model.js"></script><script defer src="apartment.js"></script>')
+# A changed geometry file must replace the browser's cached copy on deployment.
+for asset in ['apartment-data.js','apartment-details.js','apartment-model.js','apartment.js']:
+    version=hashlib.sha256((ROOT/asset).read_bytes()).hexdigest()[:12]
+    html=html.replace(f'src="{asset}"',f'src="{asset}?v={version}"')
 (ROOT/'index.html').write_text(html,encoding='utf-8')
 print('Apartment viewer rebuilt; original kitchen preserved in kitchen.html.')

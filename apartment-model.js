@@ -70,7 +70,9 @@ window.buildApartment = function (B, scene, register) {
       for(let i=0;i<ix.length;i+=3){const swap=ix[i+1];ix[i+1]=ix[i+2];ix[i+2]=swap;}
       vd=new B.VertexData();vd.positions=p;vd.normals=n;vd.uvs=uv;vd.indices=ix;roundCache.set(key,vd);
     }
-    const m=new B.Mesh(name,scene);vd.applyToMesh(m);m.position.set(x,y,z);m.material=material;m.parent=parent;m.receiveShadows=true;return m;
+    // Mesh merging can append indices in place. Each piece needs its own buffers,
+    // even when its rounded shape comes from the same cached template.
+    const m=new B.Mesh(name,scene);vd.clone().applyToMesh(m);m.position.set(x,y,z);m.material=material;m.parent=parent;m.receiveShadows=true;return m;
   }
   function cylinder(name,r,h,x,y,z,material=M.metal,parent=null,rTop=r) {
     const m=B.MeshBuilder.CreateCylinder(name,{diameter:r*2,diameterTop:rTop*2,height:h,tessellation:24},scene);
