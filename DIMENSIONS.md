@@ -73,3 +73,5 @@ The microwave sits in a fitted visual surround at 1220 mm above floor, retaining
 
 - [IKEA Egypt TRONES](https://www.ikea.com/eg/en/p/trones-shoe-cabinet-storage-white-00397307/) — 180 mm-deep tilt shoe storage reference.
 - [IKEA Egypt METOD appliance cabinet](https://www.ikea.com/eg/en/p/metod-high-cabinet-f-built-in-appliances-white-50213570/) — 600 mm system-depth appliance cabinet with ventilation; the proposed pantry width/height are fitted to this room.
+
+The inner family/TV lounge sofa F01 is blue and one continuous L-shaped piece, retaining the recorded 3000 × 2000 mm overall size and 1000 mm seat-run depth. Two full standalone sofas and their internal junction arms have been replaced by connected base, seat and back shells, with armrests only at the two free ends.

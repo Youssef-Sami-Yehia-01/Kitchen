@@ -363,8 +363,10 @@
       "room": "STUDY",
       "size": "3000 x 2000; D1000",
       "status": "E",
-      "desc": "L-shaped sofa",
-      "overhead": false
+      "desc": "Continuous blue L-shaped family sofa",
+      "overhead": false,
+      "finish": "blue",
+      "construction": "continuous_sectional"
     },
     {
       "id": "F02",

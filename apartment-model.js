@@ -1,5 +1,74 @@
 'use strict';
 
+// A single upholstered sectional shell, rather than two complete sofas meeting.
+window.buildLoungeSectional = function(B,scene,kit,parent,w,d){
+  const {M,soft,cylinder,rod}=kit,blue=M.loungeBlue,t=1,x0=-w/2,x1=w/2,z0=-d/2,z1=d/2;
+  const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+  function roundedOutline(outline,inset,radius){
+    const result=[];
+    for(let i=0;i<outline.length;i++){
+      const previous=outline[(i+outline.length-1)%outline.length],v=outline[i],next=outline[(i+1)%outline.length];
+      const before=new B.Vector2(v[0]-previous[0],v[1]-previous[1]).normalize();
+      const after=new B.Vector2(next[0]-v[0],next[1]-v[1]).normalize();
+      const corner=[v[0]+(-before.y-after.y)*inset,v[1]+(before.x+after.x)*inset];
+      const a=[corner[0]-before.x*radius,corner[1]-before.y*radius];
+      const b=[corner[0]+after.x*radius,corner[1]+after.y*radius];
+      const center=[a[0]+after.x*radius,a[1]+after.y*radius];
+      const start=Math.atan2(a[1]-center[1],a[0]-center[0]);
+      let sweep=Math.atan2(b[1]-center[1],b[0]-center[0])-start;
+      while(sweep>Math.PI)sweep-=Math.PI*2;while(sweep<-Math.PI)sweep+=Math.PI*2;
+      for(let j=0;j<=4;j++){const angle=start+sweep*j/4;result.push([center[0]+Math.cos(angle)*radius,center[1]+Math.sin(angle)*radius]);}
+    }
+    return result;
+  }
+  function triangulate(points){
+    const remaining=points.map((_,i)=>i),triangles=[];
+    while(remaining.length>3){
+      let clipped=false;
+      for(let i=0;i<remaining.length;i++){
+        const a=remaining[(i+remaining.length-1)%remaining.length],b=remaining[i],c=remaining[(i+1)%remaining.length];
+        if(cross(points[a],points[b],points[c])<=1e-10)continue;
+        const occupied=remaining.some(k=>k!==a&&k!==b&&k!==c&&cross(points[a],points[b],points[k])>=-1e-10&&cross(points[b],points[c],points[k])>=-1e-10&&cross(points[c],points[a],points[k])>=-1e-10);
+        if(occupied)continue;
+        triangles.push(a,b,c);remaining.splice(i,1);clipped=true;break;
+      }
+      if(!clipped)throw Error('Invalid continuous sectional outline');
+    }
+    return triangles.concat(remaining);
+  }
+  function paddedL(name,outline,height,y,component,bevel=.025){
+    const positions=[],indices=[],normals=[],uvs=[];
+    const rings=[[-height/2,bevel],[-height/2+bevel,0],[height/2-bevel,0],[height/2,bevel]];
+    let cap;
+    for(const [level,inset] of rings){
+      const points=roundedOutline(outline,inset,.04);cap=points;
+      for(const [x,z] of points){positions.push(x,level,z);uvs.push((x+w/2)/w,(z+d/2)/d);}
+    }
+    const n=cap.length;
+    for(let ring=0;ring<3;ring++)for(let i=0;i<n;i++){
+      const a=ring*n+i,b=ring*n+(i+1)%n,c=a+n,e=b+n;indices.push(a,b,c,b,e,c);
+    }
+    const caps=triangulate(cap);
+    for(let i=0;i<caps.length;i+=3){indices.push(caps[i+2],caps[i+1],caps[i],3*n+caps[i],3*n+caps[i+1],3*n+caps[i+2]);}
+    B.VertexData.ComputeNormals(positions,indices,normals);
+    const data=new B.VertexData();Object.assign(data,{positions,indices,normals,uvs});
+    const mesh=new B.Mesh(name,scene);data.applyToMesh(mesh);mesh.position.y=y;mesh.parent=parent;mesh.material=blue;mesh.receiveShadows=true;
+    mesh.metadata={sectionalComponent:component};return mesh;
+  }
+  const outline=[[x0,z0],[x1,z0],[x1,z0+t],[x0+t,z0+t],[x0+t,z1],[x0,z1]];
+  paddedL('Continuous blue L-shaped sofa base',outline,.25,.25,'base');
+  paddedL('Continuous blue L-shaped seat',[[x0+.19,z0+.19],[x1-.19,z0+.19],[x1-.19,z0+t-.03],[x0+t-.03,z0+t-.03],[x0+t-.03,z1-.19],[x0+.19,z1-.19]],.14,.39,'seat');
+  paddedL('Continuous blue wraparound sofa back',[[x0,z0],[x1,z0],[x1,z0+.17],[x0+.17,z0+.17],[x0+.17,z1],[x0,z1]],.65,.58,'back',.02);
+  soft('Sectional right end arm',.17,.48,t,x1-.085,.47,z0+t/2,blue,parent,.06);
+  soft('Sectional return end arm',t,.48,.17,x0+t/2,.47,z1-.085,blue,parent,.06);
+  for(let i=0;i<3;i++)soft('Sectional blue back cushion',(w-.38)/3-.018,.40,.16,x0+.19+(i+.5)*(w-.38)/3,.67,z0+.22,blue,parent,.055);
+  soft('Sectional return back cushion',.16,.40,d-.52,x0+.24,.67,.04,blue,parent,.055);
+  for(const [x,z] of [[x0+.10,z0+.10],[x1-.10,z0+.10],[x1-.10,z0+t-.10],[x0+t-.10,z0+t-.10],[x0+t-.10,z1-.10],[x0+.10,z1-.10]])cylinder('Sectional recessed foot',.021,.18,x,.09,z,M.walnut,parent,.016);
+  const pillow=soft('Sectional ivory accent pillow',.34,.34,.12,x1-.44,.65,z0+.34,M.cream,parent,.045);pillow.rotation.z=-.14;
+  const returnPillow=soft('Sectional return accent pillow',.12,.34,.34,x0+.36,.65,z1-.42,M.cream,parent,.045);returnPillow.rotation.x=.12;
+  for(const x of [x0+t+.04,x0+t+.88])rod('Sectional seat stitching',[x,.463,z0+.30],[x,.463,z0+t-.10],.0015,M.blue,parent);
+};
+
 // All plan coordinates come from the R05 scene specification. Metres, Y up.
 window.buildApartment = function (B, scene, register) {
   const plan = window.APARTMENT, walls = [], ceilings = [], furniture = [], labels = [], mirrors=[];
@@ -23,6 +92,7 @@ window.buildApartment = function (B, scene, register) {
     cream: mat('Apartment · ivory linen', '#d7cdbc', .98),
     taupe: mat('Apartment · warm taupe', '#a59a8c', .96),
     blue: mat('Apartment · muted blue linen', '#677c89', .96),
+    loungeBlue: mat('Apartment · lounge blue upholstery', '#315b7c', .96),
     terracotta: mat('Apartment · clay linen', '#b5826a', .96),
     sheet: mat('Apartment · cotton bedding', '#e7e3da', .97),
     rug: mat('Apartment · wool rug', '#c2b9aa', 1),
@@ -47,7 +117,7 @@ window.buildApartment = function (B, scene, register) {
   const ctx=weave.getContext(), pixels=ctx.createImageData(256,256); let seed=871;
   for(let y=0;y<256;y++)for(let x=0;x<256;x++) {seed=(seed*1664525+1013904223)>>>0;const n=215+(seed%23)+(x%3===0?9:0)+(y%3===0?7:0),i=(y*256+x)*4;pixels.data.set([n,n,n,255],i);}
   ctx.putImageData(pixels,0,0);weave.update();weave.uScale=weave.vScale=5;
-  for(const name of ['grey','cream','taupe','sheet','blue','terracotta','rug']) M[name].albedoTexture=weave;
+  for(const name of ['grey','cream','taupe','sheet','blue','loungeBlue','terracotta','rug']) M[name].albedoTexture=weave;
 
   function box(name,w,h,d,x,y,z,material=M.oak,parent=null) {
     const m=B.MeshBuilder.CreateBox(name,{width:w,height:h,depth:d},scene);
@@ -264,9 +334,7 @@ window.buildApartment = function (B, scene, register) {
     if(f.kind==='sofa'){p.rotation.y=Math.PI/2;sofa(p,d,w,f.id==='R08'?M.grey:M.taupe);}
     else if(f.kind==='armchair'){p.rotation.y=-Math.PI/2;sofa(p,w,d,M.taupe);}
     else if(f.kind==='l_sofa'){
-      // Exact R05 union: 3 x 1 m bottom leg plus 1 x 2 m west return.
-      const a=node('Family sofa long leg',0,0,-.50,0,p);sofa(a,3,1,M.cream);
-      const b=node('Family sofa west return',-1,0,.50,Math.PI/2,p);sofa(b,1,1,M.cream);
+      window.buildLoungeSectional(B,scene,{M,soft,cylinder,rod},p,w,d);
     }
     else if(f.kind==='chair'){
       p.rotation.y=f.frontSide==='west'?-Math.PI/2:f.frontSide==='east'?Math.PI/2:f.x<1000?Math.PI/2:f.x>2000?-Math.PI/2:f.y<2000?Math.PI:0;

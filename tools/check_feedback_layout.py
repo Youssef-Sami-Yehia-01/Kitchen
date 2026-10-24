@@ -21,6 +21,8 @@ assert min(shoe['x'] - (f['x'] + f['w']) for f in right_chairs) == 930
 assert (items['R01']['w'], items['R01']['d']) == (1100, 2300)
 assert items['K08']['kind'] == 'tall_cabinet'
 assert footprint(items['K08']).covers(footprint(items['K11']))
+assert items['F01']['construction']=='continuous_sectional' and items['F01']['finish']=='blue'
+assert (items['F01']['w'],items['F01']['d'])==(3000,2000)
 assert items['F05']['overhead'] and items['F05']['base'] == 600
 assert items['M01']['headSide'] == 'right'
 for key in ['C05', 'M04a', 'M04b', 'M04c']:

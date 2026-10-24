@@ -90,7 +90,7 @@ function finishApartment(){
  for(const drawer of ['part_01','part_02','part_03'])excludeTogether('part_26',drawer);
  // Consolidate static furniture by material. Hinged/sliding components stay separate.
  const layoutAudit={};
- for(const id of ['R14','K08','F05','C01','C07']){
+ for(const id of ['R14','K08','F05','F01','C01','C07']){
   const root=apartment.roots.get(id),min=new B.Vector3(Infinity,Infinity,Infinity),max=new B.Vector3(-Infinity,-Infinity,-Infinity);
   for(const m of root.getChildMeshes(false)){m.computeWorldMatrix(true);const b=m.getBoundingInfo().boundingBox;min.minimizeInPlace(b.minimumWorld);max.maximizeInPlace(b.maximumWorld);}
   layoutAudit[id]={minMm:min.asArray().map(v=>Math.round(v*1000)),maxMm:max.asArray().map(v=>Math.round(v*1000))};
@@ -98,6 +98,10 @@ function finishApartment(){
   if(mattress){const b=mattress.getBoundingInfo().boundingBox;layoutAudit[id].mattressMm={width:Math.round((b.maximumWorld.x-b.minimumWorld.x)*1000),length:Math.round((b.maximumWorld.z-b.minimumWorld.z)*1000)};}
  }
  layoutAudit.shoeAisleMm=layoutAudit.R14.minMm[0]-2750;
+ const sectional=apartment.roots.get('F01').getChildMeshes(false);
+ layoutAudit.F01.connectedShells=sectional.filter(m=>m.metadata?.sectionalComponent).map(m=>m.metadata.sectionalComponent);
+ layoutAudit.F01.endArms=sectional.filter(m=>/end arm$/.test(m.name)).length;
+ layoutAudit.F01.upholstery=apartment.materials.loungeBlue.albedoColor.toGammaSpace().toHexString();
  document.body.dataset.layoutAudit=JSON.stringify(layoutAudit);
  const buckets=new Map();
  for(const root of apartment.furniture){for(const m of root.getChildMeshes(false)){

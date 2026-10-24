@@ -21,7 +21,7 @@ window.addApartmentDetails = function (B, scene, kit) {
     fp.data.set([Math.round((dx+1)*127.5),Math.round((dy+1)*127.5),Math.round((z+1)*127.5),255],i);
   }
   fc.putImageData(fp,0,0);fabricNormal.update();fabricNormal.gammaSpace=false;fabricNormal.uScale=fabricNormal.vScale=8;fabricNormal.level=.15;
-  for(const m of [M.cream,M.grey,M.taupe,M.sheet,M.blue,M.terracotta,M.rug,linen])m.bumpTexture=fabricNormal;
+  for(const m of [M.cream,M.grey,M.taupe,M.sheet,M.blue,M.loungeBlue,M.terracotta,M.rug,linen])m.bumpTexture=fabricNormal;
   const leafTexture=new B.DynamicTexture('Natural leaf veins',{width:128,height:256},scene,false);
   const lc=leafTexture.getContext();lc.fillStyle='#deded3';lc.fillRect(0,0,128,256);
   lc.strokeStyle='#a9b09b';lc.lineWidth=2;lc.beginPath();lc.moveTo(64,256);lc.lineTo(64,0);lc.stroke();

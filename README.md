@@ -68,3 +68,5 @@ Rounded furniture uses independent vertex/index buffers when batching by materia
 - The new children’s room follows the supplied two-bed reference around the actual PDF column/window positions. The confirmed ceiling remains 2750 mm rather than the reference image’s 2600 mm.
 
 Run `python tools/check_feedback_layout.py` for new furniture, door-swing, column and balcony-route checks. The current viewer exposes 97 interactions.
+
+The family/TV lounge F01 is one continuous blue L-shaped sectional, with joined upholstered base, seat and back geometry and only two end arms. Its recorded 3000 × 2000 mm footprint is retained. The geometry check also verifies closed, connected shells and the L-shaped recess.
