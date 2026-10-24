@@ -27,6 +27,14 @@
           "value": "no-cache"
         }
       ]
+    },
+    {
+      "source": "/apartment(.*).js",
+      "headers": [{"key":"Cache-Control","value":"no-cache"}]
+    },
+    {
+      "source": "/assets/apartment(.*).json",
+      "headers": [{"key":"Cache-Control","value":"no-cache"}]
     }
   ]
 }

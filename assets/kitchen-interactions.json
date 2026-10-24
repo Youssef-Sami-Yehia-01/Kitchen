@@ -1,0 +1,635 @@
+{
+  "room": {
+    "width": 2.5,
+    "depth": 4.0,
+    "height": 2.75
+  },
+  "interactions": [
+    {
+      "id": "part_01",
+      "node": "Interact_part_01",
+      "label": "West cooking storage drawer 1",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.4,
+      "category": "drawer",
+      "requires": null,
+      "conflicts": [
+        "corner_base"
+      ]
+    },
+    {
+      "id": "part_02",
+      "node": "Interact_part_02",
+      "label": "West cooking storage drawer 2",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.4,
+      "category": "drawer",
+      "requires": null,
+      "conflicts": [
+        "corner_base"
+      ]
+    },
+    {
+      "id": "part_03",
+      "node": "Interact_part_03",
+      "label": "West cooking storage drawer 3",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.4,
+      "category": "drawer",
+      "requires": null,
+      "conflicts": [
+        "corner_base"
+      ]
+    },
+    {
+      "id": "part_04",
+      "node": "Interact_part_04",
+      "label": "West utility storage door 1",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    },
+    {
+      "id": "part_05",
+      "node": "Interact_part_05",
+      "label": "Sink cabinet door 1",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    },
+    {
+      "id": "part_06",
+      "node": "Interact_part_06",
+      "label": "Sink cabinet door 2",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": 1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    },
+    {
+      "id": "part_07",
+      "node": "Interact_part_07",
+      "label": "Entrance drawer cabinet drawer 1",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.4,
+      "category": "drawer",
+      "requires": null
+    },
+    {
+      "id": "part_08",
+      "node": "Interact_part_08",
+      "label": "Entrance drawer cabinet drawer 2",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.4,
+      "category": "drawer",
+      "requires": null
+    },
+    {
+      "id": "part_09",
+      "node": "Interact_part_09",
+      "label": "Entrance drawer cabinet drawer 3",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.4,
+      "category": "drawer",
+      "requires": null
+    },
+    {
+      "id": "part_14",
+      "node": "Interact_part_14",
+      "label": "Column shallow cabinet 1 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": 1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    },
+    {
+      "id": "part_15",
+      "node": "Interact_part_15",
+      "label": "Column shallow cabinet 2 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": 1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    },
+    {
+      "id": "part_16",
+      "node": "Interact_part_16",
+      "label": "Column shallow cabinet 3 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": 1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    },
+    {
+      "id": "part_17",
+      "node": "Interact_part_17",
+      "label": "Column shallow cabinet 4 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": 1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    },
+    {
+      "id": "part_18",
+      "node": "Interact_part_18",
+      "label": "Upper cabinet 1-1 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "upper",
+      "requires": null,
+      "conflicts": [
+        "corner_upper"
+      ]
+    },
+    {
+      "id": "part_19",
+      "node": "Interact_part_19",
+      "label": "Upper cabinet 2-1 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "upper",
+      "requires": null
+    },
+    {
+      "id": "part_20",
+      "node": "Interact_part_20",
+      "label": "Upper cabinet 3-1 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "upper",
+      "requires": null
+    },
+    {
+      "id": "part_21",
+      "node": "Interact_part_21",
+      "label": "Upper cabinet 4-1 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "upper",
+      "requires": null
+    },
+    {
+      "id": "part_22",
+      "node": "Interact_part_22",
+      "label": "Upper cabinet 4-2 door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "upper",
+      "requires": null
+    },
+    {
+      "id": "part_23",
+      "node": "Interact_part_23",
+      "label": "Dishwasher rack lower",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.38,
+      "category": "rack",
+      "requires": "dishwasher_door"
+    },
+    {
+      "id": "part_24",
+      "node": "Interact_part_24",
+      "label": "Dishwasher rack upper",
+      "kind": "slide",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": 0.38,
+      "category": "rack",
+      "requires": "dishwasher_door"
+    },
+    {
+      "id": "part_25",
+      "node": "Interact_part_25",
+      "label": "Dishwasher door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "amount": 1.5707963267948966,
+      "category": "appliance",
+      "requires": null
+    },
+    {
+      "id": "part_26",
+      "node": "Interact_part_26",
+      "label": "Stove oven door",
+      "kind": "hinge",
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "appliance",
+      "requires": null
+    },
+    {
+      "id": "part_27",
+      "node": "Interact_part_27",
+      "label": "Refrigerator lower compartment",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "appliance",
+      "requires": null
+    },
+    {
+      "id": "part_28",
+      "node": "Interact_part_28",
+      "label": "Refrigerator main door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "appliance",
+      "requires": null
+    },
+    {
+      "id": "part_29",
+      "node": "Interact_part_29",
+      "label": "Upright freezer door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "appliance",
+      "requires": null
+    },
+    {
+      "id": "part_30",
+      "node": "Interact_part_30",
+      "label": "Freezer drawer 1",
+      "kind": "slide",
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "amount": 0.36,
+      "category": "drawer",
+      "requires": "freezer_door"
+    },
+    {
+      "id": "part_31",
+      "node": "Interact_part_31",
+      "label": "Freezer drawer 2",
+      "kind": "slide",
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "amount": 0.36,
+      "category": "drawer",
+      "requires": "freezer_door"
+    },
+    {
+      "id": "part_32",
+      "node": "Interact_part_32",
+      "label": "Freezer drawer 3",
+      "kind": "slide",
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "amount": 0.36,
+      "category": "drawer",
+      "requires": "freezer_door"
+    },
+    {
+      "id": "part_33",
+      "node": "Interact_part_33",
+      "label": "Freezer drawer 4",
+      "kind": "slide",
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "amount": 0.36,
+      "category": "drawer",
+      "requires": "freezer_door"
+    },
+    {
+      "id": "part_34",
+      "node": "Interact_part_34",
+      "label": "Freezer drawer 5",
+      "kind": "slide",
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "amount": 0.36,
+      "category": "drawer",
+      "requires": "freezer_door"
+    },
+    {
+      "id": "part_35",
+      "node": "Interact_part_35",
+      "label": "Freezer drawer 6",
+      "kind": "slide",
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "amount": 0.36,
+      "category": "drawer",
+      "requires": "freezer_door"
+    },
+    {
+      "id": "part_38",
+      "node": "Interact_part_38",
+      "label": "Concealed extractor cabinet left door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": 1.5707963267948966,
+      "category": "upper",
+      "requires": null,
+      "wall": "north"
+    },
+    {
+      "id": "part_39",
+      "node": "Interact_part_39",
+      "label": "Concealed extractor cabinet right door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "upper",
+      "requires": null,
+      "wall": "north"
+    },
+    {
+      "id": "part_40",
+      "node": "Interact_part_40",
+      "label": "Microwave door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": 1.5707963267948966,
+      "category": "appliance",
+      "requires": null
+    },
+    {
+      "id": "corner_upper",
+      "node": "Interact_corner_upper",
+      "label": "Front corner cabinet door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "upper",
+      "requires": null,
+      "wall": "corner",
+      "conflicts": [
+        "part_18"
+      ]
+    },
+    {
+      "id": "corner_base",
+      "node": "Interact_corner_base",
+      "label": "Stove-side corner cabinet door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "cabinet",
+      "requires": null,
+      "conflicts": [
+        "part_01",
+        "part_02",
+        "part_03"
+      ]
+    },
+    {
+      "id": "corner_window",
+      "node": "Interact_corner_window",
+      "label": "Window-side corner cabinet door",
+      "kind": "hinge",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "amount": -1.5707963267948966,
+      "category": "cabinet",
+      "requires": null
+    }
+  ],
+  "obstacles": [
+    [
+      1.885,
+      2.5,
+      0.6,
+      4.0
+    ],
+    [
+      0.0,
+      2.5,
+      0,
+      0.6
+    ],
+    [
+      0.0,
+      0.6102028241335038,
+      0,
+      2.5288831835686785
+    ],
+    [
+      0.02499999999999991,
+      0.685,
+      2.5438831835686786,
+      3.323883183568679
+    ],
+    [
+      0.02499999999999991,
+      0.7249999999999999,
+      3.343883183568679,
+      3.963883183568679
+    ]
+  ],
+  "sink": {
+    "yMin": 2.1092297817715027,
+    "yMax": 2.6892297817715027
+  },
+  "dishwasher": {
+    "yMin": 2.7984595635430054,
+    "yMax": 3.3984595635430055
+  },
+  "appliances": {
+    "fridge": {
+      "width": 0.78,
+      "depth": 0.66,
+      "heightAssumed": 2.16
+    },
+    "dishwasher": {
+      "width": 0.6,
+      "depth": 0.58,
+      "heightAssumed": 0.865
+    },
+    "stove": {
+      "width": 0.9,
+      "depth": 0.53,
+      "heightAssumed": 0.91
+    },
+    "uprightFreezer": {
+      "width": 0.62,
+      "depth": 0.7,
+      "heightAssumed": 1.9
+    },
+    "microwave": {
+      "widthAssumed": 0.54,
+      "depthAssumed": 0.42,
+      "heightAssumed": 0.32,
+      "location": "Left counter beside entrance"
+    }
+  },
+  "mirrored": true,
+  "frontCabinets": {
+    "baseHeight": 1.7,
+    "topHeight": 2.48,
+    "depth": 0.382,
+    "extractorUnderside": 1.68,
+    "extractorWidth": 0.9,
+    "windowClearance": 0.02
+  },
+  "corners": {
+    "upperBase": 1.7,
+    "upperTop": 2.48,
+    "upperFiller": 0.056,
+    "baseFiller": 0.06,
+    "style": "Square 90 degree blind returns with straight cabinet doors",
+    "protectedArchitectureUnchanged": true
+  }
+}

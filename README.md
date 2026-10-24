@@ -1,33 +1,47 @@
-# Ibrahim & Merna Kitchen Viewer
+# Ibrahim & Merna Apartment Studio
 
-This is a complete static website with all runtime assets included. No account keys, CDN connection, or build step is needed.
+A complete static apartment viewer extending the existing kitchen with the approved **R05** furniture plan. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
 
-## Deploy on Vercel
+## Preview
 
-Import this GitHub repository in Vercel. Use the repository root as the Root Directory. Choose Framework Preset **Other**. Leave the Build Command empty and set Output Directory to **.** (the root). Deploy.
+Run `python -m http.server 8088` from this directory and open `http://localhost:8088/`. For a phone on the same Wi-Fi, serve with `python -m http.server 8088 --bind 0.0.0.0` and open the computer's local IPv4 address on port 8088. The computer must allow the connection. Desktop mouse capture requires localhost or HTTPS; touch controls work without it.
 
-Keep assets/ and vendor/ alongside index.html and viewer.js. Do not upload only the HTML file. Serve over HTTPS for mouse capture and full-screen controls.
+`index.html` opens the full apartment. `kitchen.html` preserves the original standalone kitchen.
 
-## Local preview
+## Explore
 
-From this folder run `python -m http.server 8080`, then open http://localhost:8080 .
+- **Room selector / floor map:** focus a room in isometric view, or enter it in walkthrough mode. Sizes are internal R05 dimensions.
+- **Walk inside:** click Explore; WASD/arrows move, mouse looks, Shift moves faster, E opens the part under the crosshair, Escape pauses. Walls, columns, furniture and moving doors have collision footprints.
+- **Phone:** tap Explore, hold movement arrows, swipe to look, tap Open to interact, Pause to return to navigation. Pinch/drag in isometric view. Narrow screens also expose these controls.
+- **Isometric:** drag to orbit, scroll/pinch to zoom, right-drag to pan. Automatic cutaway hides walls between the camera and target, and removes ceilings. Disable it in Scene to retain walls.
+- **Doors & drawers:** 90 controls cover kitchen appliances/cabinets, room doors, balcony sliders, wardrobes, storage, vanities and washing machine. Sliding wardrobe panels and kitchen corner doors close conflicting neighbours.
+- **Scene:** sunlight strength, cutaway, close all compartments, dimension-data download and source assumptions.
 
-## Controls
+## R05 layout
 
-Walk inside: click to explore; WASD/arrow keys move, mouse looks, Shift moves faster, E opens the item under the crosshair, Escape releases the mouse. Isometric: drag to orbit and scroll to zoom. On phones: tap to explore, hold the on-screen arrows to move, swipe the room to look around, tap Open to interact, and tap Pause to stop. Movement and looking work together. In isometric mode, drag to rotate, pinch to zoom, and tap a door or drawer to open. Doors & drawers lists all 37 opening parts. Scene controls sunlight and automatic wall hiding.
+Reception/dining/TV lounge, kitchen, guest WC, two bathrooms, main bedroom, dressing room, family/study, two-child bedroom, hallway, both balconies and the open shaft are included. The 57 furniture records retain approved positions and plan dimensions.
 
-Room: 4.00 x 2.50 m; ceiling 2.75 m. Model geometry and appliance dimensions are retained. The room is mirrored with the column on the right when entering. Real-time lighting approximates the supplied reference; the AI image is an artistic visualization.
+The kitchen entrance is a centred 1000 mm open passage. The dishwasher is on the user's right when facing the sink; the column stays on the right when entering. The main bed is on the left wall; dresser and three wardrobe bays are on the right. Bathroom 2 has the shower against the shaft wall; toilet, washer, overhead cabinet and vanity are on the left wall. Children have two rotated beds and an entrance-wall wardrobe; their removed desk stays absent. The right balcony is entered only from the main bedroom. The reception entrance and dressing room have no windows. R04 is removed; R01/R02 are 150 mm higher; R05/R06 are 150 mm lower.
 
-Vercel settings reference: https://vercel.com/docs/builds/configure-a-build
+Ceiling height **2.75 m** is confirmed. Unrecorded heights are proposals: window sill 1.10 m, head 2.30 m, door head 2.15 m and typical furniture heights. The retained balcony transverse strip is a 1.05 m guard wall. Finishes, decorative lighting and accessories outside the kitchen are proposals. The R05 kitchen window is retained; the existing upper-cabinet junction needs review against the actual opening before fabrication. This is a design review model, not a construction survey.
 
-## Validation
+## Files and maintenance
 
-Verified in Chromium desktop and emulated touch devices: simultaneous walking and swipe looking, tap interactions, pause/resume, drag orbit, pinch zoom, portrait/landscape layouts, collision checks, opening/closing all 37 parts, auto-hidden walls, and sunlight settings. Testing used phone emulation; physical iOS/Android hardware was not available.
+- `assets/apartment-r05.json`: source R05 rooms/furniture/columns in millimetres.
+- `assets/apartment-scene.json`: dimension specification including joined walls and openings.
+- `apartment-data.js`: bundled scene specification; no runtime JSON fetch.
+- `apartment-model.js`: apartment geometry, materials and furniture.
+- `apartment.js`: connected viewer, kitchen import, interactions and controls.
+- `viewer.js`: unchanged original standalone kitchen runtime.
+- `tools/prepare_apartment.py`: regenerate dimension data; authoring requires Python and Shapely.
+- `tools/build_apartment_viewer.py` and `tools/apartment-controller-extra.js`: regenerate apartment runtime/page from the original kitchen controls.
 
-## Cabinetry and microwave
+After source dimension/control edits, run both Python tools in that order. Edit `apartment-model.js` directly for geometry/material changes. Python is for authoring only, not deployment.
 
-The microwave sits on the left counter beside the entrance. Its 54 x 42 x 32 cm size is assumed. Matching front upper cabinets conceal the 90 cm extractor above the stove.
+## Vercel
 
-Cabinet corners keep their square 90 degree layout. Side and front upper cabinets share a 1.70 m underside and 2.48 m top. Straight blind return panels and clearance fillers replace the buried corner door leaves. The existing counter keeps its square L-shaped join and sink opening. Neighboring corner doors/drawers close before opening another component whose sweep would overlap.
+Choose Framework Preset **Other**, root directory **.**, no Build Command and Output Directory **.**. Keep all scripts, `assets/` and `vendor/` together. `vercel.json` supplies no-cache headers for apartment scripts/dimensions. HTTPS enables mouse capture and full-screen controls.
 
-The room, PDF column, window and confirmed appliance dimensions are unchanged. There are 37 usable interactive parts, including the microwave, extractor cabinet, corner cabinet doors and existing appliance drawers/racks.
+## Verification
+
+Checked in local Chromium: all 12 room entry points clear; all 90 interaction buttons exercised without console errors or non-finite transforms; close-all; desktop movement/look/pause; compact 390 x 844 layout without horizontal overflow. Phone controls were checked in browser emulation; physical iOS/Android hardware was not used. Rounded furniture, tiled/plank floors, warm lighting and contact shadows render without bloom or depth-of-field blur.
