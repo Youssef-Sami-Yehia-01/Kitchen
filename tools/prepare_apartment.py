@@ -5,7 +5,7 @@ from shapely.geometry import box, Point
 from shapely.ops import unary_union
 
 ROOT = Path(__file__).resolve().parents[1]
-data = json.loads((ROOT / 'assets/apartment-r05.json').read_text())
+data = json.loads((ROOT / 'assets/apartment-r05.json').read_text(encoding='utf-8'))
 rects = [(-120,-120,12840,0),(-120,0,0,11680),(12720,0,12840,11680),(0,11560,12720,11680),
  (3860,0,3980,11560),(3980,1570,10200,1690),(5380,0,5500,1570),(7580,0,7700,1570),
  (10200,0,10320,1690),(6480,1690,6600,5810),(8600,1690,8720,7090),
@@ -55,17 +55,15 @@ for low,high in [(0,1100),(1100,2150),(2150,2300),(2300,2750)]:
     cuts += [w['bounds'] for w in windows if (w['slider'] and low<2300) or (not w['slider'] and low>=1100 and high<=2300)]
     geom=base.difference(unary_union([box(*r) for r in cuts])).difference(columns)
     for r in rectangles(geom):walls.append(dict(bounds=r,low=low,high=high))
-# R04's retained transverse balcony strip is represented as a 1.05 m guard wall.
-balcony_divider=[11520,9940,12540,10060]
-walls.append(dict(bounds=balcony_divider,low=0,high=1050))
+# The side balcony is one continuous space; no transverse divider.
 floor_cuts = passages + [d['cut'] for d in doors] + [w['bounds'] for w in windows if w['slider']]
 ground=base.difference(unary_union([box(*r) for r in floor_cuts]))
 data.update(walls=walls,doors=doors,windows=windows,passages=passages,
- obstacles=rectangles(ground.union(columns).union(box(*balcony_divider))),
+ obstacles=rectangles(ground.union(columns)),
  source='Apartment_2D_Review_R05.dxf',revision='R05',height=2750,
  assumptions=['Ceiling 2.75 m confirmed by owner.','Window sill 1.10 m; window head 2.30 m; door head 2.15 m assumed.',
  'Unrecorded furniture heights and decorative finishes are visual proposals.',
- 'The retained right-balcony transverse strip is shown as a 1.05 m guard wall.'])
+ 'Right balcony is continuous, entered only from the master bedroom.'])
 (ROOT/'assets/apartment-scene.json').write_text(json.dumps(data,indent=2),encoding='utf-8')
 (ROOT/'apartment-data.js').write_text('window.APARTMENT = '+json.dumps(data,separators=(',',':'))+';\n',encoding='utf-8')
 print(f"R05: {len(data['rooms'])} spaces, {len(data['furniture'])} furniture items, {len(walls)} wall sections, {len(doors)} doors, {len(windows)} windows/sliders")

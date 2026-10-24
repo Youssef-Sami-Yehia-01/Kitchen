@@ -10,7 +10,7 @@ config['mirrored']=False
 config['appliances']['fridge']['heightAssumed']=1.85
 config['appliances']['uprightFreezer']['heightAssumed']=1.714
 config['appliances']['microwave'].update(widthAssumed=.489,depthAssumed=.374,heightAssumed=.275)
-config['interactions']=[i for i in config['interactions'] if i['id'] not in ['part_05','part_06']]
+config['interactions']=[i for i in config['interactions'] if i['id'] not in ['part_05','part_06',*[f'part_{n:02d}' for n in range(29,36)]]]
 for i in config['interactions']:i['room']='KIT'
 s=re.sub(r'const CONFIG=.*?,W=CONFIG.room.width,D=CONFIG.room.depth,eye=1.65;', 'const CONFIG='+json.dumps(config,separators=(',',':'))+',W=12.72,D=11.56,eye=1.65;',s,count=1)
 s=s.replace('const entrance=new B.Vector3(1.25,eye,-3.79), center=new B.Vector3(W/2,1.15,-D/2);','const entrance=new B.Vector3(3.15,eye,-1.50), center=new B.Vector3(W/2,.7,-D/2);')

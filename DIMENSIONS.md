@@ -11,10 +11,12 @@ The owner's measurements and the PDF room/column/opening dimensions take priorit
 | Refrigerator | 780 wide × 660 deep | Owner |
 | Dishwasher | 600 wide × 580 deep | Owner |
 | Stove | 900 wide × 530 deep | Owner |
-| Upright freezer | 620 wide × 700 deep | Owner |
+| Upright freezer | Removed in latest review; replaced by K08 pantry | Owner correction |
 | Main bed | 1600 × 2000 mm | Owner's notebook |
 | R06 coffee table | 1000 × 610 mm; long side parallel to R05 | Recorded centre-table size; owner corrected its type |
-| Other recorded furniture footprints | Unchanged | Notebook/reference measurements |
+| Children’s beds | 1200 × 2000 mm mattresses; 1240 × 2080 mm proposed frames | Latest owner-supplied layout image |
+| Slim shoe storage | 1040 wide × 180 overall deep; approximately 1290 high | Shallow tilt-bin proposal |
+| Other retained recorded furniture footprints | Unchanged | Notebook/reference measurements |
 
 ## Unmeasured sizes and heights
 
@@ -29,7 +31,7 @@ The owner's measurements and the PDF room/column/opening dimensions take priorit
 | Bathroom 1 basin | 600 × 450 mm | Ideal Standard Egypt Independent basin size |
 | Toilet seat top | 430 mm | Conventional domestic proposal; final ceramic/seat model remains unspecified |
 | Refrigerator height | 1850 mm | Egyptian-market Beko refrigerator height; owner's width/depth retained |
-| Upright freezer height | 1714 mm | Egyptian-market Beko upright freezer height; owner's width/depth retained |
+| Tall microwave pantry | 620 wide × 600 carcass-deep × 2350 high | Proposed fit within former freezer position |
 | Compact microwave | 489 wide × 374 deep × 275 high | Samsung compact solo microwave dimensions; owner did not give a size |
 | Wardrobe fitted depth | 600 mm where unmeasured | Existing 650 mm owner-recorded wardrobe depths retained |
 | Window sill / head | 1100 / 2300 mm | Previous unconfirmed vertical assumptions retained |
@@ -58,3 +60,16 @@ The owner's measurements and the PDF room/column/opening dimensions take priorit
 - [Carrefour Egypt Beko refrigerator](https://www.carrefouregypt.com/mafegy/en/fridge-401l-to-500l/beko-frg-rdne455m20xbidegb-455l-bk/p/645853) — 1850 mm height.
 - [Raya Egypt Beko upright freezer](https://www.rayashop.com/en/beko-freezer-digital-touch-7-drawers-nofrost-260-liter-silver-rfne280e13s-10501) — 1714 mm height.
 - [Samsung compact microwave specifications](https://www.samsung.com/ie/microwave-ovens/solo/microwave-oven-solo-ms23f301tak/) — 489 × 275 × 374 mm outside dimensions.
+
+## Current feedback layout
+
+Dining remains 2300 × 1100 mm, with chairs shown pulled out. A 180 mm-deep shoe cabinet on the adjacent wall leaves 930 mm at the chair backs when closed. This is a measured model clearance, not a guaranteed clearance while bins are open or people are seated.
+
+The master bed faces from the right column face; the dresser and three wardrobe bays face from the left wall. Foot-to-wardrobe clearance is 1170 mm. The balcony cross-wall is removed. The large-bathroom vanity has a 10 mm end reveal at the lower-left wall. The family bookcase starts 600 mm above the floor and ends at 2200 mm.
+
+Children’s beds retain the existing window opening and avoid the structural column. Frame-to-frame aisle is 1040 mm. The left desk is 800 × 550 mm because a longer desk would clash with the entrance swing or column; the right desk is 1350 × 550 mm. Wall shelves stay below the confirmed 2750 mm ceiling. The reference’s 2600 mm height is not used.
+
+The microwave sits in a fitted visual surround at 1220 mm above floor, retaining its 489 × 374 × 275 mm envelope. Select a built-in-rated appliance and its required vented enclosure before construction; the previous compact appliance geometry is a review placeholder.
+
+- [IKEA Egypt TRONES](https://www.ikea.com/eg/en/p/trones-shoe-cabinet-storage-white-00397307/) — 180 mm-deep tilt shoe storage reference.
+- [IKEA Egypt METOD appliance cabinet](https://www.ikea.com/eg/en/p/metod-high-cabinet-f-built-in-appliances-white-50213570/) — 600 mm system-depth appliance cabinet with ventilation; the proposed pantry width/height are fitted to this room.

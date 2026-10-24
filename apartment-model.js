@@ -15,6 +15,7 @@ window.buildApartment = function (B, scene, register) {
     walnut: mat('Apartment · walnut', '#694b36', .55),
     stone: mat('Apartment · ivory stone', '#ddd1bb', .36),
     floor: mat('Apartment · limestone tile', '#b7aea0', .7),
+    receptionFloor: mat('Apartment · reception warm ivory marble', '#f1ece2', .34),
     grout: mat('Apartment · recessed grout', '#8d8577', .9),
     metal: mat('Apartment · brushed brass', '#b5a077', .3, .8),
     black: mat('Apartment · charcoal metal', '#282a29', .4, .55),
@@ -38,6 +39,8 @@ window.buildApartment = function (B, scene, register) {
   const texture = (path, scale = 1) => {const t=new B.Texture(path,scene);t.uScale=t.vScale=scale;t.anisotropicFilteringLevel=8;return t;};
   M.stone.albedoTexture = texture('assets/Ivory_stone.png', 2);
   M.floor.albedoTexture = texture('assets/Ivory_stone.png', 3);
+  M.receptionFloor.albedoTexture=texture('assets/Ivory_stone.png',1);
+  M.receptionFloor.bumpTexture=texture('assets/Floor_normal.png',1);M.receptionFloor.bumpTexture.level=.035;
   M.floor.bumpTexture = texture('assets/Floor_normal.png', 2); M.floor.bumpTexture.level = .13;
   // Subtle woven texture, generated locally; no image or CDN requests.
   const weave = new B.DynamicTexture('Linen weave', {width:256,height:256}, scene, false);
@@ -102,13 +105,14 @@ window.buildApartment = function (B, scene, register) {
   for(const [id,room] of Object.entries(plan.rooms)){
     const r=room.bounds,w=(r[2]-r[0])/1000,d=(r[3]-r[1])/1000,cx=(r[0]+r[2])/2000,cz=-(r[1]+r[3])/2000;
     if(id==='SHAFT'){fromRect('Open light well floor',r,-110,-90,M.grout);continue;}
+    const floorMaterial=id==='REC'?M.receptionFloor:M.floor;
     const wood=bedroomIds.includes(id), tile=id==='KIT'?.6:(['BATH','UTIL','WC'].includes(id)?.6:.8);
     fromRect(room.name+' subfloor',r,-29,-3,M.grout);
     const tileX=wood?.18:tile,tileY=wood?1.2:tile;
     for(let yy=r[1]/1000,row=0;yy<r[3]/1000-.001;yy+=tileY,row++){
       for(let xx=r[0]/1000-(wood&&row%2?.09:0);xx<r[2]/1000-.001;xx+=tileX){
         const left=Math.max(xx,r[0]/1000),right=Math.min(xx+tileX,r[2]/1000),bottom=Math.min(yy+tileY,r[3]/1000);
-        const m=box(room.name+' floor',right-left-.002,.016,bottom-yy-.002,(left+right)/2,-.004,-(yy+bottom)/2,wood?M.oak:M.floor);m.isPickable=false;
+        const m=box(room.name+' floor',right-left-.002,.016,bottom-yy-.002,(left+right)/2,-.004,-(yy+bottom)/2,wood?M.oak:floorMaterial);m.isPickable=false;
       }
     }
     if(!['BAL','BAY'].includes(id)){
@@ -244,8 +248,8 @@ window.buildApartment = function (B, scene, register) {
     cylinder('Rain shower head',.105,.018,w/2-.14,2.09,back+.33,M.silver,p);
     box('Shower mixer',.16,.07,.04,w/2-.14,1.05,back+.025,M.silver,p);
   }
-  function bookcase(f,p){const w=f.d/1000,d=f.w/1000,h=f.id==='R13'?.81:1.6,base=f.overhead?1.34:0;
-    const q=node('Bookcase orientation',0,base,0,Math.PI/2,p);
+  function bookcase(f,p){const w=f.d/1000,d=f.w/1000,h=f.height?f.height/1000:f.id==='R13'?.81:1.6,base=f.base!==undefined?f.base/1000:f.overhead?1.34:0;
+    const q=node('Bookcase orientation',0,base,0,f.frontSide==='west'?-Math.PI/2:Math.PI/2,p);
     box('Bookcase back',w,h,.016,0,h/2,-d/2,M.walnut,q);
     for(const x of [-w/2,w/2])box('Bookcase side',.018,h,d,x,h/2,0,M.walnut,q);
     for(let row=0;row<4;row++){
@@ -265,7 +269,7 @@ window.buildApartment = function (B, scene, register) {
       const b=node('Family sofa west return',-1,0,.50,Math.PI/2,p);sofa(b,1,1,M.cream);
     }
     else if(f.kind==='chair'){
-      p.rotation.y=f.x<1000?Math.PI/2:f.x>2000?-Math.PI/2:f.y<2000?Math.PI:0;
+      p.rotation.y=f.frontSide==='west'?-Math.PI/2:f.frontSide==='east'?Math.PI/2:f.x<1000?Math.PI/2:f.x>2000?-Math.PI/2:f.y<2000?Math.PI:0;
       feet(w-.08,d-.06,p,.19);soft('Dining chair seat',w,.10,d,0,.405,0,M.cream,p,.04);
       soft('Dining chair padded back',w,.50,.09,0,.69,-d/2+.045,M.cream,p,.04);
     }
@@ -276,17 +280,17 @@ window.buildApartment = function (B, scene, register) {
       else {box('Coffee table drawer base',w*.92,.36,d*.93,0,.205,0,M.walnut,p);for(const x of [-w*.37,w*.37])for(const z of [-d*.37,d*.37])cylinder('Coffee table recessed foot',.025,.025,x,.0125,z,M.walnut,p);const drawer=node(f.id+' drawer',0,0,d*.47,0,p);box('Coffee drawer front',w*.84,.22,.02,0,.23,0,M.white,drawer);register(drawer,{id:f.id+'_drawer',label:f.desc+' drawer',kind:'slide',axis:[0,0,1],amount:.28,category:'drawer',room:f.room});}
     }
     else if(f.kind==='bed'){
-      const headRight=f.id!=='M01';p.rotation.y=headRight?-Math.PI/2:Math.PI/2;
-      const bw=d,bl=w;feet(bw,bl,p,.08);soft('Oak upholstered bed frame',bw,.28,bl,0,.27,0,M.walnut,p,.025);
+      const headRight=f.headSide?f.headSide==='right':f.id!=='M01';p.rotation.y=f.orientation==='vertical'?0:headRight?-Math.PI/2:Math.PI/2;
+      const bw=f.orientation==='vertical'?w:d,bl=f.orientation==='vertical'?d:w;feet(bw,bl,p,.08);soft('Oak upholstered bed frame',bw,.28,bl,0,.27,0,M.walnut,p,.025);
       soft('Padded headboard',bw,.99,.075,0,.56,-bl/2+.04,M.taupe,p,.035);
-      soft('Mattress',bw-.07,.23,bl-.08,0,.51,0,M.sheet,p,.06);
+      soft('Mattress',bw-(f.orientation==='vertical'?.04:.07),.23,bl-.08,0,.51,0,M.sheet,p,.06);
       soft('Linen duvet',bw-.045,.085,bl*.75,0,.66,bl*.1,M.sheet,p,.04);
       const pillowCount=f.id==='M01'?2:1;
-      for(let i=0;i<pillowCount;i++)soft('Sleeping pillow',bw/pillowCount-.09,.13,.40,(i-(pillowCount-1)/2)*bw/pillowCount,.72,-bl/2+.32,M.sheet,p,.06);
+      for(let i=0;i<pillowCount;i++)soft('Sleeping pillow',Math.min(.60,bw/pillowCount-.09),.13,.40,(i-(pillowCount-1)/2)*bw/pillowCount,.72,-bl/2+.32,M.sheet,p,.06);
       soft('Folded bed throw',bw-.025,.03,.65,0,.72,bl/2-.43,f.id==='C01'?M.blue:f.id==='C07'?M.terracotta:M.taupe,p,.012);
     }
     else if(f.kind==='wardrobe'){
-      const side=w<d;const angle=side?(f.id==='M05a'?Math.PI/2:-Math.PI/2):Math.PI;
+      const side=w<d;const angle=side?(f.frontSide==='east'||f.id==='M05a'?Math.PI/2:-Math.PI/2):Math.PI;
       wardrobe(f,p,side?d:w,side?w:d,angle);
     }
     else if(f.kind==='tv'){
@@ -299,8 +303,8 @@ window.buildApartment = function (B, scene, register) {
     }
     else if(f.kind==='bookcase')bookcase(f,p);
     else if(f.kind==='dresser'){
-      const q=node('Dresser orientation',0,0,0,-Math.PI/2,p);cabinet(f,q,d,w,.78);
-      const wallGap=(plan.rooms[f.room].bounds[2]-f.x-f.w)/1000;
+      const west=f.frontSide==='east',q=node('Dresser orientation',0,0,0,west?Math.PI/2:-Math.PI/2,p);cabinet(f,q,d,w,.78);
+      const wallGap=(west?f.x-plan.rooms[f.room].bounds[0]:plan.rooms[f.room].bounds[2]-f.x-f.w)/1000;
       mirror('Dressing wall mirror',.90,.90,0,1.39,-w/2-wallGap+.008,q,f.room);
     }
     else if(f.kind==='wc')toilet(f,p);
@@ -315,13 +319,41 @@ window.buildApartment = function (B, scene, register) {
       box('Washer display',.16,.065,.015,.12,.74,w/2+.018,M.black,p);
       register(hinge,{id:'washer',label:'Bathroom 2 washing machine',kind:'hinge',axis:[0,1,0],amount:-1.65,category:'appliance',room:f.room});
     }
+    else if(f.kind==='desk'){
+      const q=node('Study desk orientation',0,0,0,f.frontSide==='east'?Math.PI/2:-Math.PI/2,p),width=d,depth=w;
+      box('Study desk oak worktop',width,.035,depth,0,.7325,0,M.oak,q);
+      for(const x of [-width/2+.015,width/2-.015])box('Study desk end panel',.025,.71,depth-.03,x,.355,0,M.white,q);
+      const drawer=node(f.id+' desk drawer',width/2-.19,0,depth/2-.015,0,q);
+      for(const x of [width/2-.352,width/2-.028])box('Study drawer case side',.016,.56,depth-.04,x,.36,0,M.white,q);
+      box('Study drawer case back',.34,.56,.016,width/2-.19,.36,-depth/2+.018,M.white,q);
+      for(const y of [.08,.48,.66])box('Study drawer case shelf',.34,.016,depth-.04,width/2-.19,y,0,M.white,q);
+      box('Study drawer tray',.31,.014,depth-.06,0,.495,-(depth-.06)/2+.003,M.oak,drawer);
+      for(const x of [-.15,.15])box('Study drawer tray side',.012,.10,depth-.06,x,.55,-(depth-.06)/2+.003,M.oak,drawer);
+      box('Study drawer face',.33,.15,.018,0,.565,0,M.oak,drawer);
+      rod('Study drawer handle',[-.08,.565,.02],[.08,.565,.02],.004,M.metal,drawer);
+      register(drawer,{id:f.id+'_drawer',label:f.desc+' drawer',kind:'slide',axis:[0,0,1],amount:.28,category:'drawer',room:f.room});
+    }
+    else if(f.kind==='shoe_cabinet'){
+      const q=node('Shoe cabinet orientation',.005,0,0,-Math.PI/2,p),width=d,depth=w-.010,base=.10,h=1.17;
+      box('Shoe storage backing',width,h,.016,0,base+h/2,-depth/2+.008,M.white,q);
+      for(const x of [-width/2,0,width/2])box('Shoe cabinet side',.016,h,depth,x,base+h/2,0,M.white,q);
+      box('Shoe cabinet oak top',width+.008,.022,depth,0,base+h+.011,0,M.oak,q);
+      for(let col=0;col<2;col++)for(let row=0;row<3;row++){
+        const cw=width/2-.012,ch=h/3-.014,x=(col-.5)*width/2,y=base+row*h/3;
+        const pivot=node('Shoe tilt bin '+col+' '+row,x,y,depth/2-.008,0,q);
+        box('Matte shoe bin front',cw,ch,.018,0,ch/2,0,M.white,pivot);
+        box('Tilt bin tray',cw-.025,.014,depth-.035,0,.025,-depth/2+.013,M.oak,pivot);
+        rod('Recessed shoe bin pull',[-.09,ch-.04,.014],[.09,ch-.04,.014],.004,M.metal,pivot);
+        register(pivot,{id:f.id+'_'+col+'_'+row,label:'Shoe cabinet bin '+(col*3+row+1),kind:'hinge',axis:[1,0,0],amount:.58,category:'cabinet',room:f.room});
+      }
+    }
     else if(f.kind==='cabinet'){
-      const side=w<d,base=f.id==='B10'?1.5:f.overhead?2.03:0,height=f.id==='B10'?.7:f.overhead?.35:f.id.startsWith('M02')?.48:.83;
-      cabinet(f,p,side?d:w,side?w:d,height,base,side?(f.id==='B10'?Math.PI/2:-Math.PI/2):Math.PI);
+      const side=w<d,base=f.id==='B10'?1.5:f.overhead?2.03:0,height=f.id==='B10'?.7:f.overhead?.35:f.id.startsWith('M02')||['C14','C15'].includes(f.id)?.48:.83;
+      cabinet(f,p,side?d:w,side?w:d,height,base,side?(f.id==='B10'||f.frontSide==='east'?Math.PI/2:-Math.PI/2):Math.PI);
     }
   }
   // Rugs deliberately remain outside clear circulation and door swings.
-  for(const [r,color] of [ [[145,1590,2870,4420],M.rug],[[100,7350,3180,10020],M.rug],[[4200,9290,7150,11430],M.rug],[[8850,3010,11020,5290],M.rug] ]){
+  for(const [r,color] of [ [[145,1590,2870,4420],M.rug],[[100,7350,3180,10020],M.rug],[[4200,9290,7150,11430],M.rug],[[10290,3010,12540,5290],M.rug],[[8020,7920,11300,11480],M.rug] ]){
     const rug=fromRect('Bound woven rug',r,7,13,color);rug.isPickable=false;
   }
   // A small number of decorative objects keep the real furniture footprints clear.
@@ -342,8 +374,8 @@ window.buildApartment = function (B, scene, register) {
     const ring=B.MeshBuilder.CreateTorus('Dining pendant brass ring',{diameter:.52,thickness:.018,tessellation:48},scene);ring.position.set(1.6,2.14,z);ring.material=M.metal;ceilings.push(ring);
   }
   const details=window.addApartmentDetails(B,scene,{M,node,box,soft,cylinder,sphere,rod,furniture,roots,plan});
-  // Batch the tile geometry: floor joints remain modelled, with two draw calls.
-  for(const material of [M.oak,M.floor]){
+  // Batch tiles by finish while keeping their modelled joints.
+  for(const material of [M.oak,M.floor,M.receptionFloor]){
     const tiles=scene.meshes.filter(m=>m.name.endsWith(' floor')&&m.material===material);
     if(tiles.length){const merged=B.Mesh.MergeMeshes(tiles,true,true,undefined,false,false);merged.name='Apartment batched floor · '+material.name;merged.material=material;merged.receiveShadows=true;merged.isPickable=false;}
   }

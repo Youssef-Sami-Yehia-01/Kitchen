@@ -97,9 +97,9 @@ window.addApartmentDetails = function (B, scene, kit) {
   plant('Bedroom balcony far planter',12.56,-11.06,.70,'grass');
   plant('Buffet greenery',1.48,-.25,.39,'broadleaf',.855,.067);
   plant('Dining centrepiece',1.60,-2.88,.25,'grass',.750,.052);
-  plant('Main bedside greenery',9.05,-2.98,.28,'broadleaf',.505,.055);
-  plant('Dressing table greenery',12.24,-1.91,.26,'grass',.805,.05);
-  plant('Family bookcase trailing pothos',4.19,-7.96,.62,'trailing',1.63,.068);
+  plant('Main bedside greenery',12.24,-2.98,.28,'broadleaf',.505,.055);
+  plant('Dressing table greenery',8.96,-1.91,.26,'grass',.805,.05);
+  plant('Family bookcase trailing pothos',4.19,-7.96,.62,'trailing',2.23,.068);
   plant('Reception bookcase trailing pothos',.41,-8.38,.62,'trailing',2.17,.07);
   plant('Kitchen counter herbs',4.20,-4.68,.26,'grass',.905,.05);
   plant('Children window plant',8.42,-11.56,.27,'grass',1.12,.05);
@@ -145,7 +145,7 @@ window.addApartmentDetails = function (B, scene, kit) {
     const pillow=soft('Textured accent pillow',.32,.32,.12,w/2-.40,.62,-d/2+.28,id==='R08'?M.blue:M.terracotta,p,.05);pillow.rotation.z=-.12;
   }
   for(const id of ['M01','C01','C07']){
-    const f=plan.furniture.find(v=>v.id===id),p=roots.get(id),w=f.d/1000,length=f.w/1000;
+    const f=plan.furniture.find(v=>v.id===id),p=roots.get(id),w=(f.orientation==='vertical'?f.w:f.d)/1000,length=(f.orientation==='vertical'?f.d:f.w)/1000;
     for(let i=0;i<7;i++){const z=length/2-.68+i*.08;rod('Bed throw woven seam',[-w/2+.04,.738,z],[w/2-.04,.738,z],.0018,id==='C07'?M.cream:M.taupe,p);}
     for(const x of [-w/2+.055,w/2-.055])rod('Duvet bound edge',[x,.696,-length*.25],[x,.696,length/2-.04],.0025,M.cream,p);
   }
@@ -164,7 +164,7 @@ window.addApartmentDetails = function (B, scene, kit) {
     for(let i=0;i<2;i++)soft('Folded wardrobe linen',Math.min(.35,w*.35),.07,.34,-w*.20,.59+i*.075,.01,i?M.sheet:M.taupe,q,.012);
   }
   // Bedside lamp and grooming/bathroom objects sit wholly on existing furniture.
-  const lamp=decorRoot('Main bedside reading lamp',9.08,.505,-5.14);
+  const lamp=decorRoot('Main bedside reading lamp',12.24,.505,-5.14);
   cylinder('Lamp brass foot',.075,.015,0,.008,0,M.metal,lamp);
   cylinder('Lamp stem',.008,.28,0,.15,0,M.metal,lamp);
   cylinder('Linen lamp shade',.11,.16,0,.36,0,linen,lamp,.075);

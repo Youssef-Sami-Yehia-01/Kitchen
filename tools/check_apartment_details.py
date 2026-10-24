@@ -9,9 +9,10 @@ from shapely.ops import unary_union
 root = Path(__file__).resolve().parents[1]
 plan = json.loads((root / 'assets/apartment-scene.json').read_text())
 items={f['id']:f for f in plan['furniture']}
-for key,expected in {'K07':(660,780),'K10':(580,600),'K03':(900,530),'K08':(700,620),'M01':(2000,1600),'R01':(1100,2300),'R03':(2000,500)}.items():
+for key,expected in {'K07':(660,780),'K10':(580,600),'K03':(900,530),'K08':(600,620),'M01':(2000,1600),'R01':(1100,2300),'R03':(2000,500)}.items():
     assert (items[key]['w'],items[key]['d'])==expected, f'{key}: preserve owner measurements.'
 assert items['R06']['kind']=='table' and (items['R06']['w'],items['R06']['d'])==(610,1000)
+assert items['K08']['kind']=='tall_cabinet', 'Freezer replaced by microwave pantry.'
 assert plan['height']==2750
 source = (root / 'apartment-details.js').read_text()
 floor_plants = re.findall(r"plant\('([^']+)',([-\d.]+),([-\d.]+),([-\d.]+)(?:,'(?:tree|grass|broadleaf)')?\);", source)
@@ -37,4 +38,4 @@ for name,sx,sz,sh in floor_plants:
         assert x-radius-11.52 >= .90, 'Keep a 900 mm route beside right-balcony planters.'
 assert not box(1.12,11.325,2.76,11.535).intersects(fixed), 'Balcony trough overlaps existing geometry.'
 print('Four balcony pots and the trough clear furniture, columns and door swings; indoor floors stay clear, right-balcony pot clearance exceeds 900 mm.')
-print('Recorded appliance/furniture dimensions and 2750 mm ceiling preserved; R06 is a 1000 x 610 mm coffee table.')
+print('Retained appliance/furniture dimensions and 2750 mm ceiling preserved; R06 is a 1000 x 610 mm coffee table.')
