@@ -140,7 +140,7 @@ window.kitchenDebug={scene,engine,walker,orbit,groups,valid,changeMode,reset,sta
 
 // R05 apartment navigation and reusable room/furniture interactions.
 const roomNames={ALL:'Entire apartment',REC:'Reception & dining',KIT:'Kitchen',UTIL:'Bathroom 2 & laundry',MASTER:'Main bedroom',DRESS:'Dressing room',STUDY:'Family & study',CHILD:'Children’s bedroom',BATH:'Bathroom 1',WC:'Guest WC',BAL:'Reception balcony',BAY:'Bedroom balcony',HALL:'Hallway'};
-const visits={REC:[3.15,1.50,-2.80],KIT:[5.22,5.20,0],UTIL:[8.12,5.17,0],MASTER:[11.23,6.52,-.55],DRESS:[11.50,1.14,0],STUDY:[6.80,8.35,Math.PI],CHILD:[9.55,8.25,Math.PI],BATH:[9.88,1.18,-1.3],WC:[4.28,1.28,.66],BAL:[1.90,11.02,0],BAY:[12.0,8.36,0],HALL:[7.0,6.48,Math.PI/2]};
+const visits={REC:[3.15,1.50,-2.80],KIT:[5.22,5.20,0],UTIL:[8.12,5.17,-1.38],MASTER:[11.23,6.52,-.55],DRESS:[11.50,1.14,0],STUDY:[6.80,8.35,Math.PI],CHILD:[9.55,8.25,Math.PI],BATH:[9.88,1.18,-1.3],WC:[4.28,1.28,.66],BAL:[1.90,11.02,0],BAY:[12.0,8.36,0],HALL:[7.0,6.48,Math.PI/2]};
 const roomSections=new Map();
 function registerApartmentPart(node,spec){
  const s={spec,node,value:0,target:0,position:node.position.clone(),rotation:node.rotationQuaternion?.clone()||B.Quaternion.FromEulerVector(node.rotation),meshes:node.getChildMeshes(false)};
@@ -238,6 +238,11 @@ function finishApartment(){
   if(mattress){const b=mattress.getBoundingInfo().boundingBox;layoutAudit[id].mattressMm={width:Math.round((b.maximumWorld.x-b.minimumWorld.x)*1000),length:Math.round((b.maximumWorld.z-b.minimumWorld.z)*1000)};}
  }
  layoutAudit.shoeAisleMm=layoutAudit.R14.minMm[0]-2750;
+ const vanityMeshes=apartment.roots.get('B08').getChildMeshes(false);
+ const vanityTop=vanityMeshes.find(m=>m.name==='Vanity stone rim'),bowl=vanityMeshes.find(m=>m.name==='Porcelain bowl base'),vanityMirror=apartment.mirrors.find(m=>m.surface.name==='B08 wall-mounted mirror').surface;
+ for(const mesh of [vanityTop,bowl,vanityMirror])mesh.computeWorldMatrix(true);
+ const vb=vanityTop.getBoundingInfo().boundingBox,bb=bowl.getBoundingInfo().boundingBox,mb=vanityMirror.getBoundingInfo().boundingBox;
+ document.body.dataset.vanityAudit=JSON.stringify({topWidthMm:Math.round((vb.maximumWorld.z-vb.minimumWorld.z)*1000),topDepthMm:Math.round((vb.maximumWorld.x-vb.minimumWorld.x)*1000),bowlWidthMm:Math.round((bb.maximumWorld.z-bb.minimumWorld.z)*1000),bowlDepthMm:Math.round((bb.maximumWorld.x-bb.minimumWorld.x)*1000),mirrorWidthMm:Math.round((mb.maximumWorld.z-mb.minimumWorld.z)*1000),bowlCenterErrorMm:Math.round(B.Vector3.Distance(vanityTop.getAbsolutePosition(),new B.Vector3(bowl.getAbsolutePosition().x,vanityTop.getAbsolutePosition().y,bowl.getAbsolutePosition().z))*1000),mirrorCenterErrorMm:Math.round(Math.abs(vanityTop.getAbsolutePosition().z-vanityMirror.getAbsolutePosition().z)*1000)});
  const sectional=apartment.roots.get('F01').getChildMeshes(false);
  layoutAudit.F01.connectedShells=sectional.filter(m=>m.metadata?.sectionalComponent).map(m=>m.metadata.sectionalComponent);
  layoutAudit.F01.endArms=sectional.filter(m=>/end arm$/.test(m.name)).length;
@@ -286,9 +291,9 @@ function finishApartment(){
  const spawnReport=Object.fromEntries(Object.entries(visits).map(([id,[x,y]])=>[id,valid(x,y)]));
  const attachmentAudit=[];
  for(const m of apartment.mirrors){
-  const r=APT.rooms[m.room].bounds,dresser=m.surface.name==='Dressing wall mirror',west=dresser?APT.furniture.find(f=>f.id==='C05').frontSide==='east':m.surface.name.startsWith('B08');
-  const distance=dresser?Math.abs(m.position.x-r[west?0:2]/1000):west?Math.abs(m.position.x-r[0]/1000):Math.abs(m.position.z-r[1]/1000);
-  const expected=new B.Vector3(dresser?(west?1:-1):west?1:0,0,dresser||west?0:1);
+  const r=APT.rooms[m.room].bounds,dresser=m.surface.name==='Dressing wall mirror',west=dresser?APT.furniture.find(f=>f.id==='C05').frontSide==='east':m.surface.name.startsWith('B08'),east=m.surface.metadata.wallSide==='east';
+  const distance=east?Math.abs(m.position.x-r[2]/1000):dresser?Math.abs(m.position.x-r[west?0:2]/1000):west?Math.abs(m.position.x-r[0]/1000):Math.abs(m.position.z-r[1]/1000);
+  const expected=new B.Vector3(east?-1: dresser?(west?1:-1):west?1:0,0,east||dresser||west?0:1);
   attachmentAudit.push({item:m.surface.name,wallOffsetMm:Math.round(distance*1000),correct:distance<.03&&B.Vector3.Dot(m.normal,expected)>.99});
  }
  for(const f of APT.furniture.filter(f=>f.kind==='shower')){

@@ -14,12 +14,12 @@ Run `python -m http.server 8088` from this directory and open `http://localhost:
 - **Walk inside:** click Explore; WASD/arrows move, mouse looks, Shift moves faster, E opens the part under the crosshair, Escape pauses. Walls, columns, furniture and moving doors have collision footprints.
 - **Phone:** tap Explore, hold movement arrows, swipe to look, tap Open to interact, Pause to return to navigation. Pinch/drag in isometric view. Narrow screens also expose these controls.
 - **Isometric:** drag to orbit, scroll/pinch to zoom, right-drag to pan. Automatic cutaway hides walls between the camera and target, and removes ceilings. Disable it in Scene to retain walls.
-- **Doors & drawers:** 97 controls cover kitchen appliances/cabinets, room doors, balcony sliders, wardrobes, storage, vanities and washing machine. Sliding wardrobe panels and kitchen corner doors close conflicting neighbours.
+- **Doors & drawers:** 98 controls cover kitchen appliances/cabinets, room doors, balcony sliders, wardrobes, storage, vanities and washing machine. Sliding wardrobe panels and kitchen corner doors close conflicting neighbours.
 - **Scene:** sunlight strength, cutaway, close all compartments, dimension-data download and source assumptions.
 
 ## R05 layout
 
-Reception/dining/TV lounge, kitchen, guest WC, two bathrooms, main bedroom, dressing room, family/study, two-child bedroom, hallway, both balconies and the open shaft are included. The 64 furniture records include the latest owner-requested changes; architectural room dimensions and structural columns remain from R05.
+Reception/dining/TV lounge, kitchen, guest WC, two bathrooms, main bedroom, dressing room, family/study, two-child bedroom, hallway, both balconies and the open shaft are included. The 65 furniture records include the latest owner-requested changes; architectural room dimensions and structural columns remain from R05.
 
 The kitchen entrance is a centred 1000 mm open passage. The dishwasher is on the user's right when facing the sink; the column stays on the right when entering. The main bed is on the right side at the column face; dresser and three wardrobe bays are on the left. Bathroom 2 has the shower against the shaft wall; toilet, washer, overhead cabinet and vanity are on the left wall. The children’s reference layout now has two 1200 × 2000 mm mattresses in 1240 × 2080 mm frames along the side walls, an entrance-wall wardrobe, a right-side study desk, wall shelves and bedside tables. The left desk and chair are removed per the latest correction; the right desk remains 1350 × 550 mm. The bed-frame aisle is 1040 mm. The right balcony is entered only from the main bedroom. The reception entrance and dressing room have no windows. R04 is removed; R01/R02 are 150 mm higher; R05/R06 are 150 mm lower.
 
@@ -50,9 +50,9 @@ Checked in local Chromium: all 12 room entry points clear; the previous 93 inter
 
 ## Latest review
 
-R06 is a coffee table, and R03 has a reflective wall mirror. Guest and bathroom fixtures face their backing walls; showers have wall-mounted fittings and hinged front glass doors. Five reflective mirrors are checked against the actual walls after coordinate transforms. Assumed furniture/fixture heights use the market references in [DIMENSIONS.md](DIMENSIONS.md); owner-recorded appliance widths and depths remain unchanged.
+R06 is a coffee table, and R03 has a reflective wall mirror. Guest and bathroom fixtures face their backing walls; showers have wall-mounted fittings and hinged front glass doors. Six reflective mirrors are checked against the actual walls after coordinate transforms. Assumed furniture/fixture heights use the market references in [DIMENSIONS.md](DIMENSIONS.md); owner-recorded appliance widths and depths remain unchanged.
 
-The apartment has 18 planters, including four floor pots confined to balcony corners. Indoor planting sits on existing furniture. Corner pots and the trough clear door swings, columns and furniture; right-balcony pots leave over 900 mm of clear floor width. Run `python tools/check_apartment_details.py` to verify these clearances. Plan geometry and supplied furniture measurements were compared with the original R05 source.
+The apartment has 19 planters, including four floor pots confined to balcony corners. Indoor planting sits on existing furniture. Corner pots and the trough clear door swings, columns and furniture; right-balcony pots leave over 900 mm of clear floor width. Run `python tools/check_apartment_details.py` to verify these clearances. Plan geometry and supplied furniture measurements were compared with the original R05 source.
 
 The walk camera retains its facing direction when exploration starts. Shower trays are walkable through the open glass doors, with the 70 mm tray elevation reflected in eye height. Complete appliance envelopes were checked after resizing, including handles and levelling feet.
 
@@ -64,9 +64,11 @@ Rounded furniture uses independent vertex/index buffers when batching by materia
 - Reception flooring now has a separate light warm-ivory marble finish. The kitchen retains its grey/beige tile reference; the reception colour is an interpretation of the supplied interior references, not a measured product colour.
 - K08 replaces the deep freezer with a 620 mm-wide, 600 mm carcass-depth tall pantry. The microwave is integrated at a 1220 mm base height; upper/lower pantry doors and the microwave door operate. The appliance model and ventilation requirements must be selected together before fabrication.
 - Master furniture has been exchanged again, while the three wardrobe bays and owner-recorded bed dimensions remain. Balcony access stays from the master bedroom only.
-- The large bathroom vanity sits at the lower-left corner, with a 10 mm side reveal. F05 is wall mounted 600 mm above the family-room floor.
+- The large bathroom vanity and marble top are 1500 × 550 mm, at the lower-left corner with a 10 mm side reveal. The previous basin and 774 mm-wide mirror remain the same size and are centred on the wider unit. F05 is wall mounted 600 mm above the family-room floor.
 - The new children’s room follows the supplied two-bed reference around the actual PDF column/window positions. The confirmed ceiling remains 2750 mm rather than the reference image’s 2600 mm.
 
-Run `python tools/check_feedback_layout.py` for new furniture, door-swing, column and balcony-route checks. The current viewer exposes 97 interactions.
+Run `python tools/check_feedback_layout.py` for new furniture, door-swing, column and balcony-route checks. The current viewer exposes 98 interactions.
 
 The family/TV lounge F01 is one continuous blue L-shaped sectional, with joined upholstered base, seat and back geometry and only two end arms. Its recorded 3000 × 2000 mm footprint is retained. The geometry check also verifies closed, connected shells and the L-shaped recess.
+
+A 700 × 1650 mm full-length wall mirror sits beside the shoe cabinet, with its bottom at 320 mm. Compact greenery sits on the existing cabinet top; no additional floor object or walking-path obstruction is introduced.

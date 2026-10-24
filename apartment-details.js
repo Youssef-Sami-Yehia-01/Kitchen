@@ -88,6 +88,7 @@ window.addApartmentDetails = function (B, scene, kit) {
   }
 
   // Floor planting stays inside empty corners. Table/shelf planting has no floor footprint.
+  plant('Shoe cabinet compact greenery',3.77,-2.58,.32,'grass',1.292,.05);
   plant('Buffet sculptural greenery',.55,-.25,.60,'broadleaf',.855,.085);
   plant('TV console greenery',3.66,-8.15,.38,'broadleaf',.635,.055);
   plant('Family TV console greenery',5.12,-7.46,.32,'grass',.635,.05);

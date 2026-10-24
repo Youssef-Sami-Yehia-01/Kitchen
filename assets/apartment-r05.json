@@ -798,14 +798,17 @@
       "id": "B08",
       "kind": "basin",
       "x": 6600,
-      "y": 4780,
-      "w": 500,
-      "d": 900,
+      "y": 4180,
+      "w": 550,
+      "d": 1500,
       "room": "UTIL",
-      "size": "900 x 500",
+      "size": "Vanity 1500 x 550; existing basin retained",
       "status": "A",
-      "desc": "Bathroom 2 vanity, at lower left corner with 10 mm side reveal",
-      "overhead": false
+      "desc": "Bathroom 2 wide vanity",
+      "overhead": false,
+      "basinWidth": 639,
+      "basinDepth": 340,
+      "mirrorWidth": 774
     },
     {
       "id": "M05a",
@@ -972,6 +975,22 @@
       "desc": "Right child bedside table",
       "frontSide": "north",
       "overhead": false
+    },
+    {
+      "id": "R15",
+      "kind": "wall_mirror",
+      "x": 3830,
+      "y": 3210,
+      "w": 30,
+      "d": 700,
+      "height": 1650,
+      "base": 320,
+      "room": "REC",
+      "size": "700 wide x 1650 high; bottom 320",
+      "status": "A",
+      "desc": "Entry mirror beside shoe cabinet",
+      "frontSide": "west",
+      "overhead": true
     }
   ],
   "columns": [

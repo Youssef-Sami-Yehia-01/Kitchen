@@ -286,13 +286,13 @@ window.buildApartment = function (B, scene, register) {
     const q=node('Vanity orientation',0,0,0,west?Math.PI/2:Math.PI,p);
     cabinet(f,q,w,d,.72,0,0);
     box('Vanity stone rim',w,.030,d,0,.755,0,M.stone,q);
-    const bw=w*.71,bd=d*.68;
+    const bw=f.basinWidth?f.basinWidth/1000:w*.71,bd=f.basinDepth?f.basinDepth/1000:d*.68;
     box('Porcelain bowl base',bw,.018,bd,0,.775,0,M.ceramic,q);
     for(const x of [-bw/2,bw/2])soft('Porcelain basin edge',.032,.074,bd,x,.813,0,M.ceramic,q,.012);
     for(const z of [-bd/2,bd/2])soft('Porcelain basin edge',bw,.074,.032,0,.813,z,M.ceramic,q,.012);
     cylinder('Basin waste',.023,.004,0,.786,0,M.silver,q);tap(q,0,.78,-d/2+.06);
     const room=plan.rooms[f.room].bounds,wallGap=(west?f.x-room[0]:f.y-room[1])/1000;
-    mirror(f.id+' wall-mounted mirror',w*.86,.74,0,1.50,-d/2-wallGap+.008,q,f.room);
+    mirror(f.id+' wall-mounted mirror',f.mirrorWidth?f.mirrorWidth/1000:w*.86,.74,0,1.50,-d/2-wallGap+.008,q,f.room);
   }
   function toilet(f,p){const west=f.id==='B07',south=f.id==='B04';const q=node('WC orientation',0,0,0,west?Math.PI/2:south?0:Math.PI,p);
     box('Concealed cistern',.36,.77,.15,0,.385,-.265,M.ceramic,q);
@@ -370,6 +370,12 @@ window.buildApartment = function (B, scene, register) {
       const side=w<d;cabinet(f,p,side?d:w,side?w:d,.43,.18,side?-Math.PI/2:Math.PI);
     }
     else if(f.kind==='bookcase')bookcase(f,p);
+    else if(f.kind==='wall_mirror'){
+      p.rotation.y=-Math.PI/2;
+      const wallGap=(plan.rooms[f.room].bounds[2]-f.x-f.w/2)/1000;
+      const surface=mirror(f.id+' entry mirror',d,f.height/1000,0,(f.base+f.height/2)/1000,-wallGap+.008,p,f.room);
+      surface.metadata.wallSide='east';
+    }
     else if(f.kind==='dresser'){
       const west=f.frontSide==='east',q=node('Dresser orientation',0,0,0,west?Math.PI/2:-Math.PI/2,p);cabinet(f,q,d,w,.78);
       const wallGap=(west?f.x-plan.rooms[f.room].bounds[0]:plan.rooms[f.room].bounds[2]-f.x-f.w)/1000;

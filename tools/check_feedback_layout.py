@@ -28,6 +28,12 @@ assert items['M01']['headSide'] == 'right'
 for key in ['C05', 'M04a', 'M04b', 'M04c']:
     assert items[key]['x'] == 8720 and items[key]['frontSide'] == 'east'
 assert items['M01']['x'] - (items['M04a']['x'] + items['M04a']['w']) >= 1100
+assert (items['B08']['d'],items['B08']['w'])==(1500,550)
+assert (items['B08']['basinWidth'],items['B08']['basinDepth'])==(639,340)
+assert items['B08']['mirrorWidth']==774
+assert items['B08']['y']-(items['B09']['y']+items['B09']['d'])==80
+assert items['R15']['kind']=='wall_mirror' and items['R15']['overhead']
+assert items['R15']['y'] >= shoe['y']+shoe['d']
 assert items['B08']['y'] + items['B08']['d'] == plan['rooms']['UTIL']['bounds'][3] - 10
 
 # All new/moved floor furniture clears columns and the other furniture in its room.

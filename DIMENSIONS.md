@@ -75,3 +75,7 @@ The microwave sits in a fitted visual surround at 1220 mm above floor, retaining
 - [IKEA Egypt METOD appliance cabinet](https://www.ikea.com/eg/en/p/metod-high-cabinet-f-built-in-appliances-white-50213570/) — 600 mm system-depth appliance cabinet with ventilation; the proposed pantry width/height are fitted to this room.
 
 The inner family/TV lounge sofa F01 is blue and one continuous L-shaped piece, retaining the recorded 3000 × 2000 mm overall size and 1000 mm seat-run depth. Two full standalone sofas and their internal junction arms have been replaced by connected base, seat and back shells, with armrests only at the two free ends.
+
+Latest bathroom revision: B08 cabinetry and marble top increase from 900 × 500 to 1500 × 550 mm, leaving an 80 mm gap along the wall between the vanity and washer. The basin geometry remains 639 × 340 mm internally with the same 32 mm rims, and the mirror stays 774 × 740 mm. Both are centred on the new cabinet axis. The vanity retains the 10 mm end reveal at the lower-left corner.
+
+Beside the shoe cabinet, R15 is a wall-mounted 700 × 1650 mm mirror, bottom 320 mm above floor. A compact grass-like plant is supported on the shoe cabinet at 1292 mm; floor clearance beside the chairs remains 930 mm.
