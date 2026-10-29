@@ -79,3 +79,18 @@ assert all(items[k]['w']==650 for k in ['M04a','M04b','M04c'])
 assert [items[k]['height'] for k in ['M04a','M04b','M04c']]==[2220,2220,2150]
 print('PASS: shoe aisle 930 mm; master aisle >=1100 mm; child bed aisle 1040 mm;')
 print('new furniture clears room boundaries, structural columns, furniture and door swings; master recess open, balcony entrance at CAD divider; notebook wardrobe envelopes retained.')
+
+# R06 entrances agree with the issued CAD, without changing recorded widths.
+doors={d['id']:d for d in plan['doors']}
+assert (doors['D05']['x'],doors['D05']['y'],doors['D05']['w'])==(9620,7090,900)
+assert (doors['D07']['x'],doors['D07']['y'],doors['D07']['w'])==(8500,7210,850)
+assert (items['C02']['x'],items['C02']['w'],items['C02']['d'])==(9450,1950,600)
+assert items['C02']['x']-(doors['D07']['x']+doors['D07']['w'])==100
+assert architecture.covers(box(7601,7091,8449,7209)), 'Old child opening not filled'
+assert architecture.covers(box(8721,6091,9619,6189)), 'Missing 100 mm return'
+assert_clear(box(8740,6220,9460,7060),architecture,'Master entry recess blocked')
+for k in ['C02','M04a','M04b','M04c']:
+    assert_clear(footprint(items[k]),architecture,k+' intersects wall')
+assert items['M04c']['y']+items['M04c']['d']==6090
+assert plan['revision']=='R06'
+print('PASS: R06 door positions and widths match CAD; C02 1950 x 600; no wall/furniture conflict.')

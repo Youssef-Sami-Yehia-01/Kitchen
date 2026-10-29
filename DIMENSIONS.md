@@ -90,8 +90,17 @@ The source is the owner-uploaded notebook photograph `codex-clipboard-9c32b8d0-4
 | `dolab -> 65 x 222 x 215` | Main wardrobe: 2150 wide x 650 deep x 2220 high mm | Shown as M04a and M04b, each 1075 wide; the notebook does not give that split |
 | `dolab dija -> 90 x 215 x 65` | Khadija wardrobe M04c: 900 wide x 650 deep x 2150 high mm | Door leaves and internal fittings proposed |
 
-The main wardrobe's width/height ordering was inferred from the handwritten sequence and proportions; it was not separately confirmed. The two equal bays plus Khadija's wardrobe form a 3050 mm-long run, with a 20 mm separator before the third bay. These are three model bays, not three separately measured full-size wardrobes. The dressing table is separate: the notebook records 135 x 49 cm.
+The main wardrobe's width/height ordering was inferred from the handwritten sequence and proportions; it was not separately confirmed. The two equal bays plus Khadija's wardrobe form a 3050 mm-long run, with the gaps between the three sections closed in R06 to fit the entrance return. These are three model bays, not three separately measured full-size wardrobes. The dressing table is separate: the notebook records 135 x 49 cm.
 
 ## Master balcony: confirmed entrance correction
 
 Owner confirmed the glazed entrance belongs at the former divider farther inside the recess, with a doorless opening facing the bedroom. The edited CAD source has two layer-0 lines from X=11520 to 12540 at CAD Y=1500 and 1620, equivalent to sheet Y=10060 and 9940. This is the divider location used in the viewer. The 900 mm opening is retained as a proposed width and shifted 30 mm left of the earlier opening's X position so the right jamb meets, rather than overlaps, the structural column. No child-room access is added. The exterior parapet and floor planters now start beyond this entrance; the recess has an indoor ceiling and no floor planter. The earlier issued CAD files are preserved.
+
+
+## R06 bedroom doors and PDF
+
+Both entrance doors move 900 mm east per the green markup, retaining 900 mm master and 850 mm children nominal widths. D05 is at X=9620, sheet Y=7090, with a 100 mm return at [8720,6090,9620,6190]. The old master opening is the doorless hall connection to the new entry recess. D07 is at X=8500, Y=7210; its old opening is infilled. The child wardrobe C02 is 1950 x 600 mm, X=9450, leaving a 100 mm reveal to the new opening; shortening was approved by the owner.
+
+The website retains its latest furniture, finishes and balcony recess. Master wardrobe section gaps close: M04a starts at Y=3040, M04b at 4115, M04c at 5190, ending at 6090. All notebook wardrobe dimensions remain unchanged. The new return is 100 mm rather than the previous 120 mm proposal so it clears this run. The CAD/PDF door geometry uses the same 100 mm return. Earlier CAD furniture layouts otherwise remain as issued; the website includes the subsequent furniture revisions.
+
+The R06 PDF and AutoCAD DWG are downloadable in Scene settings. Door translations are inferred from the sketch, not field-surveyed locations.

@@ -271,7 +271,7 @@ function finishApartment(){
  select.onchange=()=>visitRoom(select.value);
  createFloorMap();refreshButtons();document.getElementById('partCount').textContent=states.length;
  document.getElementById('mapToggle').onclick=()=>{const body=document.getElementById('mapBody'),visible=getComputedStyle(body).display==='none';body.style.display=visible?'block':'none';document.getElementById('mapToggle').setAttribute('aria-expanded',String(visible));document.querySelector('#mapToggle span').textContent=visible?'−':'+';};
- document.getElementById('saveImage').onclick=()=>{scene.onAfterRenderObservable.addOnce(()=>canvas.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='Ibrahim-Merna-Apartment-R05.png';link.click();setTimeout(()=>URL.revokeObjectURL(url),10000);},'image/png'));};
+ document.getElementById('saveImage').onclick=()=>{scene.onAfterRenderObservable.addOnce(()=>canvas.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`Ibrahim-Merna-Apartment-${APT.revision}.png`;link.click();setTimeout(()=>URL.revokeObjectURL(url),10000);},'image/png'));};
  // R05 uses sheet Y down. Reflect geometry into Z down so an entrance view
  // preserves plan handedness (kitchen column east/right, side counter west/left).
  const planRoot=new B.TransformNode('R05 apartment coordinate frame',scene);planRoot.scaling.z=-1;
@@ -312,7 +312,7 @@ function finishApartment(){
  }
  applianceAudit.freezer={removed:true,replacedBy:'K08 tall pantry'};
  document.body.dataset.applianceAudit=JSON.stringify(applianceAudit);
- const report={revision:'R05',furniture:APT.furniture.length,interactions:states.length,spawns:spawnReport,meshes:scene.meshes.length,ssao:!!ao,planters:apartment.details.planterCount,draperies:apartment.details.drapes.length,mirrors:apartment.mirrors.length};
+ const report={revision:APT.revision,furniture:APT.furniture.length,interactions:states.length,spawns:spawnReport,meshes:scene.meshes.length,ssao:!!ao,planters:apartment.details.planterCount,draperies:apartment.details.drapes.length,mirrors:apartment.mirrors.length};
  document.body.dataset.apartmentReport=JSON.stringify(report);
  let reportFrame=0;scene.onAfterRenderObservable.add(()=>{if(++reportFrame%120===0)document.body.dataset.apartmentPerformance=JSON.stringify({fps:Math.round(engine.getFps()),activeMeshes:scene.getActiveMeshes().length,mode,position:walker.position.asArray(),pointerLocked:document.pointerLockElement===canvas,openParts:states.filter(s=>s.target).length,invalidParts:states.filter(s=>!s.node.position.asArray().every(Number.isFinite)||!s.node.getWorldMatrix().asArray().every(Number.isFinite)).map(s=>s.spec.id)});});
 }
@@ -327,7 +327,7 @@ function visitRoom(id){
  updateRoomUI();visibility();hint();
 }
 function updateRoomUI(){
- const r=APT.rooms[selectedRoom];document.getElementById('roomSize').textContent=r?`${((r.bounds[2]-r.bounds[0])/1000).toFixed(2)} × ${((r.bounds[3]-r.bounds[1])/1000).toFixed(2)} m`:'R05 · 2.75 m ceiling';
+ const r=APT.rooms[selectedRoom];document.getElementById('roomSize').textContent=r?`${((r.bounds[2]-r.bounds[0])/1000).toFixed(2)} × ${((r.bounds[3]-r.bounds[1])/1000).toFixed(2)} m`:`${APT.revision} · 2.75 m ceiling`;
  document.querySelectorAll('.map-room').forEach(el=>el.classList.toggle('selected',el.dataset.room===selectedRoom));
 }
 function createFloorMap(){

@@ -461,14 +461,14 @@
     {
       "id": "C02",
       "kind": "wardrobe",
-      "x": 8900,
+      "x": 9450,
       "y": 7210.0,
-      "w": 2500,
+      "w": 1950,
       "d": 600,
       "room": "CHILD",
-      "size": "2500 x 600",
+      "size": "1950 x 600",
       "status": "A",
-      "desc": "Entrance-wall wardrobe, sliding fronts",
+      "desc": "Entrance-wall wardrobe, shortened for relocated door",
       "overhead": false
     },
     {
@@ -531,7 +531,7 @@
       "id": "M04a",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 3060.0,
+      "y": 3040,
       "w": 650,
       "d": 1075,
       "room": "MASTER",
@@ -552,7 +552,7 @@
       "id": "M04b",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 4135.0,
+      "y": 4115,
       "w": 650,
       "d": 1075,
       "room": "MASTER",
@@ -573,7 +573,7 @@
       "id": "M04c",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 5230.0,
+      "y": 5190,
       "w": 650,
       "d": 900,
       "room": "MASTER",
@@ -1146,5 +1146,47 @@
       10060
     ],
     "basis": "Owner confirmed glazed entrance at former divider. Divider Y=9940..10060 comes from edited CAD layer 0 lines at Y=1620/1500 in the 11560 mm drawing height. Door width 900 retained; jamb avoids structural column."
+  },
+  "bedroomDoorRevision": {
+    "revision": "R06",
+    "masterReturn": [
+      8720,
+      6090,
+      9620,
+      6190
+    ],
+    "masterOldPassage": [
+      8600,
+      6190,
+      8720,
+      7090
+    ],
+    "masterDoor": {
+      "x": 9620,
+      "y": 7090,
+      "w": 900,
+      "angle": 270,
+      "open": 360,
+      "cut": [
+        9500,
+        6190,
+        9620,
+        7090
+      ]
+    },
+    "childDoor": {
+      "x": 8500,
+      "y": 7210,
+      "w": 850,
+      "angle": 0,
+      "open": 90,
+      "cut": [
+        8500,
+        7090,
+        9350,
+        7210
+      ]
+    },
+    "basis": "Green markup: both doors move 900 mm east; widths retained. C02 shortened with owner approval. New return is 100 mm thick, with master wardrobe gaps closed to preserve supplied cabinet dimensions."
   }
 }
