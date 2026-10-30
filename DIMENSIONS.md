@@ -134,3 +134,9 @@ The owner explicitly corrected the main wardrobe on 30 October 2026 and approved
 The master entry return is removed. D05 returns to the west wall at X=8720, sheet Y=6270..7070, retaining an 800 mm nominal door. The straight bathroom wall and all eight columns stay fixed. The internal furniture wall is 4580 mm, excluding the doorway: dresser 1350 + main wardrobe 2220 + Khadija wardrobe 900 = 4470 mm, leaving 110 mm. M04 occupies Y=3040..5260; M04c moves to Y=5260..6160. The doorway has one flush oak finish, without overlapping floor plates.
 
 D07 returns to X=7600..8450, with the entering person's left-inward swing retained. Its 850 mm nominal door is unchanged. C02, a proposed fitted wardrobe, extends to 2850 x 600 mm at X=8550, leaving a 100 mm reveal. C12, also proposed fitted storage, becomes 800 x 600 x 2220 high mm at Y=8110..8910; it clears the door's nominal swing reach by 50 mm and the column by 10 mm. These child storage adjustments were included in the approved proposal.
+
+## Current R10: children doorway opens to the right
+
+The short left-wall wardrobe C12, directly ahead of the children entrance, is removed. C02 remains 2850 x 600 mm beside the doorway along the entrance wall. Its dimensions are still a fitted design proposal. All beds, the right study area, measured master furniture, walls and structural columns are unchanged.
+
+D07 retains its 850 mm nominal width and opening position, X=7600..8450, sheet Y=7070..7210. The hinge is now at X=7600, Y=7210, closed angle 0 degrees and open angle 90 degrees in sheet coordinates. The leaf opens inward to a person's right when entering from the hall. CAD, PDF and website use this same handing; C12 and its sliding-panel controls are absent.

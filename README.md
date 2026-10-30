@@ -1,6 +1,6 @@
 # Ibrahim & Merna Apartment Studio
 
-A complete static apartment viewer extending the existing kitchen with the **R09** wardrobe and bedroom entrance revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
+A complete static apartment viewer extending the existing kitchen with the **R10** children entrance and storage revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
 
 ## Preview
 
@@ -19,7 +19,7 @@ Run `python -m http.server 8088` from this directory and open `http://localhost:
 
 ## R05 layout
 
-Reception/dining/TV lounge, kitchen, guest WC, two bathrooms, main bedroom, dressing room, family/study, two-child bedroom, hallway, both balconies and the open shaft are included. The 64 furniture records include the latest owner-requested changes; R09 combines the earlier two master wardrobe records into one corrected unit. Structural columns remain fixed at their original coordinates.
+Reception/dining/TV lounge, kitchen, guest WC, two bathrooms, main bedroom, dressing room, family/study, two-child bedroom, hallway, both balconies and the open shaft are included. The 63 furniture records include the latest owner-requested changes; R09 combines the earlier two master wardrobe records into one corrected unit and R10 removes C12. Structural columns remain fixed at their original coordinates.
 
 The kitchen entrance is a centred 1000 mm open passage. The dishwasher is on the user's right when facing the sink; the column stays on the right when entering. The main bed is on the right side at the column face; dresser and three wardrobe bays are on the left. Bathroom 2 has the shower against the shaft wall; toilet, washer, overhead cabinet and vanity are on the left wall. The children’s reference layout now has two 1200 × 2000 mm mattresses in 1240 × 2080 mm frames along the side walls, an entrance-wall wardrobe, a right-side study desk, wall shelves and bedside tables. The left desk and chair are removed per the latest correction; the right desk remains 1350 × 550 mm. The bed-frame aisle is 1040 mm. The right balcony is entered only from the main bedroom. The reception entrance and dressing room have no windows. R04 is removed; R01/R02 are 150 mm higher; R05/R06 are 150 mm lower.
 
@@ -97,7 +97,7 @@ C12 alone is resized as requested: its run extends north to the children entranc
 
 The master entry now has a dedicated flush oak floor. Its footprint is removed from the hall/bedroom floor grids, and the duplicate stone threshold plates are omitted. Production-mesh ray checks confirm continuous oak at the same finished level across the entrance. R08 CAD and the three-sheet PDF were issued for this revision.
 
-## Current R09 wardrobe and entrance revision
+## R09 wardrobe and entrance revision
 
 M04 replaces M04a/M04b with one continuous 2220 x 650 x 2150 high mm wardrobe, using the owner's explicit correction of the notebook width and height. Khadija's M04c stays 900 x 650 x 2150 high. The 1350 x 490 mm dressing table and bed/bedside furniture retain their dimensions and positions; M04c shifts 70 mm along the same wall to follow M04.
 
@@ -106,3 +106,11 @@ The short master entry return is removed. D05 returns to the west wall at X=8720
 D07 returns to X=7600..8450, retaining its 850 mm width and left-inward swing. C02 extends to 2850 x 600 mm with a 100 mm door reveal. Proposed C12 shortens to 800 x 600 x 2220 high, at Y=8110..8910, clear of the leaf swing and structural column. Beds, the right study area and all other room furniture remain unchanged.
 
 The website and CAD share the same 64 records. R09 PDF/DWG downloads are in Scene settings; earlier issues remain available in `assets/plans/`. Native AutoCAD round-trip verifies insert positions, sizes and door rotations and reports zero audit errors. Spatial checks cover furniture and door sweeps; production-mesh checks cover both revised door animations, one continuous 2220 mm wardrobe back, storage panels and flush entrance flooring.
+
+## Current R10 children entrance and storage revision
+
+C12, the short left-wall wardrobe directly ahead of the children doorway, is removed from CAD, the website and its interaction controls. C02, the longer 2850 x 600 mm entrance-wall wardrobe beside the doorway, remains. The two beds, right study area and other furniture remain unchanged.
+
+D07 keeps its 850 mm opening at X=7600..8450, sheet Y=7070..7210. Its hinge moves to the west jamb, X=7600; the leaf opens inward toward the entering person's right/west. Production door animation verifies the closed leaf tip at (8450, 7210) and the open tip at (7600, 8060) in sheet millimetres. Furniture and wall sweep checks pass. The R09 master room correction and all columns are unchanged.
+
+The CAD and website share 63 furniture records. R10 PDF and DWG downloads are in Scene settings; R09 files are preserved in `assets/plans/`.

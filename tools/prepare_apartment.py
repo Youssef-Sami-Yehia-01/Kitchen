@@ -17,7 +17,7 @@ room_faces = {
 for key,bounds in room_faces.items(): data['rooms'][key]['bounds']=bounds
 data['masterBalcony'].update(bedroomPassage=[11540,7070,12720,7210],
  divider=[11540,9940,12720,10080],doorBounds=[11640,9940,12540,10080])
-# R09 wall faces are explicit so cabinetry can meet a clear room face. Exterior
+# R10 wall faces are explicit so cabinetry can meet a clear room face. Exterior
 # walls grow outward. Service partitions use the adjacent shaft/hall where possible.
 # The bathroom/master partition stays straight. Removing the entry return gives
 # the corrected 4470 mm dresser/wardrobe run a 4580 mm internal wall before D05.
@@ -89,12 +89,12 @@ data.update(walls=walls,doors=doors,windows=windows,passages=passages,wallMinimu
  wallBands=rects,partition=partitions,
  floorAreas=floor_areas,masterEntryFloor=entry_floor,
  obstacles=rectangles(ground.union(columns)),
- source='Apartment_2D_Review_R09.dxf',revision='R09',height=2750,
+ source='Apartment_2D_Review_R10.dxf',revision='R10',height=2750,
  assumptions=['Ceiling 2.75 m confirmed by owner.','Window sill 1.10 m; window head 2.30 m; door head 2.15 m assumed.',
  'Unrecorded furniture heights and decorative finishes are visual proposals.',
- 'All walls and partitions are at least 140 mm thick in R09; existing structural columns remain fixed.',
+ 'All walls and partitions are at least 140 mm thick in R10; existing structural columns remain fixed.',
  'Main wardrobe dimensions corrected by owner: one 2220 x 650 x 2150 high mm unit; earlier equal-bay interpretation superseded.',
  'Master bedroom opens through a 1200 mm passage into the recess; 900 mm glazed balcony entrance sits at the former CAD divider, as confirmed by owner.'])
 (ROOT/'assets/apartment-scene.json').write_text(json.dumps(data,indent=2),encoding='utf-8')
 (ROOT/'apartment-data.js').write_text('window.APARTMENT = '+json.dumps(data,separators=(',',':'))+';\n',encoding='utf-8')
-print(f"R09: {len(data['rooms'])} spaces, {len(data['furniture'])} furniture items, {len(walls)} wall sections, {len(doors)} doors, {len(windows)} windows/sliders")
+print(f"R10: {len(data['rooms'])} spaces, {len(data['furniture'])} furniture items, {len(walls)} wall sections, {len(doors)} doors, {len(windows)} windows/sliders")

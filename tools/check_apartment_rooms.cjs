@@ -16,19 +16,18 @@ const states=new Map(),apt=scope.window.buildApartment(B,scene,(node,spec)=>stat
 const frame=new B.TransformNode('Plan handedness',scene);frame.scaling.z=-1;
 for(const node of [...scene.rootNodes])if(node!==frame)node.parent=frame;
 const door=states.get('D07'),spec=plan.doors.find(d=>d.id==='D07');
-assert.equal(spec.w,850);assert.ok(door.spec.amount<0);
+assert.equal(spec.w,850);assert.ok(door.spec.amount>0);
 function tip(){door.node.computeWorldMatrix(true);return B.Vector3.TransformCoordinates(new B.Vector3(.85,0,0),door.node.getWorldMatrix());}
-const closed=tip();assert.ok(Math.abs(closed.x-7.6)<1e-5&&Math.abs(closed.z-7.21)<1e-5);
+const closed=tip();assert.ok(Math.abs(closed.x-8.45)<1e-5&&Math.abs(closed.z-7.21)<1e-5);
 door.node.rotation.y+=door.spec.amount;const opened=tip();
-assert.ok(Math.abs(opened.x-8.45)<1e-5&&Math.abs(opened.z-8.06)<1e-5,'D07 must swing inward toward the entering person left/east');
+assert.ok(Math.abs(opened.x-7.6)<1e-5&&Math.abs(opened.z-8.06)<1e-5,'D07 must swing inward toward the entering person right/west');
 const masterDoor=states.get('D05');
 function masterTip(){masterDoor.node.computeWorldMatrix(true);return B.Vector3.TransformCoordinates(new B.Vector3(.8,0,0),masterDoor.node.getWorldMatrix());}
 const masterClosed=masterTip();assert.ok(Math.abs(masterClosed.x-8.72)<1e-5&&Math.abs(masterClosed.z-6.27)<1e-5);
 masterDoor.node.rotation.y+=masterDoor.spec.amount;
 const masterOpened=masterTip();assert.ok(Math.abs(masterOpened.x-9.52)<1e-5&&Math.abs(masterOpened.z-7.07)<1e-5);
-const cabinet=apt.roots.get('C12');assert.ok(cabinet);
-assert.equal(cabinet.getChildMeshes().filter(m=>m.name==='Bookcase shelf').length,0);
-assert.equal([...states.keys()].filter(k=>k.startsWith('C12_')).length,2);
+assert.ok(!apt.roots.has('C12'),'Remove the wardrobe directly ahead of the entrance.');
+assert.equal([...states.keys()].filter(k=>k.startsWith('C12_')).length,0);
 assert.equal([...states.keys()].filter(k=>k.startsWith('C02_')).length,4);
 assert.ok(apt.roots.has('M04')&&!apt.roots.has('M04a')&&!apt.roots.has('M04b'));
 assert.equal([...states.keys()].filter(k=>k.startsWith('M04_')).length,3);
@@ -51,5 +50,5 @@ for(const mesh of scene.meshes){
  assert.ok(!positions||positions.every(Number.isFinite),mesh.name+' invalid positions');
  mesh.computeWorldMatrix(true);assert.ok(Array.from(mesh.getWorldMatrix().asArray()).every(Number.isFinite),mesh.name+' invalid transform');
 }
-console.log(`PASS: ${scene.meshes.length} production meshes, restored left-inward D07, revised C02/C12, flush master entrance floor and one corrected main wardrobe.`);
+console.log(`PASS: ${scene.meshes.length} production meshes, right-inward D07, child storage, flush master entrance floor and one corrected main wardrobe.`);
 engine.dispose();

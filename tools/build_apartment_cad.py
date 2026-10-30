@@ -1,4 +1,4 @@
-"""Author R09 CAD from the same millimetre specification as the apartment viewer."""
+"""Author R10 CAD from the same millimetre specification as the apartment viewer."""
 import json, math
 from pathlib import Path
 import ezdxf
@@ -7,7 +7,7 @@ from shapely.geometry import box, Polygon, LineString
 from shapely.ops import unary_union
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT.parent/'output/apartment_2d_r09'
+OUT=ROOT.parent/'output/apartment_2d_r10'
 OUT.mkdir(parents=True,exist_ok=True)
 p=json.loads((ROOT/'assets/apartment-scene.json').read_text(encoding='utf-8'))
 H=11560
@@ -71,7 +71,7 @@ for d in p['doors']:
  for x in [0,w]:line(b,(x,0),(x,-140 if d['open']>d['angle'] else 140))
  e=insert(name,d['x'],d['y'],'A-DOOR',d['id'],str(w));e.dxf.rotation=-d['angle']
  # Label in the open floor, away from the jamb geometry.
- if d['id']=='D07':label('D07 / 850 - LEFT INWARD',8010,6970,61)
+ if d['id']=='D07':label('D07 / 850 - RIGHT INWARD',8010,6970,61)
  elif d['id']=='D05':label('D05 / '+str(w),9630,6650,70)
 for w in p['windows']:
  r=w['bounds'];x,y,x1,y1=r;bw,bd=x1-x,y1-y
@@ -157,7 +157,7 @@ for f in p['furniture']:
 # Internal bathroom face to the restored doorway, independent of the door width.
 dim((8720,1690),(8720,6270),(8120,0),90)
 dim((8720,6270),(8720,7070),(8420,0),90)
-label('IBRAHIM & MERNA - APARTMENT REVIEW R09',6360,-1350,155)
+label('IBRAHIM & MERNA - APARTMENT REVIEW R10',6360,-1350,155)
 label('ALL DIMENSIONS mm / WALLS >= 140 / STRUCTURAL COLUMNS RETAINED',6360,13030,105)
 doc.set_modelspace_vport(height=15300,center=(6300,5500))
 audit=doc.audit();assert not audit.errors and not audit.fixes
@@ -165,12 +165,12 @@ segments=[LineString([tuple(e.dxf.start)[:2],tuple(e.dxf.end)[:2]]) for e in m.q
 assert sum(s.length for s in segments)-unary_union(segments).length<.01
 source_cols=json.loads((ROOT/'assets/apartment-r05.json').read_text(encoding='utf-8'))['columns']
 assert p['columns']==source_cols
-doc.saveas(OUT/'Apartment_2D_Review_R09.dxf')
-(OUT/'Plan_Data_R09.json').write_text(json.dumps(p,indent=2),encoding='utf-8')
-(OUT/'Revision_Audit_R09.json').write_text(json.dumps({'revision':'R09','wall_minimum_mm':140,
+doc.saveas(OUT/'Apartment_2D_Review_R10.dxf')
+(OUT/'Plan_Data_R10.json').write_text(json.dumps(p,indent=2),encoding='utf-8')
+(OUT/'Revision_Audit_R10.json').write_text(json.dumps({'revision':'R10','wall_minimum_mm':140,
  'column_positions_unchanged':True,'master_wardrobe_owner_correction_applied':True,
  'master_wardrobe_one_unit_mm':[2220,650,2150],
  'master_usable_wall_mm':4580,'master_furniture_run_mm':4470,'master_remaining_allowance_mm':110,
  'shared_cad_website_furniture_records':len(p['furniture']),'cad_block_references':len(m.query('INSERT')),
  'editable_dimensions':len(m.query('DIMENSION')),'duplicate_model_lines_mm':0,'dxf_audit_errors':len(audit.errors)},indent=2),encoding='utf-8')
-print('Created R09 CAD: corrected single wardrobe, restored door openings, 140 mm walls and fixed columns.')
+print('Created R10 CAD: corrected single wardrobe, restored door openings, 140 mm walls and fixed columns.')

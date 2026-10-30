@@ -927,21 +927,6 @@
       "overhead": false
     },
     {
-      "id": "C12",
-      "kind": "wardrobe",
-      "x": 7608,
-      "y": 8110,
-      "w": 600,
-      "d": 800,
-      "room": "CHILD",
-      "size": "800 x 600; H2220",
-      "status": "A",
-      "desc": "Children's left-wall wardrobe",
-      "frontSide": "east",
-      "overhead": false,
-      "height": 2220
-    },
-    {
       "id": "C13",
       "kind": "bookcase",
       "x": 11132,
@@ -1127,7 +1112,7 @@
     "basis": "Owner confirmed glazed entrance at former divider. Divider Y=9940..10060 comes from edited CAD layer 0 lines at Y=1620/1500 in the 11560 mm drawing height. Door width 900 retained; jamb avoids structural column."
   },
   "bedroomDoorRevision": {
-    "revision": "R09",
+    "revision": "R10",
     "masterReturn": null,
     "masterOldPassage": null,
     "masterDoor": {
@@ -1144,10 +1129,10 @@
       ]
     },
     "childDoor": {
-      "x": 8450,
+      "x": 7600,
       "y": 7210,
       "w": 850,
-      "angle": 180,
+      "angle": 0,
       "open": 90,
       "cut": [
         7600,
@@ -1164,6 +1149,6 @@
       "furnitureRun": 4470,
       "remainingAllowance": 110
     },
-    "basis": "R09 applies the owner-approved corrected wardrobe dimensions: one main unit 2220 wide x 650 deep x 2150 high. Remove the short master entry return and restore both door openings to their pre-R06 positions, retaining an 800 mm master door and an 850 mm left-inward children door. The internal master wall is 4580 mm before the doorway: 4470 mm furniture plus 110 mm allowance. C02 extends to 2850 mm; C12 shortens to 800 mm and moves beyond the door swing. Structural columns and the straight bathroom wall remain fixed."
+    "basis": "R10 retains the R09 master wardrobe correction, 4580 mm internal wall, 800 mm master door and fixed columns. Children D07 keeps its opening at X=7600..8450 and its 850 mm width; its hinge is now at X=7600, with a right-inward swing as viewed entering from the hall. The short left-wall wardrobe C12 is removed from directly ahead of the entrance; the entrance-wall wardrobe C02 is retained."
   }
 }
