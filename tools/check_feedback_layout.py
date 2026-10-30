@@ -14,10 +14,10 @@ def assert_clear(a, b, message):
     assert a.intersection(b).area < .01, message
 
 shoe = items['R14']
-assert shoe['w'] == 180 and shoe['x'] + shoe['w'] == 3860
+assert shoe['w'] == 180 and shoe['x'] + shoe['w'] == 3840
 chairs = [f for f in plan['furniture'] if f['id'].startswith('R02')]
 right_chairs = [f for f in chairs if f['x'] > 2000]
-assert min(shoe['x'] - (f['x'] + f['w']) for f in right_chairs) == 930
+assert min(shoe['x'] - (f['x'] + f['w']) for f in right_chairs) == 910
 assert (items['R01']['w'], items['R01']['d']) == (1100, 2300)
 assert items['K08']['kind'] == 'tall_cabinet'
 assert footprint(items['K08']).covers(footprint(items['K11']))
@@ -35,14 +35,17 @@ assert items['B08']['y']-(items['B09']['y']+items['B09']['d'])==80
 assert items['R15']['kind']=='wall_mirror' and items['R15']['overhead']
 assert items['R15']['y'] >= shoe['y']+shoe['d']
 assert items['B08']['y'] + items['B08']['d'] == plan['rooms']['UTIL']['bounds'][3] - 10
+architecture = unary_union([box(*r) for r in plan['obstacles']])
 
 # All new/moved floor furniture clears columns and the other furniture in its room.
 changed = {'R14','K08','M01','M02a','M02b','M04a','M04b','M04c','C05','B08',
-           'C01','C07','C02','C10','C11','C14','C15'}
+           'C01','C07','C02','C10','C11','C12','C14','C15'}
 for key in changed:
     f = items[key]
     shape = footprint(f)
     assert box(*plan['rooms'][f['room']]['bounds']).covers(shape), key + ' outside room'
+    if key in {'M01','M02a','M02b','M04a','M04b','M04c','C05','B08','C01','C07','C02','C10','C11','C12','C14','C15'}:
+        assert_clear(shape, architecture, key + ' intersects a wall')
     for column in plan['columns']:
         assert_clear(shape, box(*column), key + ' clashes with a column')
     for other in plan['furniture']:
@@ -64,33 +67,44 @@ assert items['C07']['x'] - (items['C01']['x'] + items['C01']['w']) == 1040
 assert plan['height'] == 2750
 # Master opening is doorless; the glazed entrance is at the owner-confirmed CAD divider.
 route = LineString([(12000, 7500), (12000, 11350)]).buffer(140)
-architecture = unary_union([box(*r) for r in plan['obstacles']])
 assert_clear(route, architecture, 'Master recess / balcony structural route blocked')
 assert plan['masterBalcony']['bedroomPassage'] in plan['passages']
 slider=next(w for w in plan['windows'] if w['id']=='S02')
-assert slider['bounds']==[11640,9940,12540,10060] and slider['slider']
+assert slider['bounds']==[11640,9940,12540,10080] and slider['slider']
 assert not any(w['bounds'][1]==7090 for w in plan['windows'])
-assert plan['rooms']['RECESS']['bounds']==[11520,7210,12720,9940]
-assert plan['rooms']['BAY']['bounds']==[11520,10060,12720,11560]
-assert_clear(box(11520,7090,12720,7210), architecture, 'Bedroom passage not open')
-assert architecture.covers(box(11520,9940,11640,10060)), 'Missing recessed door pier'
+assert plan['rooms']['RECESS']['bounds']==[11540,7210,12720,9940]
+assert plan['rooms']['BAY']['bounds']==[11540,10080,12720,11560]
+assert_clear(box(11540,7070,12720,7210), architecture, 'Bedroom passage not open')
+assert architecture.covers(box(11540,9940,11640,10080)), 'Missing recessed door pier'
 assert items['M04a']['d']+items['M04b']['d']==2150
 assert all(items[k]['w']==650 for k in ['M04a','M04b','M04c'])
 assert [items[k]['height'] for k in ['M04a','M04b','M04c']]==[2220,2220,2150]
-print('PASS: shoe aisle 930 mm; master aisle >=1100 mm; child bed aisle 1040 mm;')
+print('PASS: shoe aisle 910 mm; master aisle >=1100 mm; child bed aisle 1040 mm;')
 print('new furniture clears room boundaries, structural columns, furniture and door swings; master recess open, balcony entrance at CAD divider; notebook wardrobe envelopes retained.')
 
-# R06 entrances agree with the issued CAD, without changing recorded widths.
+# R07 keeps the issued door widths, upgrades construction thickness and reverses D07 inward.
 doors={d['id']:d for d in plan['doors']}
-assert (doors['D05']['x'],doors['D05']['y'],doors['D05']['w'])==(9620,7090,900)
-assert (doors['D07']['x'],doors['D07']['y'],doors['D07']['w'])==(8500,7210,850)
-assert (items['C02']['x'],items['C02']['w'],items['C02']['d'])==(9450,1950,600)
-assert items['C02']['x']-(doors['D07']['x']+doors['D07']['w'])==100
+assert (doors['D05']['x'],doors['D05']['y'],doors['D05']['w'])==(9620,7070,900)
+assert (doors['D07']['x'],doors['D07']['y'],doors['D07']['w'],doors['D07']['angle'],doors['D07']['open'])==(9350,7210,850,180,90)
+assert (items['C02']['x'],items['C02']['y'],items['C02']['w'],items['C02']['d'])==(9450,7210,1950,600)
+assert items['C02']['x']-doors['D07']['x']==100
+assert items['C12']['kind']=='wardrobe' and not items['C12']['overhead'], 'Replace the shelf beside D07 with a wardrobe.'
+assert (items['C12']['x'],items['C12']['w'],items['C12']['d'],items['C12']['height'])==(7608,600,800,2220)
 assert architecture.covers(box(7601,7091,8449,7209)), 'Old child opening not filled'
-assert architecture.covers(box(8721,6091,9619,6189)), 'Missing 100 mm return'
-assert_clear(box(8740,6220,9460,7060),architecture,'Master entry recess blocked')
+assert architecture.covers(box(8731,6031,9619,6169)), 'Missing 140 mm return'
+assert_clear(box(8740,6200,9460,7040),architecture,'Master entry recess blocked')
 for k in ['C02','M04a','M04b','M04c']:
     assert_clear(footprint(items[k]),architecture,k+' intersects wall')
-assert items['M04c']['y']+items['M04c']['d']==6090
-assert plan['revision']=='R06'
-print('PASS: R06 door positions and widths match CAD; C02 1950 x 600; no wall/furniture conflict.')
+assert items['M04c']['y']+items['M04c']['d']==6030
+assert all(items[k]['x']==8720 for k in ['C05','M04a','M04b','M04c'])
+assert plan['revision']=='R07'
+assert plan['wallMinimumMm']==140, 'R07 source wall-band minimum is not 140 mm.'
+assert all(min(r[2]-r[0],r[3]-r[1])>=140 for r in plan['wallBands']+plan['partition'])
+for f in plan['furniture']:
+    if not f['overhead']:
+        assert_clear(footprint(f),architecture,f['id']+' intersects construction')
+for door in plan['doors']:
+    arc=[(door['x']+door['w']*math.cos(math.radians(door['angle']+(door['open']-door['angle'])*i/90)),
+          door['y']+door['w']*math.sin(math.radians(door['angle']+(door['open']-door['angle'])*i/90))) for i in range(91)]
+    assert_clear(Polygon([(door['x'],door['y']),*arc]).buffer(-1),architecture,door['id']+' swing intersects construction')
+print('PASS: R07 door swing, 140 mm wall minimum, children wardrobe and fixed-column clearances verified.')

@@ -1,6 +1,6 @@
 # Ibrahim & Merna Apartment Studio
 
-A complete static apartment viewer extending the existing kitchen with the **R06** bedroom-door revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
+A complete static apartment viewer extending the existing kitchen with the **R07** wall and bedroom revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
 
 ## Preview
 
@@ -10,11 +10,11 @@ Run `python -m http.server 8088` from this directory and open `http://localhost:
 
 ## Explore
 
-- **Room selector / floor map:** focus a room in isometric view, or enter it in walkthrough mode. Sizes are internal R05 dimensions.
+- **Room selector / floor map:** focus a room in isometric view, or enter it in walkthrough mode. Sizes reflect the R07 clear wall faces.
 - **Walk inside:** click Explore; WASD/arrows move, mouse looks, Shift moves faster, E opens the part under the crosshair, Escape pauses. Walls, columns, furniture and moving doors have collision footprints.
 - **Phone:** tap Explore, hold movement arrows, swipe to look, tap Open to interact, Pause to return to navigation. Pinch/drag in isometric view. Narrow screens also expose these controls.
 - **Isometric:** drag to orbit, scroll/pinch to zoom, right-drag to pan. Automatic cutaway hides walls between the camera and target, and removes ceilings. Disable it in Scene to retain walls.
-- **Doors & drawers:** 97 controls cover kitchen appliances/cabinets, room doors, balcony sliders, wardrobes, storage, vanities and washing machine. Sliding wardrobe panels and kitchen corner doors close conflicting neighbours.
+- **Doors & drawers:** interactive controls cover kitchen appliances/cabinets, room doors, balcony sliders, wardrobes, storage, vanities and washing machine. Sliding wardrobe panels and kitchen corner doors close conflicting neighbours.
 - **Scene:** sunlight strength, cutaway, close all compartments, dimension-data download and source assumptions.
 
 ## R05 layout
@@ -67,7 +67,7 @@ Rounded furniture uses independent vertex/index buffers when batching by materia
 - The large bathroom vanity and marble top are 1500 × 550 mm, at the lower-left corner with a 10 mm side reveal. The previous basin and 774 mm-wide mirror remain the same size and are centred on the wider unit. F05 is wall mounted 600 mm above the family-room floor.
 - The new children’s room follows the supplied two-bed reference around the actual PDF column/window positions. The confirmed ceiling remains 2750 mm rather than the reference image’s 2600 mm.
 
-Run `python tools/check_feedback_layout.py` for new furniture, door-swing, column and balcony-route checks. The current viewer exposes 97 interactions.
+Run `python tools/check_feedback_layout.py` for new furniture, door-swing, column and balcony-route checks. The new C12 wardrobe also exposes two sliding-panel controls.
 
 The family/TV lounge F01 is one continuous blue L-shaped sectional, with joined upholstered base, seat and back geometry and only two end arms. Its recorded 3000 × 2000 mm footprint is retained. The geometry check also verifies closed, connected shells and the L-shaped recess.
 
@@ -78,3 +78,13 @@ The master wardrobe dimensions and their exact handwritten source values are doc
 ## R06 door revision
 
 The master and children entrances move 900 mm east, retaining their 900 / 850 mm widths. A 100 mm return forms the master entry recess; the old children opening is infilled. C02 is shortened to 1950 x 600 mm with a 100 mm door reveal, as approved. The master wardrobe section gaps close while their supplied widths/depths/heights remain unchanged. The R06 PDF, DWG and DXF are in `assets/plans/`, with PDF and DWG downloads in Scene settings. The PDF documents the CAD revision; the website retains its later furniture/material and balcony changes.
+
+## Current R07 wall and bedroom revision
+
+Every wall/partition band is at least 140 mm thick. Exterior walls grow outward; interior faces are explicitly placed in `tools/prepare_apartment.py`. All eight structural columns retain their earlier coordinates and sizes. Clear room dimensions reflect the revised faces.
+
+The bathroom/master partition moves 60 mm north, giving the unchanged 1350 mm dresser and 3050 mm wardrobe run enough length before the 140 mm entry return. M04a/M04b remain 1075 x 650 x 2220 mm each; Khadija's M04c remains 900 x 650 x 2150 mm. The bed and bedside tables retain their recorded envelopes. D05 stays 900 mm wide.
+
+D07 keeps its 850 mm width and now opens inward to the entering person's left/east. C12 replaces the short left-wall hanging bookcase with an 800 x 600 x 2220 mm wardrobe with two sliding fronts. The right study desk and shelves remain. C02 stays 1950 x 600 mm with a 100 mm door reveal. Reception wall-mounted furniture moves 20 mm to the new face; the shoe aisle is now 910 mm.
+
+The CAD furniture and website use the same 65 records. R07 PDF/DWG downloads appear in Scene settings. `tools/build_apartment_cad.py` authors the editable DXF; `tools/build_apartment_pdf.py` plots a native AutoCAD round-trip as three A3 sheets. Native AutoCAD reports zero audit errors. Run the feedback/planting checks and `node tools/check_apartment_rooms.cjs` to check fixed-column clearances, the production door animation, new wardrobe assembly and finite geometry. Browser UI control was disabled during this revision; the production meshes and locally served files were checked directly.

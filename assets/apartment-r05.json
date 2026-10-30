@@ -313,7 +313,7 @@
     {
       "id": "R10",
       "kind": "tv_unit",
-      "x": 3440.0,
+      "x": 3420.0,
       "y": 7950.0,
       "w": 420,
       "d": 1400,
@@ -326,7 +326,7 @@
     {
       "id": "R11",
       "kind": "tv",
-      "x": 3800.0,
+      "x": 3780.0,
       "y": 8030.0,
       "w": 60,
       "d": 1240,
@@ -339,7 +339,7 @@
     {
       "id": "R12",
       "kind": "cabinet",
-      "x": 3460.0,
+      "x": 3440.0,
       "y": 7950.0,
       "w": 400,
       "d": 1400,
@@ -468,14 +468,14 @@
       "room": "CHILD",
       "size": "1950 x 600",
       "status": "A",
-      "desc": "Entrance-wall wardrobe, shortened for relocated door",
+      "desc": "Entrance-wall wardrobe, shortened for relocated door and held clear of 140 mm wall",
       "overhead": false
     },
     {
       "id": "C05",
       "kind": "dresser",
       "x": 8720,
-      "y": 1690.0,
+      "y": 1630.0,
       "w": 490,
       "d": 1350,
       "room": "MASTER",
@@ -531,7 +531,7 @@
       "id": "M04a",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 3040,
+      "y": 2980,
       "w": 650,
       "d": 1075,
       "room": "MASTER",
@@ -552,7 +552,7 @@
       "id": "M04b",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 4115,
+      "y": 4055,
       "w": 650,
       "d": 1075,
       "room": "MASTER",
@@ -573,7 +573,7 @@
       "id": "M04c",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 5190,
+      "y": 5130,
       "w": 650,
       "d": 900,
       "room": "MASTER",
@@ -776,7 +776,7 @@
       "id": "B04",
       "kind": "wc",
       "x": 4710.0,
-      "y": 870.0,
+      "y": 850.0,
       "w": 380,
       "d": 700,
       "room": "WC",
@@ -814,7 +814,7 @@
     {
       "id": "B07",
       "kind": "wc",
-      "x": 6600,
+      "x": 6620,
       "y": 2850,
       "w": 700,
       "d": 380,
@@ -827,7 +827,7 @@
     {
       "id": "B08",
       "kind": "basin",
-      "x": 6600,
+      "x": 6620,
       "y": 4180,
       "w": 550,
       "d": 1500,
@@ -882,7 +882,7 @@
     {
       "id": "B09",
       "kind": "washer",
-      "x": 6600,
+      "x": 6620,
       "y": 3500,
       "w": 650,
       "d": 600,
@@ -895,7 +895,7 @@
     {
       "id": "B10",
       "kind": "cabinet",
-      "x": 6600,
+      "x": 6620,
       "y": 3500,
       "w": 350,
       "d": 600,
@@ -908,7 +908,7 @@
     {
       "id": "R14",
       "kind": "shoe_cabinet",
-      "x": 3680,
+      "x": 3660,
       "y": 1800,
       "w": 180,
       "d": 1040,
@@ -948,19 +948,18 @@
     },
     {
       "id": "C12",
-      "kind": "bookcase",
+      "kind": "wardrobe",
       "x": 7608,
       "y": 8110,
-      "w": 260,
+      "w": 600,
       "d": 800,
       "room": "CHILD",
-      "size": "800 x 260; H750",
+      "size": "800 x 600; H2220",
       "status": "A",
-      "desc": "Left wall bookshelves",
+      "desc": "Children's left-wall wardrobe beside entrance, replaces hanging bookshelf",
       "frontSide": "east",
-      "overhead": true,
-      "base": 1500,
-      "height": 750
+      "overhead": false,
+      "height": 2220
     },
     {
       "id": "C13",
@@ -1009,7 +1008,7 @@
     {
       "id": "R15",
       "kind": "wall_mirror",
-      "x": 3830,
+      "x": 3810,
       "y": 3210,
       "w": 30,
       "d": 700,
@@ -1148,45 +1147,45 @@
     "basis": "Owner confirmed glazed entrance at former divider. Divider Y=9940..10060 comes from edited CAD layer 0 lines at Y=1620/1500 in the 11560 mm drawing height. Door width 900 retained; jamb avoids structural column."
   },
   "bedroomDoorRevision": {
-    "revision": "R06",
+    "revision": "R07",
     "masterReturn": [
       8720,
-      6090,
+      6030,
       9620,
-      6190
+      6170
     ],
     "masterOldPassage": [
-      8600,
-      6190,
+      8580,
+      6170,
       8720,
-      7090
+      7070
     ],
     "masterDoor": {
       "x": 9620,
-      "y": 7090,
+      "y": 7070,
       "w": 900,
       "angle": 270,
       "open": 360,
       "cut": [
-        9500,
-        6190,
+        9480,
+        6170,
         9620,
-        7090
+        7070
       ]
     },
     "childDoor": {
-      "x": 8500,
+      "x": 9350,
       "y": 7210,
       "w": 850,
-      "angle": 0,
+      "angle": 180,
       "open": 90,
       "cut": [
         8500,
-        7090,
+        7070,
         9350,
         7210
       ]
     },
-    "basis": "Green markup: both doors move 900 mm east; widths retained. C02 shortened with owner approval. New return is 100 mm thick, with master wardrobe gaps closed to preserve supplied cabinet dimensions."
+    "basis": "R06 green markup moved both doors east; R07 keeps their nominal widths, upgrades all partitions to at least 140 mm, and reverses D07 so it swings inward to the entering person's left. C02 was shortened with owner approval. The master return is 140 mm thick and the supplied wardrobe envelopes remain unchanged."
   }
 }

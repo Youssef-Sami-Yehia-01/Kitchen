@@ -195,7 +195,7 @@ window.buildApartment = function (B, scene, register) {
   }
   for(const r of [...plan.passages,...plan.doors.map(d=>d.cut),...plan.windows.filter(w=>w.slider).map(w=>w.bounds)])fromRect('Flush threshold',r,-6,1,M.stone);
   // Low balcony guardrails: these spaces remain visibly open to daylight.
-  for(const r of [[0,11560,3860,11680],[12720,10060,12840,11560]]){
+  for(const r of [[0,11560,3840,11700],[12720,10080,12860,11560]]){
     wallPiece(fromRect('Balcony parapet',r,0,1050,M.wall),r);
   }
   // Exterior wall sections at balconies are parapets, not full-height enclosure.

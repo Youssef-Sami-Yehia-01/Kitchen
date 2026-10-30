@@ -1,5 +1,7 @@
 # Dimensions and review corrections
 
+Current issue: R07. The R06 notes below are historical; the current changes at the end supersede their wall thicknesses and positions.
+
 The owner's measurements and the PDF room/column/opening dimensions take priority. For unmeasured furniture, the model uses common Egyptian-market product proportions. These references describe product sizes rather than a single mandatory national furniture size.
 
 ## Recorded sizes retained
@@ -104,3 +106,13 @@ Both entrance doors move 900 mm east per the green markup, retaining 900 mm mast
 The website retains its latest furniture, finishes and balcony recess. Master wardrobe section gaps close: M04a starts at Y=3040, M04b at 4115, M04c at 5190, ending at 6090. All notebook wardrobe dimensions remain unchanged. The new return is 100 mm rather than the previous 120 mm proposal so it clears this run. The CAD/PDF door geometry uses the same 100 mm return. Earlier CAD furniture layouts otherwise remain as issued; the website includes the subsequent furniture revisions.
 
 The R06 PDF and AutoCAD DWG are downloadable in Scene settings. Door translations are inferred from the sketch, not field-surveyed locations.
+
+## R07: 140 mm construction and synchronized bedrooms
+
+All wall and partition bands have a minimum 140 mm thickness. Exterior walls extend outward; service partitions use adjacent hall/shaft space where possible. The bathroom/master dividing wall moves 60 mm north, from its former 1570..1690 band to 1490..1630 on the master side. Columns stay at their original coordinates and retain their original sizes. Clear room faces are recorded in the generated scene data and used by the room selector.
+
+Master furniture sizes stay intact: C05 dresser 1350 x 490; M04a and M04b 1075 x 650 x 2220 high each; M04c / Khadija 900 x 650 x 2150 high; M01 bed 1600 x 2000; M02a/M02b 600 x 400. The continuous dresser/wardrobe run starts at Y=1630 and ends at 6030. The return is 140 mm thick at Y=6030..6170. D05 retains 900 mm width, pivot X=9620, Y=7070. The bed/wardrobe clear footprint aisle remains 1170 mm.
+
+Children D07 retains 850 mm clear nominal width and reverses its handing: pivot X=9350, Y=7210, closed angle 180 degrees, open 90 degrees in sheet coordinates. Viewed entering from the hall it swings inward to the left/east. The opening remains X=8500..9350. C02 retains 1950 x 600 and a 100 mm reveal. Owner confirmed that the short left-wall shelf is the one to replace: C12 now has an 800 mm run, 600 mm depth and 2220 mm height with matching warm-white sliding fronts. This proposed wardrobe is separate from the measured master wardrobes. The right study area remains.
+
+The CAD is rebuilt from the same furniture data as the website, including the current master and two-bed child arrangement. Small 20 mm shifts to reception storage and bathroom 2 fixtures place them against the thicker wall faces without resizing the furniture. The shoe aisle becomes 910 mm; bed-frame aisle remains 1040 mm. CAD labels, door rotations and furniture locations are checked after native AutoCAD conversion. The current three-sheet A3 PDF and DWG are downloadable in Scene settings.
