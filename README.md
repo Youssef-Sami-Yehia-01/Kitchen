@@ -1,6 +1,6 @@
 # Ibrahim & Merna Apartment Studio
 
-A complete static apartment viewer extending the existing kitchen with the **R07** wall and bedroom revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
+A complete static apartment viewer extending the existing kitchen with the **R08** wall and bedroom revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
 
 ## Preview
 
@@ -10,7 +10,7 @@ Run `python -m http.server 8088` from this directory and open `http://localhost:
 
 ## Explore
 
-- **Room selector / floor map:** focus a room in isometric view, or enter it in walkthrough mode. Sizes reflect the R07 clear wall faces.
+- **Room selector / floor map:** focus a room in isometric view, or enter it in walkthrough mode. Sizes reflect the current clear wall faces.
 - **Walk inside:** click Explore; WASD/arrows move, mouse looks, Shift moves faster, E opens the part under the crosshair, Escape pauses. Walls, columns, furniture and moving doors have collision footprints.
 - **Phone:** tap Explore, hold movement arrows, swipe to look, tap Open to interact, Pause to return to navigation. Pinch/drag in isometric view. Narrow screens also expose these controls.
 - **Isometric:** drag to orbit, scroll/pinch to zoom, right-drag to pan. Automatic cutaway hides walls between the camera and target, and removes ceilings. Disable it in Scene to retain walls.
@@ -79,7 +79,7 @@ The master wardrobe dimensions and their exact handwritten source values are doc
 
 The master and children entrances move 900 mm east, retaining their 900 / 850 mm widths. A 100 mm return forms the master entry recess; the old children opening is infilled. C02 is shortened to 1950 x 600 mm with a 100 mm door reveal, as approved. The master wardrobe section gaps close while their supplied widths/depths/heights remain unchanged. The R06 PDF, DWG and DXF are in `assets/plans/`, with PDF and DWG downloads in Scene settings. The PDF documents the CAD revision; the website retains its later furniture/material and balcony changes.
 
-## Current R07 wall and bedroom revision
+## R07 wall and bedroom revision (superseded below)
 
 Every wall/partition band is at least 140 mm thick. Exterior walls grow outward; interior faces are explicitly placed in `tools/prepare_apartment.py`. All eight structural columns retain their earlier coordinates and sizes. Clear room dimensions reflect the revised faces.
 
@@ -88,3 +88,11 @@ The bathroom/master partition moves 60 mm north, giving the unchanged 1350 mm dr
 D07 keeps its 850 mm width and now opens inward to the entering person's left/east. C12 replaces the short left-wall hanging bookcase with an 800 x 600 x 2220 mm wardrobe with two sliding fronts. The right study desk and shelves remain. C02 stays 1950 x 600 mm with a 100 mm door reveal. Reception wall-mounted furniture moves 20 mm to the new face; the shoe aisle is now 910 mm.
 
 The CAD furniture and website use the same 65 records. R07 PDF/DWG downloads appear in Scene settings. `tools/build_apartment_cad.py` authors the editable DXF; `tools/build_apartment_pdf.py` plots a native AutoCAD round-trip as three A3 sheets. Native AutoCAD reports zero audit errors. Run the feedback/planting checks and `node tools/check_apartment_rooms.cjs` to check fixed-column clearances, the production door animation, new wardrobe assembly and finite geometry. Browser UI control was disabled during this revision; the production meshes and locally served files were checked directly.
+
+## Current R08 correction
+
+The bathroom/master wall is straight again at sheet Y=1550..1690. The dresser and three master wardrobe bays return to Y=1690..6090, retaining every supplied size. D05 narrows from 900 to 800 mm with owner approval; the entrance return is 180 mm thick and all other wall bands remain at least 140 mm. All eight columns are fixed.
+
+C12 alone is resized as requested: its run extends north to the children entrance wall, from Y=7210 to 8910, for 1700 x 600 x 2220 high mm. The other furniture envelopes are unchanged. Its three sliding panels retain the matching warm-white finish.
+
+The master entry now has a dedicated flush oak floor. Its footprint is removed from the hall/bedroom floor grids, and the duplicate stone threshold plates are omitted. Production-mesh ray checks confirm continuous oak at the same finished level across the entrance. R08 CAD and the three-sheet PDF are the current Scene downloads.

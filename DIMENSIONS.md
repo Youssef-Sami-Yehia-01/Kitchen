@@ -1,6 +1,6 @@
 # Dimensions and review corrections
 
-Current issue: R07. The R06 notes below are historical; the current changes at the end supersede their wall thicknesses and positions.
+Current issue: R08. Earlier revision notes below are historical; the current changes at the end supersede their wall thicknesses and positions.
 
 The owner's measurements and the PDF room/column/opening dimensions take priority. For unmeasured furniture, the model uses common Egyptian-market product proportions. These references describe product sizes rather than a single mandatory national furniture size.
 
@@ -116,3 +116,13 @@ Master furniture sizes stay intact: C05 dresser 1350 x 490; M04a and M04b 1075 x
 Children D07 retains 850 mm clear nominal width and reverses its handing: pivot X=9350, Y=7210, closed angle 180 degrees, open 90 degrees in sheet coordinates. Viewed entering from the hall it swings inward to the left/east. The opening remains X=8500..9350. C02 retains 1950 x 600 and a 100 mm reveal. Owner confirmed that the short left-wall shelf is the one to replace: C12 now has an 800 mm run, 600 mm depth and 2220 mm height with matching warm-white sliding fronts. This proposed wardrobe is separate from the measured master wardrobes. The right study area remains.
 
 The CAD is rebuilt from the same furniture data as the website, including the current master and two-bed child arrangement. Small 20 mm shifts to reception storage and bathroom 2 fixtures place them against the thicker wall faces without resizing the furniture. The shoe aisle becomes 910 mm; bed-frame aisle remains 1040 mm. CAD labels, door rotations and furniture locations are checked after native AutoCAD conversion. The current three-sheet A3 PDF and DWG are downloadable in Scene settings.
+
+## R08: straight bathroom wall, smaller entrance and C12 extension
+
+The bathroom/master wall returns to the straight Y=1550..1690 band across X=3980..10180. The previous 60 mm northward offset is removed. Master C05 is at Y=1690; M04a at 3040; M04b at 4115; M04c at 5190, ending at 6090. All furniture widths, depths and heights remain identical to R07 except C12, which the owner explicitly requested to lengthen. Khadija's wardrobe remains 900 x 650 x 2150 high mm; the main two bays remain 1075 x 650 x 2220 high each.
+
+D05 is 800 mm nominal width, reduced from 900 with owner approval. The entry return occupies Y=6090..6270, an 180 mm thickness meeting the 140 mm minimum. Its door pivot remains X=9620, Y=7070. Columns remain unchanged.
+
+C12 extends northward from Y=8110 to 7210, so its end meets the children entrance wall. Its lower end stays at 8910, retaining 10 mm to the structural column at 8920. New overall size: 1700 mm run x 600 mm depth x 2220 mm height, with three proposed sliding panels.
+
+The master entry flooring covers X=8580..9620, Y=6270..7070 with oak aligned to the bedroom grid, finished at +4 mm in the model. Hall/bedroom tile footprints exclude this area and the old overlapping stone plates are removed. Geometry checks sample across the passage and doorway to confirm a flush, continuous surface.

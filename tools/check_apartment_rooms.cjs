@@ -23,7 +23,14 @@ door.node.rotation.y+=door.spec.amount;const opened=tip();
 assert.ok(Math.abs(opened.x-9.35)<1e-5&&Math.abs(opened.z-8.06)<1e-5,'D07 must swing inward toward the entering person left/east');
 const cabinet=apt.roots.get('C12');assert.ok(cabinet);
 assert.equal(cabinet.getChildMeshes().filter(m=>m.name==='Bookcase shelf').length,0);
-assert.equal([...states.keys()].filter(k=>k.startsWith('C12_')).length,2);
+assert.equal([...states.keys()].filter(k=>k.startsWith('C12_')).length,3);
+for(const mesh of scene.meshes){mesh.computeWorldMatrix(true);if(mesh.metadata?.floorSurface)mesh.isPickable=true;}
+for(const [x,z] of [[8.65,6.65],[8.83,6.65],[9.13,6.65],[9.55,6.65],[9.73,6.65]]){
+ const hits=scene.multiPickWithRay(new B.Ray(new B.Vector3(x,.50,z),new B.Vector3(0,-1,0)),m=>m.metadata?.floorSurface);
+ assert.equal(hits.length,1,'One continuous floor surface through master entry at '+x);
+ assert.ok(Math.abs(hits[0].pickedPoint.y-.004)<1e-5,'Entry floor must stay flush');
+ assert.equal(hits[0].pickedMesh.material,apt.materials.oak);
+}
 for(const id of ['M04a','M04b','M04c']){
  const f=plan.furniture.find(f=>f.id===id),caseNode=scene.getTransformNodeByName(id+' wardrobe case');
  assert.ok(caseNode);const back=caseNode.getChildMeshes().find(m=>m.name==='Wardrobe back');
@@ -35,5 +42,5 @@ for(const mesh of scene.meshes){
  assert.ok(!positions||positions.every(Number.isFinite),mesh.name+' invalid positions');
  mesh.computeWorldMatrix(true);assert.ok(Array.from(mesh.getWorldMatrix().asArray()).every(Number.isFinite),mesh.name+' invalid transform');
 }
-console.log(`PASS: ${scene.meshes.length} production meshes, D07 left-inward animation, C12 two-panel wardrobe and retained master cabinet heights.`);
+console.log(`PASS: ${scene.meshes.length} production meshes, left-inward D07, extended C12, flush master entrance floor and retained master cabinet heights.`);
 engine.dispose();

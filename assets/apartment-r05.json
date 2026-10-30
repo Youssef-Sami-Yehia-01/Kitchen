@@ -475,7 +475,7 @@
       "id": "C05",
       "kind": "dresser",
       "x": 8720,
-      "y": 1630.0,
+      "y": 1690.0,
       "w": 490,
       "d": 1350,
       "room": "MASTER",
@@ -531,7 +531,7 @@
       "id": "M04a",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 2980,
+      "y": 3040,
       "w": 650,
       "d": 1075,
       "room": "MASTER",
@@ -552,7 +552,7 @@
       "id": "M04b",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 4055,
+      "y": 4115,
       "w": 650,
       "d": 1075,
       "room": "MASTER",
@@ -573,7 +573,7 @@
       "id": "M04c",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 5130,
+      "y": 5190,
       "w": 650,
       "d": 900,
       "room": "MASTER",
@@ -950,13 +950,13 @@
       "id": "C12",
       "kind": "wardrobe",
       "x": 7608,
-      "y": 8110,
+      "y": 7210,
       "w": 600,
-      "d": 800,
+      "d": 1700,
       "room": "CHILD",
-      "size": "800 x 600; H2220",
+      "size": "1700 x 600; H2220",
       "status": "A",
-      "desc": "Children's left-wall wardrobe beside entrance, replaces hanging bookshelf",
+      "desc": "Children's left-wall wardrobe extended to meet entrance wall",
       "frontSide": "east",
       "overhead": false,
       "height": 2220
@@ -1147,28 +1147,28 @@
     "basis": "Owner confirmed glazed entrance at former divider. Divider Y=9940..10060 comes from edited CAD layer 0 lines at Y=1620/1500 in the 11560 mm drawing height. Door width 900 retained; jamb avoids structural column."
   },
   "bedroomDoorRevision": {
-    "revision": "R07",
+    "revision": "R08",
     "masterReturn": [
       8720,
-      6030,
+      6090,
       9620,
-      6170
+      6270
     ],
     "masterOldPassage": [
       8580,
-      6170,
+      6270,
       8720,
       7070
     ],
     "masterDoor": {
       "x": 9620,
       "y": 7070,
-      "w": 900,
+      "w": 800,
       "angle": 270,
       "open": 360,
       "cut": [
         9480,
-        6170,
+        6270,
         9620,
         7070
       ]
@@ -1186,6 +1186,6 @@
         7210
       ]
     },
-    "basis": "R06 green markup moved both doors east; R07 keeps their nominal widths, upgrades all partitions to at least 140 mm, and reverses D07 so it swings inward to the entering person's left. C02 was shortened with owner approval. The master return is 140 mm thick and the supplied wardrobe envelopes remain unchanged."
+    "basis": "R08 restores the straight bathroom/master partition at sheet Y=1550..1690. The dresser and all three master wardrobe bays retain their recorded sizes, with the continuous run at Y=1690..6090. D05 reduces to 800 mm as approved by the owner, with an 180 mm entry return. D07 retains its R07 left-inward swing. C12 alone is lengthened to 1700 mm to meet the children entrance wall."
   }
 }

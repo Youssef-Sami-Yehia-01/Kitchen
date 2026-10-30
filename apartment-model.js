@@ -170,21 +170,28 @@ window.buildApartment = function (B, scene, register) {
   for(const r of plan.columns)wallPiece(fromRect('R05 structural column',r,0,2750,M.wall),r);
 
   // Full floor plate includes the door thresholds and open hall passages.
-  fromRect('Apartment foundation',[-120,-120,12840,11680],-140,-30,M.grout);
+  fromRect('Apartment foundation',[-140,-140,12860,11700],-140,-30,M.grout);
   const bedroomIds=['MASTER','RECESS','STUDY','CHILD','DRESS'];
+  function layFloor(name,r,wood,tile,material,origin){
+    fromRect(name+' subfloor',r,-29,-3,M.grout);
+    const tileX=wood?.18:tile,tileY=wood?1.2:tile,ox=origin[0]/1000,oy=origin[1]/1000;
+    const firstRow=Math.floor((r[1]/1000-oy)/tileY);
+    for(let row=firstRow,yy=oy+firstRow*tileY;yy<r[3]/1000-.001;row++,yy=oy+row*tileY){
+      const shift=wood&&row%2?.09:0,start=ox-shift+Math.floor((r[0]/1000-ox+shift)/tileX)*tileX;
+      for(let xx=start;xx<r[2]/1000-.001;xx+=tileX){
+        const left=Math.max(xx,r[0]/1000),right=Math.min(xx+tileX,r[2]/1000),top=Math.max(yy,r[1]/1000),bottom=Math.min(yy+tileY,r[3]/1000);
+        if(right-left<=.002||bottom-top<=.002)continue;
+        const m=box(name+' floor',right-left-.002,.016,bottom-top-.002,(left+right)/2,-.004,-(top+bottom)/2,wood?M.oak:material);
+        m.isPickable=false;m.metadata={floorSurface:true,floorZone:name};
+      }
+    }
+  }
   for(const [id,room] of Object.entries(plan.rooms)){
     const r=room.bounds,w=(r[2]-r[0])/1000,d=(r[3]-r[1])/1000,cx=(r[0]+r[2])/2000,cz=-(r[1]+r[3])/2000;
     if(id==='SHAFT'){fromRect('Open light well floor',r,-110,-90,M.grout);continue;}
     const floorMaterial=id==='REC'?M.receptionFloor:M.floor;
     const wood=bedroomIds.includes(id), tile=id==='KIT'?.6:(['BATH','UTIL','WC'].includes(id)?.6:.8);
-    fromRect(room.name+' subfloor',r,-29,-3,M.grout);
-    const tileX=wood?.18:tile,tileY=wood?1.2:tile;
-    for(let yy=r[1]/1000,row=0;yy<r[3]/1000-.001;yy+=tileY,row++){
-      for(let xx=r[0]/1000-(wood&&row%2?.09:0);xx<r[2]/1000-.001;xx+=tileX){
-        const left=Math.max(xx,r[0]/1000),right=Math.min(xx+tileX,r[2]/1000),bottom=Math.min(yy+tileY,r[3]/1000);
-        const m=box(room.name+' floor',right-left-.002,.016,bottom-yy-.002,(left+right)/2,-.004,-(yy+bottom)/2,wood?M.oak:floorMaterial);m.isPickable=false;
-      }
-    }
+    for(const area of plan.floorAreas?.[id]||[r])layFloor(room.name,area,wood,tile,floorMaterial,r);
     if(!['BAL','BAY'].includes(id)){
       const c=box(room.name+' ceiling',w,.06,d,cx,2.78,cz,M.white);c.isPickable=false;ceilings.push(c);
       // Recessed warm fixtures, kept free of bloom.
@@ -193,7 +200,12 @@ window.buildApartment = function (B, scene, register) {
     }
     labels.push({id,name:room.name,bounds:r});
   }
-  for(const r of [...plan.passages,...plan.doors.map(d=>d.cut),...plan.windows.filter(w=>w.slider).map(w=>w.bounds)])fromRect('Flush threshold',r,-6,1,M.stone);
+  if(plan.masterEntryFloor)layFloor('Main bedroom entrance',plan.masterEntryFloor,true,.18,M.oak,plan.rooms.MASTER.bounds);
+  for(const r of [...plan.passages,...plan.doors.map(d=>d.cut),...plan.windows.filter(w=>w.slider).map(w=>w.bounds)]){
+    const e=plan.masterEntryFloor;
+    if(e&&r[0]>=e[0]&&r[1]>=e[1]&&r[2]<=e[2]&&r[3]<=e[3])continue;
+    fromRect('Flush threshold',r,-6,1,M.stone);
+  }
   // Low balcony guardrails: these spaces remain visibly open to daylight.
   for(const r of [[0,11560,3840,11700],[12720,10080,12860,11560]]){
     wallPiece(fromRect('Balcony parapet',r,0,1050,M.wall),r);
@@ -451,7 +463,7 @@ window.buildApartment = function (B, scene, register) {
   // Batch tiles by finish while keeping their modelled joints.
   for(const material of [M.oak,M.floor,M.receptionFloor]){
     const tiles=scene.meshes.filter(m=>m.name.endsWith(' floor')&&m.material===material);
-    if(tiles.length){const merged=B.Mesh.MergeMeshes(tiles,true,true,undefined,false,false);merged.name='Apartment batched floor · '+material.name;merged.material=material;merged.receiveShadows=true;merged.isPickable=false;}
+    if(tiles.length){const merged=B.Mesh.MergeMeshes(tiles,true,true,undefined,false,false);merged.name='Apartment batched floor · '+material.name;merged.material=material;merged.receiveShadows=true;merged.isPickable=false;merged.metadata={floorSurface:true};}
   }
   // Wall skirtings share each lower wall's visibility for a clean cutaway.
   for(const wall of [...walls]){
