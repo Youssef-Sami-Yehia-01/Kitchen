@@ -17,17 +17,17 @@ room_faces = {
 for key,bounds in room_faces.items(): data['rooms'][key]['bounds']=bounds
 data['masterBalcony'].update(bedroomPassage=[11540,7070,12720,7210],
  divider=[11540,9940,12720,10080],doorBounds=[11640,9940,12540,10080])
-# R08 wall faces are explicit so cabinetry can meet a clear room face. Exterior
+# R09 wall faces are explicit so cabinetry can meet a clear room face. Exterior
 # walls grow outward. Service partitions use the adjacent shaft/hall where possible.
-# The bathroom/master partition is straight again. The owner's unchanged 4400 mm
-# dresser/wardrobe run fits with an 180 mm return and the approved 800 mm entrance.
+# The bathroom/master partition stays straight. Removing the entry return gives
+# the corrected 4470 mm dresser/wardrobe run a 4580 mm internal wall before D05.
 rects = [(-140,-140,12860,0),(-140,0,0,11700),(12720,0,12860,11700),(0,11560,12720,11700),
  (3840,0,3980,11560),(3980,1550,10180,1690),
  (5380,0,5520,1550),(7560,0,7700,1550),(10180,0,10320,1690),
  (6480,1690,6620,5830),(8580,1690,8720,7070),
  (3980,5690,6480,5830),(6620,5690,8580,5830),(3980,7070,12720,7210),
  (7460,7210,7600,11560),(11400,7210,11540,11560),(0,10350,3840,10490),
- [11540,9940,12720,10080],data['bedroomDoorRevision']['masterReturn']]
+ [11540,9940,12720,10080]]
 partitions = [[0,7070,700,7210],[3140,7070,3840,7210]]
 assert all(min(r[2]-r[0],r[3]-r[1])>=140 for r in rects+partitions)
 doors = [
@@ -43,7 +43,7 @@ windows = [dict(id=i,bounds=r,slider=s) for i,r,s in [
  ('W04',[5380,550,5520,1250],False),('W05',[7560,550,7700,1250],False),
  ('W06',[4800,11560,6300,11700],False),('W07',[8200,11560,9700,11700],False),
  ('S01',[1050,10350,2810,10490],True)]]
-passages = [[3840,5830,3980,7070],[4730,5690,5730,5830],[11540,7070,12720,7210],data['bedroomDoorRevision']['masterOldPassage']]
+passages = [[3840,5830,3980,7070],[4730,5690,5730,5830],[11540,7070,12720,7210]]
 base = unary_union([box(*r) for r in rects + partitions])
 columns = unary_union([box(*r) for r in data['columns']])
 
@@ -80,21 +80,21 @@ for low,high in [(0,1100),(1100,2150),(2150,2300),(2300,2750)]:
 # Master bedroom opens into the recess; glazed balcony access is at the CAD divider.
 floor_cuts = [opening(r) for r in passages] + [opening(d['cut']) for d in doors] + [opening(w['bounds']) for w in windows if w['slider']]
 ground=base.difference(unary_union([box(*r) for r in floor_cuts]))
-# The recessed master entry used to overlay stone thresholds on room planks.
-# Give it one continuous oak finish, flush with adjoining floors, and remove
-# its footprint from both room grids so no finish faces overlap.
-entry_floor=[8580,6270,9620,7070]
+# The master door is back in the west partition. Its threshold has a single
+# flush oak finish; the old recess is ordinary bedroom flooring again.
+entry_floor=data['bedroomDoorRevision']['masterDoor']['cut']
 floor_areas={key:rectangles(box(*room['bounds']).difference(box(*entry_floor)))
  if key in ['HALL','MASTER'] else [room['bounds']] for key,room in data['rooms'].items()}
 data.update(walls=walls,doors=doors,windows=windows,passages=passages,wallMinimumMm=140,
  wallBands=rects,partition=partitions,
  floorAreas=floor_areas,masterEntryFloor=entry_floor,
  obstacles=rectangles(ground.union(columns)),
- source='Apartment_2D_Review_R08.dxf',revision='R08',height=2750,
+ source='Apartment_2D_Review_R09.dxf',revision='R09',height=2750,
  assumptions=['Ceiling 2.75 m confirmed by owner.','Window sill 1.10 m; window head 2.30 m; door head 2.15 m assumed.',
  'Unrecorded furniture heights and decorative finishes are visual proposals.',
- 'All walls and partitions are at least 140 mm thick in R08; existing structural columns remain fixed.',
+ 'All walls and partitions are at least 140 mm thick in R09; existing structural columns remain fixed.',
+ 'Main wardrobe dimensions corrected by owner: one 2220 x 650 x 2150 high mm unit; earlier equal-bay interpretation superseded.',
  'Master bedroom opens through a 1200 mm passage into the recess; 900 mm glazed balcony entrance sits at the former CAD divider, as confirmed by owner.'])
 (ROOT/'assets/apartment-scene.json').write_text(json.dumps(data,indent=2),encoding='utf-8')
 (ROOT/'apartment-data.js').write_text('window.APARTMENT = '+json.dumps(data,separators=(',',':'))+';\n',encoding='utf-8')
-print(f"R08: {len(data['rooms'])} spaces, {len(data['furniture'])} furniture items, {len(walls)} wall sections, {len(doors)} doors, {len(windows)} windows/sliders")
+print(f"R09: {len(data['rooms'])} spaces, {len(data['furniture'])} furniture items, {len(walls)} wall sections, {len(doors)} doors, {len(windows)} windows/sliders")

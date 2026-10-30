@@ -89,10 +89,10 @@ The source is the owner-uploaded notebook photograph `codex-clipboard-9c32b8d0-4
 
 | Notebook line | Interpretation used in model | Explicit modelling choice |
 |---|---|---|
-| `dolab -> 65 x 222 x 215` | Main wardrobe: 2150 wide x 650 deep x 2220 high mm | Shown as M04a and M04b, each 1075 wide; the notebook does not give that split |
+| `dolab -> 65 x 222 x 215` | Owner-confirmed correction: one main wardrobe M04, 2220 wide x 650 deep x 2150 high mm | The earlier width/height interpretation and two 1075 mm model bays are superseded in R09 |
 | `dolab dija -> 90 x 215 x 65` | Khadija wardrobe M04c: 900 wide x 650 deep x 2150 high mm | Door leaves and internal fittings proposed |
 
-The main wardrobe's width/height ordering was inferred from the handwritten sequence and proportions; it was not separately confirmed. The two equal bays plus Khadija's wardrobe form a 3050 mm-long run, with the gaps between the three sections closed in R06 to fit the entrance return. These are three model bays, not three separately measured full-size wardrobes. The dressing table is separate: the notebook records 135 x 49 cm.
+The owner corrected and confirmed the main wardrobe ordering on 30 October 2026: width 222 cm, depth 65 cm, height 215 cm. It is one complete unit, not two separately measured wardrobes. With Khadija's 900 mm wardrobe the wardrobe run is 3120 mm; adding the separate 1350 x 490 mm dressing table gives 4470 mm. Sliding fronts and internal fittings remain model proposals.
 
 ## Master balcony: confirmed entrance correction
 
@@ -126,3 +126,11 @@ D05 is 800 mm nominal width, reduced from 900 with owner approval. The entry ret
 C12 extends northward from Y=8110 to 7210, so its end meets the children entrance wall. Its lower end stays at 8910, retaining 10 mm to the structural column at 8920. New overall size: 1700 mm run x 600 mm depth x 2220 mm height, with three proposed sliding panels.
 
 The master entry flooring covers X=8580..9620, Y=6270..7070 with oak aligned to the bedroom grid, finished at +4 mm in the model. Hall/bedroom tile footprints exclude this area and the old overlapping stone plates are removed. Geometry checks sample across the passage and doorway to confirm a flush, continuous surface.
+
+## Current R09: owner-corrected wardrobe and restored entrances
+
+The owner explicitly corrected the main wardrobe on 30 October 2026 and approved the revised arrangement. It is **one M04 unit, 2220 wide x 650 deep x 2150 high mm**. This supersedes M04a/M04b and the earlier width/height interpretation. M04c / Khadija stays 900 wide x 650 deep x 2150 high. No other measured master furniture is resized.
+
+The master entry return is removed. D05 returns to the west wall at X=8720, sheet Y=6270..7070, retaining an 800 mm nominal door. The straight bathroom wall and all eight columns stay fixed. The internal furniture wall is 4580 mm, excluding the doorway: dresser 1350 + main wardrobe 2220 + Khadija wardrobe 900 = 4470 mm, leaving 110 mm. M04 occupies Y=3040..5260; M04c moves to Y=5260..6160. The doorway has one flush oak finish, without overlapping floor plates.
+
+D07 returns to X=7600..8450, with the entering person's left-inward swing retained. Its 850 mm nominal door is unchanged. C02, a proposed fitted wardrobe, extends to 2850 x 600 mm at X=8550, leaving a 100 mm reveal. C12, also proposed fitted storage, becomes 800 x 600 x 2220 high mm at Y=8110..8910; it clears the door's nominal swing reach by 50 mm and the column by 10 mm. These child storage adjustments were included in the approved proposal.

@@ -1,6 +1,6 @@
 # Ibrahim & Merna Apartment Studio
 
-A complete static apartment viewer extending the existing kitchen with the **R08** wall and bedroom revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
+A complete static apartment viewer extending the existing kitchen with the **R09** wardrobe and bedroom entrance revision of the architectural plan and the owner’s latest furniture feedback. All runtime libraries and assets are local. No build step, API key, CDN or account is needed.
 
 ## Preview
 
@@ -19,7 +19,7 @@ Run `python -m http.server 8088` from this directory and open `http://localhost:
 
 ## R05 layout
 
-Reception/dining/TV lounge, kitchen, guest WC, two bathrooms, main bedroom, dressing room, family/study, two-child bedroom, hallway, both balconies and the open shaft are included. The 65 furniture records include the latest owner-requested changes; architectural room dimensions and structural columns remain from R05.
+Reception/dining/TV lounge, kitchen, guest WC, two bathrooms, main bedroom, dressing room, family/study, two-child bedroom, hallway, both balconies and the open shaft are included. The 64 furniture records include the latest owner-requested changes; R09 combines the earlier two master wardrobe records into one corrected unit. Structural columns remain fixed at their original coordinates.
 
 The kitchen entrance is a centred 1000 mm open passage. The dishwasher is on the user's right when facing the sink; the column stays on the right when entering. The main bed is on the right side at the column face; dresser and three wardrobe bays are on the left. Bathroom 2 has the shower against the shaft wall; toilet, washer, overhead cabinet and vanity are on the left wall. The children’s reference layout now has two 1200 × 2000 mm mattresses in 1240 × 2080 mm frames along the side walls, an entrance-wall wardrobe, a right-side study desk, wall shelves and bedside tables. The left desk and chair are removed per the latest correction; the right desk remains 1350 × 550 mm. The bed-frame aisle is 1040 mm. The right balcony is entered only from the main bedroom. The reception entrance and dressing room have no windows. R04 is removed; R01/R02 are 150 mm higher; R05/R06 are 150 mm lower.
 
@@ -73,7 +73,7 @@ The family/TV lounge F01 is one continuous blue L-shaped sectional, with joined 
 
 A 700 × 1650 mm full-length wall mirror sits beside the shoe cabinet, with its bottom at 320 mm. Compact greenery sits on the existing cabinet top; no additional floor object or walking-path obstruction is introduced.
 
-The master wardrobe dimensions and their exact handwritten source values are documented in `DIMENSIONS.md`. Two 1075 mm bays divide the recorded 2150 mm main wardrobe; this equal split is a model interpretation, not a separate supplied measurement.
+The master wardrobe dimensions and their handwritten source values are documented in `DIMENSIONS.md`. The owner corrected the earlier interpretation: M04 is one 2220 mm-wide, 650 mm-deep, 2150 mm-high wardrobe. The earlier two 1075 mm model bays are superseded.
 
 ## R06 door revision
 
@@ -89,10 +89,20 @@ D07 keeps its 850 mm width and now opens inward to the entering person's left/ea
 
 The CAD furniture and website use the same 65 records. R07 PDF/DWG downloads appear in Scene settings. `tools/build_apartment_cad.py` authors the editable DXF; `tools/build_apartment_pdf.py` plots a native AutoCAD round-trip as three A3 sheets. Native AutoCAD reports zero audit errors. Run the feedback/planting checks and `node tools/check_apartment_rooms.cjs` to check fixed-column clearances, the production door animation, new wardrobe assembly and finite geometry. Browser UI control was disabled during this revision; the production meshes and locally served files were checked directly.
 
-## Current R08 correction
+## R08 correction (superseded by R09)
 
 The bathroom/master wall is straight again at sheet Y=1550..1690. The dresser and three master wardrobe bays return to Y=1690..6090, retaining every supplied size. D05 narrows from 900 to 800 mm with owner approval; the entrance return is 180 mm thick and all other wall bands remain at least 140 mm. All eight columns are fixed.
 
 C12 alone is resized as requested: its run extends north to the children entrance wall, from Y=7210 to 8910, for 1700 x 600 x 2220 high mm. The other furniture envelopes are unchanged. Its three sliding panels retain the matching warm-white finish.
 
-The master entry now has a dedicated flush oak floor. Its footprint is removed from the hall/bedroom floor grids, and the duplicate stone threshold plates are omitted. Production-mesh ray checks confirm continuous oak at the same finished level across the entrance. R08 CAD and the three-sheet PDF are the current Scene downloads.
+The master entry now has a dedicated flush oak floor. Its footprint is removed from the hall/bedroom floor grids, and the duplicate stone threshold plates are omitted. Production-mesh ray checks confirm continuous oak at the same finished level across the entrance. R08 CAD and the three-sheet PDF were issued for this revision.
+
+## Current R09 wardrobe and entrance revision
+
+M04 replaces M04a/M04b with one continuous 2220 x 650 x 2150 high mm wardrobe, using the owner's explicit correction of the notebook width and height. Khadija's M04c stays 900 x 650 x 2150 high. The 1350 x 490 mm dressing table and bed/bedside furniture retain their dimensions and positions; M04c shifts 70 mm along the same wall to follow M04.
+
+The short master entry return is removed. D05 returns to the west wall at X=8720, sheet Y=6270..7070, retaining its 800 mm width and inward swing. The internal wall before the door is 4580 mm: 1350 + 2220 + 900 = 4470 mm of furniture, leaving 110 mm. The bathroom wall stays straight and all eight structural columns remain unchanged. The doorway has a single flush oak finish; the former entry recess returns to the regular bedroom floor grid.
+
+D07 returns to X=7600..8450, retaining its 850 mm width and left-inward swing. C02 extends to 2850 x 600 mm with a 100 mm door reveal. Proposed C12 shortens to 800 x 600 x 2220 high, at Y=8110..8910, clear of the leaf swing and structural column. Beds, the right study area and all other room furniture remain unchanged.
+
+The website and CAD share the same 64 records. R09 PDF/DWG downloads are in Scene settings; earlier issues remain available in `assets/plans/`. Native AutoCAD round-trip verifies insert positions, sizes and door rotations and reports zero audit errors. Spatial checks cover furniture and door sweeps; production-mesh checks cover both revised door animations, one continuous 2220 mm wardrobe back, storage panels and flush entrance flooring.

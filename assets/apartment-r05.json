@@ -461,14 +461,14 @@
     {
       "id": "C02",
       "kind": "wardrobe",
-      "x": 9450,
+      "x": 8550,
       "y": 7210.0,
-      "w": 1950,
+      "w": 2850,
       "d": 600,
       "room": "CHILD",
-      "size": "1950 x 600",
+      "size": "2850 x 600",
       "status": "A",
-      "desc": "Entrance-wall wardrobe, shortened for relocated door and held clear of 140 mm wall",
+      "desc": "Children's entrance wardrobe",
       "overhead": false
     },
     {
@@ -528,58 +528,38 @@
       "frontSide": "west"
     },
     {
-      "id": "M04a",
+      "id": "M04",
       "kind": "wardrobe",
       "x": 8720,
       "y": 3040,
       "w": 650,
-      "d": 1075,
+      "d": 2220,
       "room": "MASTER",
-      "size": "1075 x 650; H2220",
+      "size": "2220 x 650; H2150",
       "status": "E",
-      "desc": "Main wardrobe bay 1 (2150 total / two bays)",
+      "desc": "Main wardrobe, one complete 2220 mm unit",
       "overhead": false,
       "frontSide": "east",
-      "height": 2220,
+      "height": 2150,
       "dimensionBasis": {
         "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
         "recordedCm": "65 x 222 x 215",
-        "interpretation": "Overall width 2150, depth 650, height 2220 mm; two equal 1075 mm model bays. Width/height ordering interpreted from handwritten sequence; not separately confirmed.",
-        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
-      }
-    },
-    {
-      "id": "M04b",
-      "kind": "wardrobe",
-      "x": 8720,
-      "y": 4115,
-      "w": 650,
-      "d": 1075,
-      "room": "MASTER",
-      "size": "1075 x 650; H2220",
-      "status": "E",
-      "desc": "Main wardrobe bay 2 (2150 total / two bays)",
-      "overhead": false,
-      "frontSide": "east",
-      "height": 2220,
-      "dimensionBasis": {
-        "source": "Owner notebook photo: codex-clipboard-9c32b8d0-418b-426d-99fa-282d93e30bfd.jpg",
-        "recordedCm": "65 x 222 x 215",
-        "interpretation": "Overall width 2150, depth 650, height 2220 mm; two equal 1075 mm model bays. Width/height ordering interpreted from handwritten sequence; not separately confirmed.",
-        "modelChoices": "Equal bay split where applicable, sliding doors, panels, shelves and fittings are proposed."
+        "interpretation": "Owner corrected and confirmed: one wardrobe, width 2220, depth 650, height 2150 mm. Supersedes the earlier width/height interpretation and equal 1075 mm split.",
+        "modelChoices": "Sliding panels and internal shelves are proposed; the complete 2220 x 650 x 2150 mm unit is retained.",
+        "confirmation": "Owner conversation, 30 October 2026: width 222 cm and height 215 cm; apply the 4580 mm internal-wall arrangement."
       }
     },
     {
       "id": "M04c",
       "kind": "wardrobe",
       "x": 8720,
-      "y": 5190,
+      "y": 5260,
       "w": 650,
       "d": 900,
       "room": "MASTER",
       "size": "900 x 650; H2150",
       "status": "E",
-      "desc": "Khadija wardrobe, third bay on main wall",
+      "desc": "Khadija wardrobe, 900 mm unit",
       "overhead": false,
       "frontSide": "east",
       "height": 2150,
@@ -950,13 +930,13 @@
       "id": "C12",
       "kind": "wardrobe",
       "x": 7608,
-      "y": 7210,
+      "y": 8110,
       "w": 600,
-      "d": 1700,
+      "d": 800,
       "room": "CHILD",
-      "size": "1700 x 600; H2220",
+      "size": "800 x 600; H2220",
       "status": "A",
-      "desc": "Children's left-wall wardrobe extended to meet entrance wall",
+      "desc": "Children's left-wall wardrobe",
       "frontSide": "east",
       "overhead": false,
       "height": 2220
@@ -1147,45 +1127,43 @@
     "basis": "Owner confirmed glazed entrance at former divider. Divider Y=9940..10060 comes from edited CAD layer 0 lines at Y=1620/1500 in the 11560 mm drawing height. Door width 900 retained; jamb avoids structural column."
   },
   "bedroomDoorRevision": {
-    "revision": "R08",
-    "masterReturn": [
-      8720,
-      6090,
-      9620,
-      6270
-    ],
-    "masterOldPassage": [
-      8580,
-      6270,
-      8720,
-      7070
-    ],
+    "revision": "R09",
+    "masterReturn": null,
+    "masterOldPassage": null,
     "masterDoor": {
-      "x": 9620,
+      "x": 8720,
       "y": 7070,
       "w": 800,
       "angle": 270,
       "open": 360,
       "cut": [
-        9480,
+        8580,
         6270,
-        9620,
+        8720,
         7070
       ]
     },
     "childDoor": {
-      "x": 9350,
+      "x": 8450,
       "y": 7210,
       "w": 850,
       "angle": 180,
       "open": 90,
       "cut": [
-        8500,
+        7600,
         7070,
-        9350,
+        8450,
         7210
       ]
     },
-    "basis": "R08 restores the straight bathroom/master partition at sheet Y=1550..1690. The dresser and all three master wardrobe bays retain their recorded sizes, with the continuous run at Y=1690..6090. D05 reduces to 800 mm as approved by the owner, with an 180 mm entry return. D07 retains its R07 left-inward swing. C12 alone is lengthened to 1700 mm to meet the children entrance wall."
+    "masterWallFit": {
+      "insideWallLength": 4580,
+      "dresserLength": 1350,
+      "mainWardrobeLength": 2220,
+      "khadijaWardrobeLength": 900,
+      "furnitureRun": 4470,
+      "remainingAllowance": 110
+    },
+    "basis": "R09 applies the owner-approved corrected wardrobe dimensions: one main unit 2220 wide x 650 deep x 2150 high. Remove the short master entry return and restore both door openings to their pre-R06 positions, retaining an 800 mm master door and an 850 mm left-inward children door. The internal master wall is 4580 mm before the doorway: 4470 mm furniture plus 110 mm allowance. C02 extends to 2850 mm; C12 shortens to 800 mm and moves beyond the door swing. Structural columns and the straight bathroom wall remain fixed."
   }
 }
